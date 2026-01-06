@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			body.font-loading {
+				visibility: hidden;
+			}
+		</style>
+		<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
+		<link rel="stylesheet" href="./app.css" />
+		<meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
+	</head>
+	<body style="margin: 0; padding: 0; overflow: hidden; background-color: black">
+		<script>
+			// Suppress all console output globally
+			console.log = () => {};
+			console.warn = () => {};
+			console.error = () => {};
+			console.info = () => {};
+			console.debug = () => {};
+
+			// Font loading handled by CSS @font-face
+		</script>
+		<div>%sveltekit.body%</div>
+	</body>
+</html>

@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Glow Button Component Demo</title>
+		<style>
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				margin: 0;
+				padding: 40px;
+				background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+				min-height: 100vh;
+				color: #fff;
+			}
+
+			.demo-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				background: rgba(0, 0, 0, 0.8);
+				border-radius: 20px;
+				padding: 40px;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+				backdrop-filter: blur(10px);
+			}
+
+			h1 {
+				text-align: center;
+				margin-bottom: 40px;
+				color: #fff;
+				font-size: 2.5em;
+				font-weight: 300;
+				text-shadow: 0 0 20px rgba(27, 253, 156, 0.5);
+			}
+
+			.section {
+				margin-bottom: 50px;
+				padding: 30px;
+				background: rgba(255, 255, 255, 0.02);
+				border-radius: 15px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.section h2 {
+				margin-top: 0;
+				color: #1bfd9c;
+				border-bottom: 2px solid rgba(27, 253, 156, 0.3);
+				padding-bottom: 10px;
+				text-shadow: 0 0 10px rgba(27, 253, 156, 0.3);
+			}
+
+			.button-grid {
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.button-row {
+				display: flex;
+				gap: 15px;
+				align-items: center;
+				justify-content: center;
+				margin: 20px 0;
+			}
+
+			.demo-label {
+				font-size: 14px;
+				color: #aaa;
+				margin-bottom: 20px;
+				text-align: center;
+				font-weight: 500;
+			}
+
+			/* Glow Button Styles */
+			.glow-button {
+				font-size: 15px;
+				padding: 0.7em 2.7em;
+				letter-spacing: 0.06em;
+				position: relative;
+				font-family: inherit;
+				border-radius: 0.6em;
+				overflow: hidden;
+				transition: all 0.3s;
+				line-height: 1.4em;
+				border: 2px solid var(--glow-color);
+				background: linear-gradient(
+					to right,
+					var(--glow-bg-start) 1%,
+					transparent 40%,
+					transparent 60%,
+					var(--glow-bg-end) 100%
+				);
+				color: var(--glow-color);
+				box-shadow:
+					inset 0 0 10px var(--glow-shadow-inner),
+					0 0 9px 3px var(--glow-shadow-outer);
+				cursor: pointer;
+				font-weight: 600;
+				text-transform: uppercase;
+			}
+
+			.glow-button:disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+				pointer-events: none;
+			}
+
+			.glow-button:hover:not(:disabled) {
+				color: var(--glow-color-hover);
+				box-shadow:
+					inset 0 0 10px var(--glow-shadow-inner-hover),
+					0 0 9px 3px var(--glow-shadow-outer-hover);
+			}
+
+			.glow-button:before {
+				content: '';
+				position: absolute;
+				left: -4em;
+				width: 4em;
+				height: 100%;
+				top: 0;
+				transition: transform 0.4s ease-in-out;
+				background: linear-gradient(
+					to right,
+					transparent 1%,
+					var(--glow-sweep-start) 40%,
+					var(--glow-sweep-end) 60%,
+					transparent 100%
+				);
+			}
+
+			.glow-button:hover:not(:disabled):before {
+				transform: translateX(15em);
+			}
+
+			/* Size variants */
+			.glow-button--small {
+				font-size: 12px;
+				padding: 0.5em 2em;
+				border-radius: 0.5em;
+			}
+
+			.glow-button--medium {
+				font-size: 15px;
+				padding: 0.7em 2.7em;
+				border-radius: 0.6em;
+			}
+
+			.glow-button--large {
+				font-size: 18px;
+				padding: 1em 3.5em;
+				border-radius: 0.8em;
+			}
+
+			/* Green variant (original) */
+			.glow-button--green {
+				--glow-color: #1bfd9c;
+				--glow-color-hover: #82ffc9;
+				--glow-bg-start: rgba(27, 253, 156, 0.1);
+				--glow-bg-end: rgba(27, 253, 156, 0.1);
+				--glow-shadow-inner: rgba(27, 253, 156, 0.4);
+				--glow-shadow-outer: rgba(27, 253, 156, 0.1);
+				--glow-shadow-inner-hover: rgba(27, 253, 156, 0.6);
+				--glow-shadow-outer-hover: rgba(27, 253, 156, 0.2);
+				--glow-sweep-start: rgba(27, 253, 156, 0.1);
+				--glow-sweep-end: rgba(27, 253, 156, 0.1);
+			}
+
+			/* Blue variant */
+			.glow-button--blue {
+				--glow-color: #1baafd;
+				--glow-color-hover: #82d4ff;
+				--glow-bg-start: rgba(27, 170, 253, 0.1);
+				--glow-bg-end: rgba(27, 170, 253, 0.1);
+				--glow-shadow-inner: rgba(27, 170, 253, 0.4);
+				--glow-shadow-outer: rgba(27, 170, 253, 0.1);
+				--glow-shadow-inner-hover: rgba(27, 170, 253, 0.6);
+				--glow-shadow-outer-hover: rgba(27, 170, 253, 0.2);
+				--glow-sweep-start: rgba(27, 170, 253, 0.1);
+				--glow-sweep-end: rgba(27, 170, 253, 0.1);
+			}
+
+			/* Purple variant */
+			.glow-button--purple {
+				--glow-color: #a91bfd;
+				--glow-color-hover: #d182ff;
+				--glow-bg-start: rgba(169, 27, 253, 0.1);
+				--glow-bg-end: rgba(169, 27, 253, 0.1);
+				--glow-shadow-inner: rgba(169, 27, 253, 0.4);
+				--glow-shadow-outer: rgba(169, 27, 253, 0.1);
+				--glow-shadow-inner-hover: rgba(169, 27, 253, 0.6);
+				--glow-shadow-outer-hover: rgba(169, 27, 253, 0.2);
+				--glow-sweep-start: rgba(169, 27, 253, 0.1);
+				--glow-sweep-end: rgba(169, 27, 253, 0.1);
+			}
+
+			/* Orange variant */
+			.glow-button--orange {
+				--glow-color: #fd9c1b;
+				--glow-color-hover: #ffc982;
+				--glow-bg-start: rgba(253, 156, 27, 0.1);
+				--glow-bg-end: rgba(253, 156, 27, 0.1);
+				--glow-shadow-inner: rgba(253, 156, 27, 0.4);
+				--glow-shadow-outer: rgba(253, 156, 27, 0.1);
+				--glow-shadow-inner-hover: rgba(253, 156, 27, 0.6);
+				--glow-shadow-outer-hover: rgba(253, 156, 27, 0.2);
+				--glow-sweep-start: rgba(253, 156, 27, 0.1);
+				--glow-sweep-end: rgba(253, 156, 27, 0.1);
+			}
+
+			/* Red variant */
+			.glow-button--red {
+				--glow-color: #fd1b1b;
+				--glow-color-hover: #ff8282;
+				--glow-bg-start: rgba(253, 27, 27, 0.1);
+				--glow-bg-end: rgba(253, 27, 27, 0.1);
+				--glow-shadow-inner: rgba(253, 27, 27, 0.4);
+				--glow-shadow-outer: rgba(253, 27, 27, 0.1);
+				--glow-shadow-inner-hover: rgba(253, 27, 27, 0.6);
+				--glow-shadow-outer-hover: rgba(253, 27, 27, 0.2);
+				--glow-sweep-start: rgba(253, 27, 27, 0.1);
+				--glow-sweep-end: rgba(253, 27, 27, 0.1);
+			}
+
+			/* Active/pressed state */
+			.glow-button:active:not(:disabled) {
+				transform: scale(0.98);
+				box-shadow:
+					inset 0 0 15px var(--glow-shadow-inner-hover),
+					0 0 5px 1px var(--glow-shadow-outer-hover);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="demo-container">
+			<h1>Glow Button Component Demo</h1>
+
+			<div class="section">
+				<h2>Original "I'M READY" Button</h2>
+				<div class="demo-label">The exact button you provided - perfect for game actions!</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--medium glow-button--green"
+						onclick="alert('Ready to play!')"
+					>
+						I'M READY
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Color Variants</h2>
+				<div class="demo-label">Different glowing colors for various game states and actions</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--medium glow-button--green"
+						onclick="alert('Green clicked!')"
+					>
+						READY
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--blue"
+						onclick="alert('Blue clicked!')"
+					>
+						CONTINUE
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--purple"
+						onclick="alert('Purple clicked!')"
+					>
+						BONUS
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--orange"
+						onclick="alert('Orange clicked!')"
+					>
+						WARNING
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--red"
+						onclick="alert('Red clicked!')"
+					>
+						DANGER
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Size Variants</h2>
+				<div class="demo-label">Small, medium, and large sizes</div>
+				<div class="button-row">
+					<button class="glow-button glow-button--small glow-button--green">SMALL</button>
+					<button class="glow-button glow-button--medium glow-button--green">MEDIUM</button>
+					<button class="glow-button glow-button--large glow-button--green">LARGE</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Gaming Action Buttons</h2>
+				<div class="demo-label">
+					Perfect for slot game interfaces - hover to see the sweep effect!
+				</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--large glow-button--green"
+						onclick="alert('Spin!')"
+					>
+						SPIN NOW
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--blue"
+						onclick="alert('Auto Spin!')"
+					>
+						AUTO SPIN
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--orange"
+						onclick="alert('Max Bet!')"
+					>
+						MAX BET
+					</button>
+				</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--medium glow-button--purple"
+						onclick="alert('Buy Bonus!')"
+					>
+						BUY BONUS
+					</button>
+					<button
+						class="glow-button glow-button--small glow-button--blue"
+						onclick="alert('Settings!')"
+					>
+						SETTINGS
+					</button>
+					<button class="glow-button glow-button--small glow-button--red" onclick="alert('Exit!')">
+						EXIT
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Slot Game Specific</h2>
+				<div class="demo-label">Buttons designed specifically for slot game actions</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--large glow-button--green"
+						onclick="alert('Starting game!')"
+					>
+						START GAME
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--purple"
+						onclick="alert('Ante bet activated!')"
+					>
+						ANTE BET
+					</button>
+					<button
+						class="glow-button glow-button--medium glow-button--orange"
+						onclick="alert('Collecting winnings!')"
+					>
+						COLLECT
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Disabled State</h2>
+				<div class="demo-label">Shows how buttons look when disabled</div>
+				<div class="button-row">
+					<button class="glow-button glow-button--medium glow-button--green" disabled>
+						DISABLED
+					</button>
+					<button class="glow-button glow-button--medium glow-button--blue" disabled>
+						NOT READY
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Add some extra interactivity for demo purposes
+			document.querySelectorAll('.glow-button:not([disabled])').forEach((button) => {
+				button.addEventListener('click', function () {
+					// Add a pulse effect after click
+					this.style.animation = 'pulse 0.3s ease-out';
+					setTimeout(() => {
+						this.style.animation = '';
+					}, 300);
+				});
+			});
+
+			// Add pulse animation
+			const style = document.createElement('style');
+			style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+			document.head.appendChild(style);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+{
+	"name": "components-ui-pixi",
+	"version": "0.0.0",
+	"private": true,
+	"license": "MIT",
+	"scripts": {
+		"format": "prettier --write --ignore-path=../../.prettierignore .",
+		"lint": "eslint \"src\"",
+		"storybook": "PUBLIC_CHROMATIC=true storybook dev -p 5003 public"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@storybook/addon-svelte-csf": "5.0.5",
+		"@sveltejs/vite-plugin-svelte": "5.0.3",
+		"@tailwindcss/vite": "^4.1.14",
+		"chromatic": "11.26.1",
+		"config-storybook": "workspace:*",
+		"config-svelte": "workspace:*",
+		"config-ts": "workspace:*",
+		"config-vite": "workspace:*",
+		"eslint": "9.21.0",
+		"eslint-config-custom": "workspace:*",
+		"tailwindcss": "^4.1.14"
+	},
+	"dependencies": {
+		"@lingui/core": "5.2.0",
+		"@sveltejs/kit": "2.17.3",
+		"@types/lodash": "4.17.16",
+		"components-layout": "workspace:*",
+		"components-pixi": "workspace:*",
+		"components-shared": "workspace:*",
+		"constants-shared": "workspace:*",
+		"lodash": "4.17.16",
+		"pixi-svelte": "workspace:*",
+		"state-shared": "workspace:*",
+		"svelte": "5.20.5",
+		"utils-event-emitter": "workspace:*",
+		"utils-layout": "workspace:*",
+		"utils-shared": "workspace:*",
+		"utils-xstate": "workspace:*",
+		"vite": "6.2.0"
+	}
+}

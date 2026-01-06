@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Glow Button Shapes Demo - Round & Square</title>
+		<style>
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				margin: 0;
+				padding: 40px;
+				background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+				min-height: 100vh;
+				color: #fff;
+			}
+
+			.demo-container {
+				max-width: 1400px;
+				margin: 0 auto;
+				background: rgba(0, 0, 0, 0.8);
+				border-radius: 20px;
+				padding: 40px;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+				backdrop-filter: blur(10px);
+			}
+
+			h1 {
+				text-align: center;
+				margin-bottom: 40px;
+				color: #fff;
+				font-size: 2.5em;
+				font-weight: 300;
+				text-shadow: 0 0 20px rgba(27, 253, 156, 0.5);
+			}
+
+			.section {
+				margin-bottom: 50px;
+				padding: 30px;
+				background: rgba(255, 255, 255, 0.02);
+				border-radius: 15px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.section h2 {
+				margin-top: 0;
+				color: #1bfd9c;
+				border-bottom: 2px solid rgba(27, 253, 156, 0.3);
+				padding-bottom: 10px;
+				text-shadow: 0 0 10px rgba(27, 253, 156, 0.3);
+			}
+
+			.button-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 30px;
+				align-items: center;
+				justify-items: center;
+			}
+
+			.button-row {
+				display: flex;
+				gap: 15px;
+				align-items: center;
+				justify-content: center;
+				margin: 20px 0;
+				flex-wrap: wrap;
+			}
+
+			.demo-label {
+				font-size: 14px;
+				color: #aaa;
+				margin-bottom: 20px;
+				text-align: center;
+				font-weight: 500;
+			}
+
+			.shape-comparison {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 40px;
+				margin-top: 30px;
+			}
+
+			.shape-group {
+				text-align: center;
+			}
+
+			.shape-group h3 {
+				color: #82d4ff;
+				margin-bottom: 20px;
+				font-size: 1.2em;
+			}
+
+			/* Base Glow Button Styles */
+			.glow-button {
+				font-size: 15px;
+				padding: 0.7em 2.7em;
+				letter-spacing: 0.06em;
+				position: relative;
+				font-family: inherit;
+				border-radius: 0.6em;
+				overflow: hidden;
+				transition: all 0.3s;
+				line-height: 1.4em;
+				border: 2px solid var(--glow-color);
+				background: linear-gradient(
+					to right,
+					var(--glow-bg-start) 1%,
+					transparent 40%,
+					transparent 60%,
+					var(--glow-bg-end) 100%
+				);
+				color: var(--glow-color);
+				box-shadow:
+					inset 0 0 10px var(--glow-shadow-inner),
+					0 0 9px 3px var(--glow-shadow-outer);
+				cursor: pointer;
+				font-weight: 600;
+				text-transform: uppercase;
+			}
+
+			.glow-button:disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+				pointer-events: none;
+			}
+
+			.glow-button:hover:not(:disabled) {
+				color: var(--glow-color-hover);
+				box-shadow:
+					inset 0 0 10px var(--glow-shadow-inner-hover),
+					0 0 9px 3px var(--glow-shadow-outer-hover);
+			}
+
+			.glow-button:before {
+				content: '';
+				position: absolute;
+				left: -4em;
+				width: 4em;
+				height: 100%;
+				top: 0;
+				transition: transform 0.4s ease-in-out;
+				background: linear-gradient(
+					to right,
+					transparent 1%,
+					var(--glow-sweep-start) 40%,
+					var(--glow-sweep-end) 60%,
+					transparent 100%
+				);
+			}
+
+			.glow-button:hover:not(:disabled):before {
+				transform: translateX(15em);
+			}
+
+			.glow-button:active:not(:disabled) {
+				transform: scale(0.98);
+				box-shadow:
+					inset 0 0 15px var(--glow-shadow-inner-hover),
+					0 0 5px 1px var(--glow-shadow-outer-hover);
+			}
+
+			/* SHAPE VARIATIONS */
+
+			/* Round/Circular buttons */
+			.glow-button--round {
+				border-radius: 50%;
+				padding: 1em;
+				min-width: 3em;
+				min-height: 3em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.glow-button--round-small {
+				border-radius: 50%;
+				padding: 0.8em;
+				min-width: 2.5em;
+				min-height: 2.5em;
+				font-size: 12px;
+			}
+
+			.glow-button--round-large {
+				border-radius: 50%;
+				padding: 1.5em;
+				min-width: 4em;
+				min-height: 4em;
+				font-size: 18px;
+			}
+
+			/* Square buttons */
+			.glow-button--square {
+				border-radius: 0;
+				padding: 1em;
+				min-width: 3em;
+				min-height: 3em;
+			}
+
+			.glow-button--square-small {
+				border-radius: 0;
+				padding: 0.8em;
+				min-width: 2.5em;
+				min-height: 2.5em;
+				font-size: 12px;
+			}
+
+			.glow-button--square-large {
+				border-radius: 0;
+				padding: 1.5em;
+				min-width: 4em;
+				min-height: 4em;
+				font-size: 18px;
+			}
+
+			/* Rounded square (subtle corners) */
+			.glow-button--rounded-square {
+				border-radius: 0.2em;
+				padding: 1em;
+				min-width: 3em;
+				min-height: 3em;
+			}
+
+			/* Pill shape (very rounded rectangle) */
+			.glow-button--pill {
+				border-radius: 2em;
+				padding: 0.7em 2em;
+			}
+
+			/* Icon-only variations */
+			.glow-button--icon {
+				padding: 0.8em;
+				min-width: 3em;
+				min-height: 3em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.2em;
+			}
+
+			/* Size variants for all shapes */
+			.glow-button--small {
+				font-size: 12px;
+			}
+
+			.glow-button--medium {
+				font-size: 15px;
+			}
+
+			.glow-button--large {
+				font-size: 18px;
+			}
+
+			/* Color variants */
+			.glow-button--green {
+				--glow-color: #1bfd9c;
+				--glow-color-hover: #82ffc9;
+				--glow-bg-start: rgba(27, 253, 156, 0.1);
+				--glow-bg-end: rgba(27, 253, 156, 0.1);
+				--glow-shadow-inner: rgba(27, 253, 156, 0.4);
+				--glow-shadow-outer: rgba(27, 253, 156, 0.1);
+				--glow-shadow-inner-hover: rgba(27, 253, 156, 0.6);
+				--glow-shadow-outer-hover: rgba(27, 253, 156, 0.2);
+				--glow-sweep-start: rgba(27, 253, 156, 0.1);
+				--glow-sweep-end: rgba(27, 253, 156, 0.1);
+			}
+
+			.glow-button--blue {
+				--glow-color: #1baafd;
+				--glow-color-hover: #82d4ff;
+				--glow-bg-start: rgba(27, 170, 253, 0.1);
+				--glow-bg-end: rgba(27, 170, 253, 0.1);
+				--glow-shadow-inner: rgba(27, 170, 253, 0.4);
+				--glow-shadow-outer: rgba(27, 170, 253, 0.1);
+				--glow-shadow-inner-hover: rgba(27, 170, 253, 0.6);
+				--glow-shadow-outer-hover: rgba(27, 170, 253, 0.2);
+				--glow-sweep-start: rgba(27, 170, 253, 0.1);
+				--glow-sweep-end: rgba(27, 170, 253, 0.1);
+			}
+
+			.glow-button--purple {
+				--glow-color: #a91bfd;
+				--glow-color-hover: #d182ff;
+				--glow-bg-start: rgba(169, 27, 253, 0.1);
+				--glow-bg-end: rgba(169, 27, 253, 0.1);
+				--glow-shadow-inner: rgba(169, 27, 253, 0.4);
+				--glow-shadow-outer: rgba(169, 27, 253, 0.1);
+				--glow-shadow-inner-hover: rgba(169, 27, 253, 0.6);
+				--glow-shadow-outer-hover: rgba(169, 27, 253, 0.2);
+				--glow-sweep-start: rgba(169, 27, 253, 0.1);
+				--glow-sweep-end: rgba(169, 27, 253, 0.1);
+			}
+
+			.glow-button--orange {
+				--glow-color: #fd9c1b;
+				--glow-color-hover: #ffc982;
+				--glow-bg-start: rgba(253, 156, 27, 0.1);
+				--glow-bg-end: rgba(253, 156, 27, 0.1);
+				--glow-shadow-inner: rgba(253, 156, 27, 0.4);
+				--glow-shadow-outer: rgba(253, 156, 27, 0.1);
+				--glow-shadow-inner-hover: rgba(253, 156, 27, 0.6);
+				--glow-shadow-outer-hover: rgba(253, 156, 27, 0.2);
+				--glow-sweep-start: rgba(253, 156, 27, 0.1);
+				--glow-sweep-end: rgba(253, 156, 27, 0.1);
+			}
+
+			.glow-button--red {
+				--glow-color: #fd1b1b;
+				--glow-color-hover: #ff8282;
+				--glow-bg-start: rgba(253, 27, 27, 0.1);
+				--glow-bg-end: rgba(253, 27, 27, 0.1);
+				--glow-shadow-inner: rgba(253, 27, 27, 0.4);
+				--glow-shadow-outer: rgba(253, 27, 27, 0.1);
+				--glow-shadow-inner-hover: rgba(253, 27, 27, 0.6);
+				--glow-shadow-outer-hover: rgba(253, 27, 27, 0.2);
+				--glow-sweep-start: rgba(253, 27, 27, 0.1);
+				--glow-sweep-end: rgba(253, 27, 27, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="demo-container">
+			<h1>Glow Button Shapes Demo</h1>
+
+			<div class="section">
+				<h2>Shape Comparison</h2>
+				<div class="demo-label">
+					Same button, different shapes - perfect for different UI elements
+				</div>
+				<div class="shape-comparison">
+					<div class="shape-group">
+						<h3>Round/Circular Buttons</h3>
+						<div class="button-row">
+							<button
+								class="glow-button glow-button--round glow-button--green glow-button--small"
+								onclick="alert('Small round!')"
+							>
+								⚡
+							</button>
+							<button
+								class="glow-button glow-button--round glow-button--green"
+								onclick="alert('Medium round!')"
+							>
+								🎰
+							</button>
+							<button
+								class="glow-button glow-button--round glow-button--green glow-button--large"
+								onclick="alert('Large round!')"
+							>
+								⭐
+							</button>
+						</div>
+					</div>
+					<div class="shape-group">
+						<h3>Square Buttons</h3>
+						<div class="button-row">
+							<button
+								class="glow-button glow-button--square glow-button--blue glow-button--small"
+								onclick="alert('Small square!')"
+							>
+								⚙️
+							</button>
+							<button
+								class="glow-button glow-button--square glow-button--blue"
+								onclick="alert('Medium square!')"
+							>
+								📊
+							</button>
+							<button
+								class="glow-button glow-button--square glow-button--blue glow-button--large"
+								onclick="alert('Large square!')"
+							>
+								🎯
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Gaming Interface - Round Buttons</h2>
+				<div class="demo-label">Perfect for action buttons, icons, and circular UI elements</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--round glow-button--green glow-button--large"
+						onclick="alert('Spin!')"
+					>
+						SPIN
+					</button>
+					<button class="glow-button glow-button--round glow-button--red" onclick="alert('Stop!')">
+						STOP
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--purple"
+						onclick="alert('Bonus!')"
+					>
+						BUY
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--orange"
+						onclick="alert('Auto!')"
+					>
+						AUTO
+					</button>
+				</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--round glow-button--blue glow-button--small"
+						onclick="alert('Settings!')"
+					>
+						⚙️
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--green glow-button--small"
+						onclick="alert('Sound!')"
+					>
+						🔊
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--orange glow-button--small"
+						onclick="alert('Info!')"
+					>
+						ℹ️
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--red glow-button--small"
+						onclick="alert('Close!')"
+					>
+						✖️
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Gaming Interface - Square Buttons</h2>
+				<div class="demo-label">Great for menu items, tiles, and structured layouts</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--square glow-button--green glow-button--large"
+						onclick="alert('Play!')"
+					>
+						PLAY
+					</button>
+					<button
+						class="glow-button glow-button--square glow-button--blue"
+						onclick="alert('Menu!')"
+					>
+						MENU
+					</button>
+					<button
+						class="glow-button glow-button--square glow-button--purple"
+						onclick="alert('Stats!')"
+					>
+						STATS
+					</button>
+					<button
+						class="glow-button glow-button--square glow-button--orange"
+						onclick="alert('Shop!')"
+					>
+						SHOP
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>All Shape Variations</h2>
+				<div class="demo-label">Complete collection of shape options</div>
+				<div class="button-grid">
+					<div>
+						<h3 style="color: #82d4ff; text-align: center; margin-bottom: 15px">
+							Original Rounded
+						</h3>
+						<button class="glow-button glow-button--green" onclick="alert('Original!')">
+							I'M READY
+						</button>
+					</div>
+					<div>
+						<h3 style="color: #82d4ff; text-align: center; margin-bottom: 15px">Pill Shape</h3>
+						<button
+							class="glow-button glow-button--pill glow-button--blue"
+							onclick="alert('Pill!')"
+						>
+							CONTINUE
+						</button>
+					</div>
+					<div>
+						<h3 style="color: #82d4ff; text-align: center; margin-bottom: 15px">Rounded Square</h3>
+						<button
+							class="glow-button glow-button--rounded-square glow-button--purple"
+							onclick="alert('Rounded square!')"
+						>
+							BONUS
+						</button>
+					</div>
+					<div>
+						<h3 style="color: #82d4ff; text-align: center; margin-bottom: 15px">Perfect Circle</h3>
+						<button
+							class="glow-button glow-button--round glow-button--orange"
+							onclick="alert('Circle!')"
+						>
+							GO
+						</button>
+					</div>
+					<div>
+						<h3 style="color: #82d4ff; text-align: center; margin-bottom: 15px">Perfect Square</h3>
+						<button
+							class="glow-button glow-button--square glow-button--red"
+							onclick="alert('Square!')"
+						>
+							EXIT
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Icon-Only Buttons</h2>
+				<div class="demo-label">Perfect for toolbars and compact interfaces</div>
+				<div class="button-row">
+					<button
+						class="glow-button glow-button--round glow-button--icon glow-button--green"
+						title="Spin"
+					>
+						🎰
+					</button>
+					<button
+						class="glow-button glow-button--square glow-button--icon glow-button--blue"
+						title="Settings"
+					>
+						⚙️
+					</button>
+					<button
+						class="glow-button glow-button--rounded-square glow-button--icon glow-button--purple"
+						title="Bonus"
+					>
+						💎
+					</button>
+					<button
+						class="glow-button glow-button--round glow-button--icon glow-button--orange"
+						title="Sound"
+					>
+						🔊
+					</button>
+					<button
+						class="glow-button glow-button--square glow-button--icon glow-button--red"
+						title="Close"
+					>
+						✖️
+					</button>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2>Color & Shape Matrix</h2>
+				<div class="demo-label">Every color in every shape - mix and match as needed!</div>
+				<div class="button-grid">
+					<!-- Green variants -->
+					<button class="glow-button glow-button--green">Green Original</button>
+					<button class="glow-button glow-button--pill glow-button--green">Green Pill</button>
+					<button class="glow-button glow-button--round glow-button--green">Green Round</button>
+					<button class="glow-button glow-button--square glow-button--green">Green Square</button>
+
+					<!-- Blue variants -->
+					<button class="glow-button glow-button--blue">Blue Original</button>
+					<button class="glow-button glow-button--pill glow-button--blue">Blue Pill</button>
+					<button class="glow-button glow-button--round glow-button--blue">Blue Round</button>
+					<button class="glow-button glow-button--square glow-button--blue">Blue Square</button>
+
+					<!-- Purple variants -->
+					<button class="glow-button glow-button--purple">Purple Original</button>
+					<button class="glow-button glow-button--pill glow-button--purple">Purple Pill</button>
+					<button class="glow-button glow-button--round glow-button--purple">Purple Round</button>
+					<button class="glow-button glow-button--square glow-button--purple">Purple Square</button>
+
+					<!-- Orange variants -->
+					<button class="glow-button glow-button--orange">Orange Original</button>
+					<button class="glow-button glow-button--pill glow-button--orange">Orange Pill</button>
+					<button class="glow-button glow-button--round glow-button--orange">Orange Round</button>
+					<button class="glow-button glow-button--square glow-button--orange">Orange Square</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Add some extra interactivity for demo purposes
+			document.querySelectorAll('.glow-button:not([disabled])').forEach((button) => {
+				button.addEventListener('click', function () {
+					// Add a pulse effect after click
+					this.style.animation = 'pulse 0.3s ease-out';
+					setTimeout(() => {
+						this.style.animation = '';
+					}, 300);
+				});
+			});
+
+			// Add pulse animation
+			const style = document.createElement('style');
+			style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+			document.head.appendChild(style);
+		</script>
+	</body>
+</html>
