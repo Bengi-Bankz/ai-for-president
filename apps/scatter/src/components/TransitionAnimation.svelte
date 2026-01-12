@@ -56,14 +56,24 @@
 
 <FramedDisplay
 	frameKeys={[
-		"1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png",
-		"11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png",
-		"21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png"
+		"frame_0001.png", "frame_0002.png", "frame_0003.png", "frame_0004.png", "frame_0005.png", 
+		"frame_0006.png", "frame_0007.png", "frame_0008.png", "frame_0009.png", "frame_0010.png",
+		"frame_0011.png", "frame_0012.png", "frame_0013.png", "frame_0014.png", "frame_0015.png", 
+		"frame_0016.png", "frame_0017.png", "frame_0018.png", "frame_0019.png", "frame_0020.png",
+		"frame_0021.png", "frame_0022.png", "frame_0023.png", "frame_0024.png", "frame_0025.png", 
+		"frame_0026.png", "frame_0027.png", "frame_0028.png", "frame_0029.png", "frame_0030.png",
+		"frame_0031.png", "frame_0032.png", "frame_0033.png", "frame_0034.png", "frame_0035.png", 
+		"frame_0036.png", "frame_0037.png", "frame_0038.png", "frame_0039.png", "frame_0040.png",
+		"frame_0041.png", "frame_0042.png", "frame_0043.png", "frame_0044.png", "frame_0045.png", 
+		"frame_0046.png", "frame_0047.png", "frame_0048.png", "frame_0049.png", "frame_0050.png",
+		"frame_0051.png", "frame_0052.png", "frame_0053.png", "frame_0054.png", "frame_0055.png", 
+		"frame_0056.png", "frame_0057.png", "frame_0058.png", "frame_0059.png", "frame_0060.png",
+		"frame_0061.png"
 	]}
 	x={context.stateLayoutDerived.canvasSizes().width * 0.5 - 137}
 	y={context.stateLayoutDerived.canvasSizes().height * 0.5 - 144}
-	width={275}
-	height={288}
-	fps={20}
+	width={500}
+	height={290}	
+	fps={24}
 	scale={2}
 />

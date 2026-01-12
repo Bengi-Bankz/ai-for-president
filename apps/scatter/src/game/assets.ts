@@ -408,4 +408,8 @@ export default {
 		type: 'sprite',
 		src: new URL('../../static/assets/sprites/multi/m.png', import.meta.url).href,
 	},
+	grenadeMugShot: {
+		type: 'sprite',
+		src: new URL('../../static/assets/sprites/grenade_mug_shot.png', import.meta.url).href,
+	},
 } as const;

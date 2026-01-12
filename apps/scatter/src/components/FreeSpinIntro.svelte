@@ -44,36 +44,26 @@
 
 	<FreeSpinAnimation>
 		{#snippet children({ sizes })}
-			<Sprite
-				anchor={{ x: 0.5, y: 1.2 }}
-				width={500 * 2.2}
-				height={156 * 2.2}
-				key="freespins_{stateUrlDerived.lang()}.png"
-			/>
+				<!-- Grenade mug shot sprite with sign -->
+				<Sprite
+					anchor={{ x: 0.5, y: 0.5 }}
+					width={sizes.width * 0.95}
+					height={sizes.width * 0.95}
+					key="grenadeMugShot"
+				/>
 
-			<SpineProvider key="fsIntroNumber" width={sizes.width * 0.4}>
-				<SpineTrack
-					trackIndex={0}
-					{animationName}
-					loop={animationName === 'idle'}
-					listener={{
-						complete: () => (animationName = 'idle'),
+				<!-- Text on the sign (centered horizontally, positioned on sign vertically) -->
+				<BitmapText
+					anchor={{ x: 0.5, y: 0.5 }}
+					x={sizes.width * 0.0}
+					y={sizes.width * 0.206}
+					text={freeSpinsFromEvent}
+					style={{
+						fontFamily: 'MoneyFont3',
+						fontSize: sizes.width * 0.12,
+						fontWeight: 'bold',
 					}}
 				/>
-				<SpineSlot slotName="slot_number">
-					<BitmapText
-						anchor={{ x: 0.5, y: 0.5 }}
-						text={freeSpinsFromEvent}
-						style={{
-							fontFamily: 'MoneyFont3',
-							fontSize: sizes.width * 0.15,
-							fontWeight: 'bold',
-						}}
-					/>
-				</SpineSlot>
-			</SpineProvider>
-
-			<Sprite anchor={{ x: 0.5, y: -3 }} width={183 * 2.2} height={42 * 2.2} key="freespins.png" />
 		{/snippet}
 	</FreeSpinAnimation>
 
