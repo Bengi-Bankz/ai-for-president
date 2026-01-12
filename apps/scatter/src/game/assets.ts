@@ -66,76 +66,69 @@ export default {
 		preload: true,
 	},
 	H1: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h1.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
+	},
+	H1_01: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
+	},
+	H1_02: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
+	},
+	H1_03: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
+	},
+	H1_04: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	H2: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h2.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	H3: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h3.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	H4: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h4.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	H5: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h5.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	L1: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/l1.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	L2: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/l2.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	L3: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/l3.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	L4: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/l4.json', import.meta.url).href,
-			scale: 2,
-		},
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		preload: true,
 	},
 	M: {
 		type: 'spine',
@@ -242,6 +235,11 @@ export default {
 	decrease: {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/icons/decrease.webp', import.meta.url).href,
+	},
+
+	green_win_background: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/green/green_win_background.webp', import.meta.url).href,
 	},
 
 	goldBlur: {
@@ -359,6 +357,9 @@ export default {
 	spritesheet: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/trump/spritesheet.json', import.meta.url).href,
+	},	spritesheet1: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/spritesheet1/spritesheet1.webp.json', import.meta.url).href,
 	},
 	clusterWin: {
 		type: 'spine',

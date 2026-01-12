@@ -2,15 +2,15 @@ import { createAsset } from 'pixi-svelte';
 
 import img from './symbols.webp';
 import rawAtlas from './symbols.atlas?raw';
-import H1 from './h1.json';
-import H2 from './h2.json';
-import H3 from './h3.json';
-import H4 from './h4.json';
-import H5 from './h5.json';
-import L1 from './l1.json';
-import L2 from './l2.json';
-import L3 from './l3.json';
-import L4 from './l4.json';
+import H1 from './symbols.webp.json';
+import H2 from './symbols.webp.json';
+import H3 from './symbols.webp.json';
+import H4 from './symbols.webp.json';
+import H5 from './symbols.webp.json';
+import L1 from './symbols.webp.json';
+import L2 from './symbols.webp.json';
+import L3 from './symbols.webp.json';
+import L4 from './symbols.webp.json';
 
 export default createAsset({
 	img,

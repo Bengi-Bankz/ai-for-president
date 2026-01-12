@@ -15,7 +15,7 @@
 	import { quartInOut } from 'svelte/easing';
 	import { waitForResolve } from 'utils-shared/wait';
 	import { waitForTimeout } from 'utils-shared/wait';
-	import { Sprite } from 'pixi-svelte';
+	import { Sprite, Container } from 'pixi-svelte';
 	import BoardContainer from './BoardContainer.svelte';
 	import UnifiedMultiplierBomb from './UnifiedMultiplierBomb.svelte';
 	import { getContext } from '../game/context';
@@ -132,14 +132,17 @@
 		{#each unifiedBombs as bomb (bomb.id)}
 			{#if bomb.isActive}
 				{#if bomb.showBackdrop}
-					<Sprite 
-						key="transition"
-						x={bomb.x}
-						y={bomb.y}
-						anchor={{ x: 0.5, y: 0.5 }}
-						width={300 * bomb.backdropScale}
-						height={300 * bomb.backdropScale}
-					/>
+					<!-- Backdrop glow effect - using a simple circle -->
+					<Container x={bomb.x} y={bomb.y}>
+						<Sprite 
+							key="play"
+							anchor={0.5}
+							scale={0.3 * bomb.backdropScale}
+							x={0}
+							y={0}
+							alpha={0.5}
+						/>
+					</Container>
 				{/if}
 				{#if bomb.startTicking}
 					<UnifiedMultiplierBomb 

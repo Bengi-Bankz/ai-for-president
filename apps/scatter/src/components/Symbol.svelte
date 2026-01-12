@@ -20,10 +20,10 @@
 	const context = getContext();
 	const symbolInfo = $derived(getSymbolInfo({ rawSymbol: props.rawSymbol, state: props.state }));
 	const isSprite = $derived(symbolInfo && symbolInfo.type === 'sprite');
-	const isScatterWin = $derived(symbolInfo && props.rawSymbol.name === 'S' && props.state === 'win' && Array.isArray((symbolInfo as any).assetKeys));
+	const isWinAnimation = $derived(symbolInfo && props.state === 'win' && Array.isArray((symbolInfo as any).assetKeys));
 </script>
 
-{#if isScatterWin && symbolInfo}
+{#if isWinAnimation && symbolInfo}
    <ScatterAnimation
 	   assetKeys={(symbolInfo as any).assetKeys}
 	   x={props.x}

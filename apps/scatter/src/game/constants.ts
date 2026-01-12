@@ -143,17 +143,15 @@ const explosion = {
 	sizeRatios: { width: 1, height: 1 },
 };
 
-const h1Static = { type: 'sprite', assetKey: 'h1.webp', sizeRatios: { width: 1, height: 1 } };
-const h2Static = { type: 'sprite', assetKey: 'h2.webp', sizeRatios: { width: 1, height: 1 } };
-const h3Static = { type: 'sprite', assetKey: 'h3.webp', sizeRatios: { width: 1, height: 1 } };
-const h4Static = { type: 'sprite', assetKey: 'h4.webp', sizeRatios: { width: 1, height: 1 } };
-const h5Static = { type: 'sprite', assetKey: 'h5.webp', sizeRatios: { width: 1, height: 1 } };
-
-const l1Static = { type: 'sprite', assetKey: 'l1.webp', sizeRatios: { width: 1, height: 1 } };
-const l2Static = { type: 'sprite', assetKey: 'l2.webp', sizeRatios: { width: 1, height: 1 } };
-const l3Static = { type: 'sprite', assetKey: 'l3.webp', sizeRatios: { width: 1, height: 1 } };
-const l4Static = { type: 'sprite', assetKey: 'l4.webp', sizeRatios: { width: 1, height: 1 } };
-
+const h1Static = { type: 'sprite', assetKey: 'h1.png', sizeRatios: { width: 1, height: 1 } };
+const h2Static = { type: 'sprite', assetKey: 'h2.png', sizeRatios: { width: 1, height: 1 } };
+const h3Static = { type: 'sprite', assetKey: 'h3.png', sizeRatios: { width: 1, height: 1 } };
+const h4Static = { type: 'sprite', assetKey: 'h4.png', sizeRatios: { width: 1, height: 1 } };
+const h5Static = { type: 'sprite', assetKey: 'h5.png', sizeRatios: { width: 1, height: 1 } };
+const l1Static = { type: 'sprite', assetKey: 'l1.png', sizeRatios: { width: 1, height: 1 } };
+const l2Static = { type: 'sprite', assetKey: 'l2.png', sizeRatios: { width: 1, height: 1 } };
+const l3Static = { type: 'sprite', assetKey: 'l3.png', sizeRatios: { width: 1, height: 1 } };
+const l4Static = { type: 'sprite', assetKey: 'l4.png', sizeRatios: { width: 1, height: 1 } };
 const sStatic = { type: 'sprite', assetKey: 's.png', sizeRatios: { width: 1.243, height: 1.243 } };
 const wStatic = { type: 'sprite', assetKey: 'w.png', sizeRatios: { width: 1.12, height: 1.12 } };
 
@@ -172,7 +170,7 @@ const m7Static = { type: 'sprite', assetKey: 'm2_7x.png', sizeRatios: { width: 1
 const m10Static = { type: 'sprite', assetKey: 'm3_10x.png', sizeRatios: { width: 1, height: 1 } };
 
 const wSizeRatios = { width: 1.5 * 0.9, height: SPECIAL_SYMBOL_SIZE * 1.15 };
-const sSizeRatios = { width: 1.2, height: SPECIAL_SYMBOL_SIZE * 1.1 };
+const sSizeRatios = { width: 1.2, height: SPECIAL_SYMBOL_SIZE * 1.4 };
 
 const backgroundLowStatic = {
 	type: 'spine',
@@ -268,7 +266,11 @@ const backgroundHigh = {
 export const SYMBOL_INFO_MAP = {
 	H1: {
 		explosion,
-		win: h1Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['h1.png', 'h1_01.png', 'h1_02.png', 'h1_03.png', 'h1_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: h1Static,
 		static: h1Static,
 		spin: h1Static,
@@ -276,7 +278,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	H2: {
 		explosion,
-		win: h2Static,
+			win: {
+			type: 'sprite',
+			assetKeys: ['h2.png', 'h2_01.png', 'h2_02.png', 'h2_03.png', 'h2_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: h2Static,
 		static: h2Static,
 		spin: h2Static,
@@ -284,7 +290,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	H3: {
 		explosion,
-		win: h3Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['h3.png', 'h3_01.png', 'h3_02.png', 'h3_03.png', 'h3_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: h3Static,
 		static: h3Static,
 		spin: h3Static,
@@ -292,7 +302,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	H4: {
 		explosion,
-		win: h4Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['h4.png', 'h4_01.png', 'h4_02.png', 'h4_03.png', 'h4_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: h4Static,
 		static: h4Static,
 		spin: h4Static,
@@ -300,7 +314,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	H5: {
 		explosion,
-		win: h5Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['h5.png', 'h5_01.png', 'h5_02.png', 'h5_03.png', 'h5_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: h5Static,
 		static: h5Static,
 		spin: h5Static,
@@ -308,7 +326,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	L1: {
 		explosion,
-		win: l1Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['l1.png', 'l1_01.png', 'l1_02.png', 'l1_03.png', 'l1_04.png',],
+			sizeRatios: sSizeRatios,
+		},	
 		postWinStatic: l1Static,
 		static: l1Static,
 		spin: l1Static,
@@ -316,7 +338,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	L2: {
 		explosion,
-		win: l2Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['l2.png', 'l2_01.png', 'l2_02.png', 'l2_03.png', 'l2_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: l2Static,
 		static: l2Static,
 		spin: l2Static,
@@ -324,7 +350,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	L3: {
 		explosion,
-		win: l3Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['l3.png', 'l3_01.png', 'l3_02.png', 'l3_03.png', 'l3_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: l3Static,
 		static: l3Static,
 		spin: l3Static,
@@ -332,7 +362,11 @@ export const SYMBOL_INFO_MAP = {
 	},
 	L4: {
 		explosion,
-		win: l4Static,
+		win: {
+			type: 'sprite',
+			assetKeys: ['l4.png', 'l4_01.png', 'l4_02.png', 'l4_03.png', 'l4_04.png',],
+			sizeRatios: sSizeRatios,
+		},
 		postWinStatic: l4Static,
 		static: l4Static,
 		spin: l4Static,

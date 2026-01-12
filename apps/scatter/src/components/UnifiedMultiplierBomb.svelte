@@ -24,15 +24,24 @@
 	// State management
 	let phase = $state<BombPhase>('hidden');
 	let animationName = $state('static');
-	let showMultiplierText = $state(false); // HIDDEN until tick-up phase
-	let currentTickValue = $state(1); // Start ticking from 1
-	let assetError = false; // Define assetError to prevent ReferenceError
-	let assetLoaded = true; // Assume asset is loaded for now; update logic as needed
+	let showMultiplierText = $state(false);
+	let currentTickValue = $state(1);
+	let assetError = false;
+	let assetLoaded = true;
+	
+	// Duel state
+	let showDuel = $state(false);
+	let duelFakeMultiplier = $state(2);
+	let duelWinnerRevealed = $state(false);
 	
 	// Animation tweens
 	const scale = new Tween(0);
 	const textScale = new Tween(0);
 	const rotation = new Tween(0);
+	
+	// Duel tweens
+	const duelGrenadeX = new Tween(-SYMBOL_SIZE * 1.5);
+	const duelDonutX = new Tween(SYMBOL_SIZE * 1.5);
 	
 	// Animation intervals
 	let tickUpInterval: ReturnType<typeof setInterval> | null = null;
@@ -63,7 +72,7 @@
 		await playLandingAnimation();
 		await playStaticPhase();
 		await playScalingPhase();
-		await playTickUpAnimation();
+		await playDuelAnimation();
 		await playExplodingAnimation();
 		phase = 'complete';
 		console.log(`✅ Unified bomb sequence complete for ${props.multiplierValue}X`);
@@ -101,52 +110,56 @@
 		await scale.set(2.0, { duration: 500 / stateBetDerived.timeScale() });
 	};
 	
-	const playTickUpAnimation = async () => {
+	const playDuelAnimation = async () => {
 		phase = 'tickingUp';
+		console.log('🎯 Starting duel animation');
 		
-		// NOW show the multiplier text and start ticking up
-		showMultiplierText = true;
-		currentTickValue = 1;
+		// Get random fake multiplier
+		const MULTIPLIER_VALUES = [2, 4, 5, 7, 10, 50, 100];
+		const available = MULTIPLIER_VALUES.filter(v => v !== props.multiplierValue);
+		duelFakeMultiplier = available[Math.floor(Math.random() * available.length)];
 		
-		// NO rotation during tick-up phase to keep text straight
-		// Minor rotation removed to prevent text turning
+		// Show duel
+		showDuel = true;
+		console.log(`🎯 Duel: ${props.multiplierValue}X vs ${duelFakeMultiplier}X`);
 		
-		// Animate text scale in
-		await textScale.set(1.0, { duration: 200 / stateBetDerived.timeScale() });
+		// Intro - characters slide in
+		duelGrenadeX.set(-SYMBOL_SIZE * 0.8, { duration: 400 / stateBetDerived.timeScale() });
+		duelDonutX.set(SYMBOL_SIZE * 0.8, { duration: 400 / stateBetDerived.timeScale() });
+		await waitForTimeout(600 / stateBetDerived.timeScale());
 		
-		// Tick up from 1 to the target multiplier value
-		return new Promise<void>((resolve) => {
-			tickUpInterval = setInterval(() => {
-				// Play incrementally higher sound on each tick
-				const tickSoundMap: { [key: number]: any } = {
-					1: 'sfx_scatter_stop_1',
-					2: 'sfx_scatter_stop_2',
-					3: 'sfx_scatter_stop_3',
-					4: 'sfx_scatter_stop_4',
-					5: 'sfx_scatter_stop_5',
-				};
-				// Use the current tick value to get progressively higher sounds
-				const soundIndex = Math.min(currentTickValue, 5);
-				const tickSound = tickSoundMap[soundIndex] || 'sfx_scatter_stop_5';
-				context.eventEmitter?.broadcast({ type: 'soundOnce', name: tickSound as any });
-				
-				// Increment tick value
-				currentTickValue++;
-				
-				// Text scale pulse on each tick
-				textScale.set(1.3, { duration: 150 / stateBetDerived.timeScale() })
-					.then(() => textScale.set(0.85, { duration: 150 / stateBetDerived.timeScale() }));
-				
-				// Check if we've reached target
-				if (currentTickValue >= props.multiplierValue) {
-					if (tickUpInterval) {
-						clearInterval(tickUpInterval);
-						tickUpInterval = null;
-					}
-					resolve();
-				}
-			}, TICK_SPEED / stateBetDerived.timeScale());
-		});
+		// Dueling - 3 rounds of shooting
+		for (let i = 0; i < 3; i++) {
+			console.log(`🔫 Round ${i + 1}/3`);
+			
+			// Grenade shoots
+			duelGrenadeX.set(-SYMBOL_SIZE * 0.3, { duration: 150 / stateBetDerived.timeScale() });
+			context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_scatter_stop_1' });
+			await waitForTimeout(150 / stateBetDerived.timeScale());
+			
+			// Donut shoots
+			duelDonutX.set(SYMBOL_SIZE * 0.3, { duration: 150 / stateBetDerived.timeScale() });
+			context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_scatter_stop_2' });
+			await waitForTimeout(150 / stateBetDerived.timeScale());
+			
+			// Return to positions
+			duelGrenadeX.set(-SYMBOL_SIZE * 0.8, { duration: 100 / stateBetDerived.timeScale() });
+			duelDonutX.set(SYMBOL_SIZE * 0.8, { duration: 100 / stateBetDerived.timeScale() });
+			await waitForTimeout(100 / stateBetDerived.timeScale());
+		}
+		
+		await waitForTimeout(300 / stateBetDerived.timeScale());
+		
+		// Winner reveal - loser falls, winner celebrates
+		console.log(`✨ Revealing winner: ${props.multiplierValue}X`);
+		duelWinnerRevealed = true;
+		
+		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_a' });
+		
+		await waitForTimeout(1000 / stateBetDerived.timeScale());
+		
+		console.log('✅ Duel complete');
+		showDuel = false;
 	};
 	
 	const playExplodingAnimation = async () => {
@@ -182,6 +195,78 @@
                         timeScale={stateBetDerived.timeScale()}
                     />
                 </SpineProvider>
+            {:else if phase === 'tickingUp' && showDuel}
+                <!-- Inline Duel Animation -->
+                <!-- Grenade (left side) -->
+                <Container x={duelGrenadeX.current} y={0}>
+                    <Sprite
+                        key="play"
+                        anchor={0.5}
+                        scale={0.7}
+                        x={0}
+                        y={0}
+                        tint={0xff6b6b}
+                    />
+                    <BitmapText
+                        anchor={0.5}
+                        x={0}
+                        y={SYMBOL_SIZE * 0.5}
+                        text={`${duelFakeMultiplier}X`}
+                        style={{
+                            fontFamily: 'purple',
+                            fontSize: SYMBOL_SIZE * 0.25,
+                            letterSpacing: -1,
+                        }}
+                    />
+                </Container>
+
+                <!-- Donut cop (right side) -->
+                <Container x={duelDonutX.current} y={0}>
+                    <Sprite
+                        key="play"
+                        anchor={0.5}
+                        scale={0.7}
+                        x={0}
+                        y={0}
+                        tint={0x4ecdc4}
+                    />
+                    <BitmapText
+                        anchor={0.5}
+                        x={0}
+                        y={SYMBOL_SIZE * 0.5}
+                        text={`${props.multiplierValue}X`}
+                        style={{
+                            fontFamily: 'purple',
+                            fontSize: SYMBOL_SIZE * 0.25,
+                            letterSpacing: -1,
+                        }}
+                    />
+                </Container>
+
+                <!-- Winner reveal in center -->
+                {#if duelWinnerRevealed}
+                    <Container y={0} scale={1.5}>
+                        <Sprite
+                            key="play"
+                            anchor={0.5}
+                            scale={0.9}
+                            x={0}
+                            y={0}
+                            tint={0xffd93d}
+                        />
+                        <BitmapText
+                            anchor={0.5}
+                            x={0}
+                            y={SYMBOL_SIZE * 0.5}
+                            text={`${props.multiplierValue}X`}
+                            style={{
+                                fontFamily: 'purple',
+                                fontSize: SYMBOL_SIZE * 0.35,
+                                letterSpacing: -2,
+                            }}
+                        />
+                    </Container>
+                {/if}
             {:else}
                 <Container scale={scale.current} rotation={rotation.current}>
                     <Sprite
