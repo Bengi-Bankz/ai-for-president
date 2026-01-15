@@ -34,7 +34,6 @@ const dispatch = createEventDispatcher();
 	import FreeSpinOutro from './FreeSpinOutro.svelte';
 	import Transition from './Transition.svelte';
 	import CharacterDisplay from './CharacterDisplay.svelte';
-	import VSAnimationDisplay from './VSAnimationDisplay.svelte';
 
 	import { scatterLandedThisRound } from '../stores/scatterLandedThisRound';
 	import { onDestroy } from 'svelte';
@@ -176,7 +175,6 @@ const dispatch = createEventDispatcher();
         <FreeSpinCounter />
         <CharacterDisplay />
       {/if}
-      <VSAnimationDisplay />
       <FreeSpinOutro />
       <Transition />
 

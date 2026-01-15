@@ -17,7 +17,7 @@
 	import { waitForTimeout } from 'utils-shared/wait';
 	import { Sprite, Container } from 'pixi-svelte';
 	import BoardContainer from './BoardContainer.svelte';
-	import UnifiedMultiplierBomb from './UnifiedMultiplierBomb.svelte';
+	import DonutDuel from './DonutDuel.svelte';
 	import { getContext } from '../game/context';
 	import type { RawSymbol, SymbolState } from '../game/types';
 	import { getSymbolX, getSymbolY } from '../game/utils';
@@ -29,6 +29,8 @@
 		multiplierValue: number;
 		x: number;
 		y: number;
+		reelIndex: number;
+		symbolIndex: number;
 		isActive: boolean;
 		backdropScale: number;
 		showBackdrop: boolean;
@@ -73,6 +75,8 @@
 							multiplierValue,
 							x: getSymbolX(reelIndex),
 							y: getSymbolY(symbolIndex - 1),
+							reelIndex,
+							symbolIndex: symbolIndex - 1,
 							isActive: false,
 							backdropScale: 0.2,
 							showBackdrop: false,
@@ -145,11 +149,11 @@
 					</Container>
 				{/if}
 				{#if bomb.startTicking}
-					<UnifiedMultiplierBomb 
+					<DonutDuel 
 						x={bomb.x}
 						y={bomb.y}
 						multiplierValue={bomb.multiplierValue}
-						autoStart={true}
+						gridPosition={{ row: bomb.symbolIndex, col: bomb.reelIndex }}
 						onComplete={() => handleBombComplete(bomb.id)}
 					/>
 				{/if}

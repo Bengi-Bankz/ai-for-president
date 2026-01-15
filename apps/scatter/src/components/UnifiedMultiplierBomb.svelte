@@ -7,6 +7,7 @@
 	
 	import { getContext } from '../game/context';
 	import RevolverCylinder from './RevolverCylinder.svelte';
+	import FramedDisplay from '../framedisplay.svelte';
 	import { SYMBOL_SIZE } from '../game/constants';
 
 	type Props = {
@@ -43,6 +44,8 @@
 	
 	// Duel state
 	let showDuel = $state(false);
+	let showVSAnimation = $state(false);
+	let showWinAnimation = $state(false);
 	let duelCharacters = $state<DuelCharacter[]>([]);
 	let duelWinnerRevealed = $state(false);
 	let duelShootOrder = $state<('grenadeRobber' | 'donutCop')[]>([]);
@@ -98,85 +101,48 @@
 	};
 	
 	const playDuelAnimation = async () => {
-		console.log('🎯 Starting duel animation');
+		console.log('🎯 Starting VS comparison');
 		
-		// Create character objects
+		// Create character objects - Grenade always left with winning multiplier, Cop always right with fake
 		const fakeMultiplier = getRandomMultiplier();
 		
-		// Randomly assign multipliers to characters
-		const assignToLeft = Math.random() > 0.5;
 		duelCharacters = [
 			{
 				id: 'grenadeRobber',
-				multiplier: assignToLeft ? props.multiplierValue : fakeMultiplier,
+				multiplier: props.multiplierValue,
 				spriteKey: 'grenadeRobber',
 				x: -SYMBOL_SIZE * 0.8,
-				isWinner: assignToLeft,
+				isWinner: true,
 			},
 			{
 				id: 'donutCop',
-				multiplier: assignToLeft ? fakeMultiplier : props.multiplierValue,
+				multiplier: fakeMultiplier,
 				spriteKey: 'donutCop',
 				x: SYMBOL_SIZE * 0.8,
-				isWinner: !assignToLeft,
+				isWinner: false,
 			},
 		];
 		
-		// Randomly determine shoot order
-		const shootOrders = [
-			['grenadeRobber', 'donutCop'],
-			['donutCop', 'grenadeRobber'],
-		];
-		duelShootOrder = shootOrders[Math.floor(Math.random() * 2)] as ('grenadeRobber' | 'donutCop')[];
-		
 		console.log(
-			`🎯 Duel: Grenade (${duelCharacters[0].multiplier}X) vs Donut (${duelCharacters[1].multiplier}X)`,
+			`🆚 VS: Grenade (${duelCharacters[0].multiplier}X) vs Donut (${duelCharacters[1].multiplier}X)`,
 		);
-		console.log(`🔫 Shoot order: ${duelShootOrder.join(' → ')}`);
 		
-		// Show duel
+		// Show duel with winner immediately revealed
 		showDuel = true;
-		duelWinnerRevealed = false;
-		
-		// Intro - characters slide in from sides (centered on grid)
-		duelGrenadeX.set(-SYMBOL_SIZE * 0.8, { duration: 400 / stateBetDerived.timeScale() });
-		duelDonutX.set(SYMBOL_SIZE * 0.8, { duration: 400 / stateBetDerived.timeScale() });
-		await waitForTimeout(600 / stateBetDerived.timeScale());
-		
-		// Dueling - 3 rounds of shooting
-		for (let i = 0; i < 3; i++) {
-			const shooter = duelShootOrder[i % 2];
-			const isGrenade = shooter === 'grenadeRobber';
-			
-			console.log(`🔫 Round ${i + 1}/3: ${shooter} shoots`);
-			
-			// Shooter attacks
-			if (isGrenade) {
-				duelGrenadeScale.set(1.2, { duration: 150 / stateBetDerived.timeScale() });
-				context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_scatter_stop_1' });
-			} else {
-				duelDonutScale.set(1.2, { duration: 150 / stateBetDerived.timeScale() });
-				context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_scatter_stop_2' });
-			}
-			await waitForTimeout(150 / stateBetDerived.timeScale());
-			
-			// Reset scale
-			if (isGrenade) {
-				duelGrenadeScale.set(1, { duration: 100 / stateBetDerived.timeScale() });
-			} else {
-				duelDonutScale.set(1, { duration: 100 / stateBetDerived.timeScale() });
-			}
-			await waitForTimeout(100 / stateBetDerived.timeScale());
-		}
-		
-		await waitForTimeout(300 / stateBetDerived.timeScale());
-		
-		// Winner reveal
-		console.log(`✨ Winner: ${duelCharacters.find(c => c.isWinner)?.id}`);
 		duelWinnerRevealed = true;
 		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_a' });
 		
-		await waitForTimeout(1000 / stateBetDerived.timeScale());
+		// VS Animation - show comparison with multipliers displayed
+		console.log('🆚 Playing VS animation');
+		showVSAnimation = true;
+		await waitForTimeout(2250 / stateBetDerived.timeScale()); // 36 frames at fps 16 = ~2.25 seconds
+		showVSAnimation = false;
+		
+		// Character-specific win animation
+		console.log(`🏆 Playing ${winningCharacter?.id} win animation`);
+		showWinAnimation = true;
+		await waitForTimeout(2250 / stateBetDerived.timeScale()); // 36 frames at fps 16 = ~2.25 seconds
+		showWinAnimation = false;
 		
 		console.log('✅ Duel complete');
 		showDuel = false;
@@ -222,57 +188,93 @@
                     bulletCount={bulletCount}
                 />
 
-                <!-- Duel characters (shown after revolver is ready) -->
-                {#if phase === 'revolver-ready' && showDuel}
-                    {#each duelCharacters as character}
-                        <Container
-                            x={character.id === 'grenadeRobber' ? duelGrenadeX.current : duelDonutX.current}
+                <!-- VS Comparison with multipliers shown on sides -->
+                {#if phase === 'revolver-ready' && showDuel && duelWinnerRevealed}
+                    <!-- Grenade Robber (left) with multiplier -->
+                    <Container x={-SYMBOL_SIZE * 1.0} y={0}>
+                        <Sprite
+                            key="grenadeRobber"
+                            anchor={0.5}
+                            scale={0.7}
+                            x={0}
                             y={0}
-                            scale={character.id === 'grenadeRobber' ? duelGrenadeScale.current : duelDonutScale.current}
-                        >
-                            <Sprite
-                                key={character.spriteKey}
-                                anchor={0.5}
-                                scale={0.7}
-                                x={0}
-                                y={0}
-                            />
-                            <BitmapText
-                                anchor={0.5}
-                                x={0}
-                                y={SYMBOL_SIZE * 0.5}
-                                text={`${character.multiplier}X`}
-                                style={{
-                                    fontFamily: 'purple',
-                                    fontSize: SYMBOL_SIZE * 0.25,
-                                    letterSpacing: -1,
-                                }}
-                            />
-                        </Container>
-                    {/each}
+                        />
+                        <BitmapText
+                            anchor={0.5}
+                            x={0}
+                            y={SYMBOL_SIZE * 0.5}
+                            text={`${duelCharacters[0].multiplier}X`}
+                            style={{
+                                fontFamily: 'purple',
+                                fontSize: SYMBOL_SIZE * 0.25,
+                                letterSpacing: -1,
+                            }}
+                        />
+                    </Container>
 
-                    <!-- Winner reveal in center -->
-                    {#if duelWinnerRevealed && winningCharacter}
-                        <Container y={0} scale={duelGrenadeScale.current * 1.5}>
-                            <Sprite
-                                key={winningCharacter.spriteKey}
-                                anchor={0.5}
-                                scale={0.9}
-                                x={0}
-                                y={0}
-                            />
-                            <BitmapText
-                                anchor={0.5}
-                                x={0}
-                                y={SYMBOL_SIZE * 0.5}
-                                text={`${winningCharacter.multiplier}X`}
-                                style={{
-                                    fontFamily: 'purple',
-                                    fontSize: SYMBOL_SIZE * 0.35,
-                                    letterSpacing: -2,
-                                }}
-                            />
-                        </Container>
+                    <!-- VS Animation in center -->
+                    {#if showVSAnimation}
+                        <FramedDisplay
+                            frameKeys={[
+                                "vsanimation1", "vsanimation2", "vsanimation3", "vsanimation4", "vsanimation5", 
+                                "vsanimation6", "vsanimation7", "vsanimation8", "vsanimation9", "vsanimation10",
+                                "vsanimation11", "vsanimation12", "vsanimation13", "vsanimation14", "vsanimation15", 
+                                "vsanimation16", "vsanimation17", "vsanimation18", "vsanimation19", "vsanimation20",
+                                "vsanimation21", "vsanimation22", "vsanimation23", "vsanimation24", "vsanimation25", 
+                                "vsanimation26", "vsanimation27", "vsanimation28", "vsanimation29", "vsanimation30",
+                                "vsanimation31", "vsanimation32", "vsanimation33", "vsanimation34", "vsanimation35", 
+                                "vsanimation36"
+                            ]}
+                            x={-(SYMBOL_SIZE * 0.8)}
+                            y={0}
+                            width={SYMBOL_SIZE * 1.6}
+                            height={SYMBOL_SIZE * 1.6}
+                            fps={16}
+                            scale={1}
+                            loop={false}
+                        />
+                    {/if}
+
+                    <!-- Donut Cop (right) with multiplier -->
+                    <Container x={SYMBOL_SIZE * 1.0} y={0}>
+                        <Sprite
+                            key="donutCop"
+                            anchor={0.5}
+                            scale={0.7}
+                            x={0}
+                            y={0}
+                        />
+                        <BitmapText
+                            anchor={0.5}
+                            x={0}
+                            y={SYMBOL_SIZE * 0.5}
+                            text={`${duelCharacters[1].multiplier}X`}
+                            style={{
+                                fontFamily: 'purple',
+                                fontSize: SYMBOL_SIZE * 0.25,
+                                letterSpacing: -1,
+                            }}
+                        />
+                    </Container>
+                {/if}
+
+                <!-- Winner animations -->
+                {#if phase === 'revolver-ready' && duelWinnerRevealed && winningCharacter}
+                    <!-- Character Win Animation -->
+                    {#if showWinAnimation}
+                        <FramedDisplay
+                            frameKeys={winningCharacter.id === 'donutCop' 
+                                ? ["copwins1", "copwins2", "copwins3", "copwins4", "copwins5", "copwins6", "copwins7", "copwins8", "copwins9", "copwins10", "copwins11", "copwins12", "copwins13", "copwins14", "copwins15", "copwins16", "copwins17", "copwins18", "copwins19", "copwins20", "copwins21", "copwins22", "copwins23", "copwins24", "copwins25", "copwins26", "copwins27", "copwins28", "copwins29", "copwins30", "copwins31", "copwins32", "copwins33", "copwins34", "copwins35", "copwins36"]
+                                : ["robberwins1", "robberwins2", "robberwins3", "robberwins4", "robberwins5", "robberwins6", "robberwins7", "robberwins8", "robberwins9", "robberwins10", "robberwins11", "robberwins12", "robberwins13", "robberwins14", "robberwins15", "robberwins16", "robberwins17", "robberwins18", "robberwins19", "robberwins20", "robberwins21", "robberwins22", "robberwins23", "robberwins24", "robberwins25", "robberwins26", "robberwins27", "robberwins28", "robberwins29", "robberwins30", "robberwins31", "robberwins32", "robberwins33", "robberwins34", "robberwins35", "robberwins36"]
+                            }
+                            x={winningCharacter.id === 'donutCop' ? -(SYMBOL_SIZE * 1.2) : -(SYMBOL_SIZE * 0.8)}
+                            y={0}
+                            width={winningCharacter.id === 'donutCop' ? SYMBOL_SIZE * 2.4 : SYMBOL_SIZE * 1.6}
+                            height={winningCharacter.id === 'donutCop' ? SYMBOL_SIZE * 2.4 : SYMBOL_SIZE * 1.6}
+                            fps={16}
+                            scale={1}
+                            loop={false}
+                        />
                     {/if}
                 {/if}
             {/if}
