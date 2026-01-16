@@ -94,7 +94,7 @@ export const HIGH_SYMBOLS = ['H1', 'H2', 'H3', 'H4', 'H5'];
 
 export const INITIAL_SYMBOL_STATE: SymbolState = 'static';
 
-const M_SIZE = 0.3;
+const M_SIZE = 0.5;
 const HIGH_SYMBOL_SIZE = 0.9;
 const LOW_SYMBOL_SIZE = 0.9;
 const SPECIAL_SYMBOL_SIZE = 0.9;
@@ -157,34 +157,34 @@ const wStatic = { type: 'sprite', assetKey: 'w.png', sizeRatios: { width: 1.12, 
 
 const m2Static = {
 	type: 'sprite',
-	assetKey: 'm',
-	sizeRatios: { width: 0.88, height: 0.88 },
+	assetKey: 'm.png',
+	sizeRatios: { width: 1, height: 1 },
 };
 const m4Static = {
 	type: 'sprite',
-	assetKey: 'm',
-	sizeRatios: { width: 0.88, height: 0.88 },
+	assetKey: 'm.png',
+	sizeRatios: { width: 1, height: 1 },
 };
-const m5Static = { type: 'sprite', assetKey: 'm', sizeRatios: { width: 1, height: 1 } };
-const m7Static = { type: 'sprite', assetKey: 'm', sizeRatios: { width: 1, height: 1 } };
-const m10Static = { type: 'sprite', assetKey: 'm', sizeRatios: { width: 1, height: 1 } };
+const m5Static = { type: 'sprite', assetKey: 'm.png', sizeRatios: { width: 1, height: 1 } };
+const m7Static = { type: 'sprite', assetKey: 'm.png', sizeRatios: { width: 1, height: 1 } };
+const m10Static = { type: 'sprite', assetKey: 'm.png', sizeRatios: { width: 1, height: 1 } };
 
 const wSizeRatios = { width: 1.5 * 0.9, height: SPECIAL_SYMBOL_SIZE * 1.15 };
 const sSizeRatios = { width: 1.2, height: SPECIAL_SYMBOL_SIZE * 1.4 };
 
 const backgroundLowStatic = {
 	type: 'sprite',
-	assetKey: 'm',
+	assetKey: 'm.png',
 	sizeRatios: { width: M_SIZE, height: M_SIZE },
 };
 const backgroundMidStatic = {
 	type: 'sprite',
-	assetKey: 'm',
+	assetKey: 'm.png',
 	sizeRatios: { width: M_SIZE, height: M_SIZE },
 };
 const backgroundHighStatic = {
 	type: 'sprite',
-	assetKey: 'm',
+	assetKey: 'm.png',
 	sizeRatios: { width: M_SIZE, height: M_SIZE },
 };
 

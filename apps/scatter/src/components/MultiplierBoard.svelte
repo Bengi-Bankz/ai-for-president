@@ -139,7 +139,7 @@
 					<!-- Backdrop glow effect - using a simple circle -->
 					<Container x={bomb.x} y={bomb.y}>
 						<Sprite 
-							key="play"
+							key="glow"
 							anchor={0.5}
 							scale={0.3 * bomb.backdropScale}
 							x={0}

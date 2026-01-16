@@ -11,6 +11,7 @@ import L1 from './symbols.webp.json';
 import L2 from './symbols.webp.json';
 import L3 from './symbols.webp.json';
 import L4 from './symbols.webp.json';
+import M from './symbols.webp.json';
 
 export default createAsset({
 	img,
@@ -25,5 +26,6 @@ export default createAsset({
 		L2,
 		L3,
 		L4,
+		M,
 	},
 });
