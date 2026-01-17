@@ -11,6 +11,7 @@
 	import ModalPayTable from './ModalPayTable.svelte';
 	import ModalGameRules from './ModalGameRules.svelte';
 	import ModalSettings from './ModalSettings.svelte';
+	import ModalGameHistory from './ModalGameHistory.svelte';
 
 	type Props = {
 		version: Snippet;
@@ -33,4 +34,7 @@
 	{@render props.version()}
 </ModalGameRules>
 <ModalSettings />
+<ModalGameHistory>
+	{@render props.version()}
+</ModalGameHistory>
 

@@ -2,9 +2,10 @@ import _ from 'lodash';
 
 import { recordBookEvent, checkIsMultipleRevealEvents, type BookEventHandlerMap } from 'utils-book';
 import { stateBet } from 'state-shared';
+import { addEntry as addGameHistoryEntry } from 'components-ui-html';
 
 import { eventEmitter } from './eventEmitter';
-import { playBookEvent } from './utils';
+import { playBookEvent, getCurrentBet } from './utils';
 import { winLevelMap, type WinLevel, type WinLevelData } from './winLevelMap';
 import { stateGame, stateGameDerived } from './stateGame.svelte';
 import type { BookEvent, BookEventOfType, BookEventContext } from './typesBookEvent';
@@ -236,8 +237,23 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 		eventEmitter.broadcast({ type: 'winHide' });
 	},
 	finalWin: async (bookEvent: BookEventOfType<'finalWin'>) => {
+		console.log('finalWin handler called', { bookEvent });
 		eventEmitter.broadcast({ type: 'globalMultiplierHide' });
 		eventEmitter.broadcast({ type: 'tumbleWinAmountHide' });
+		
+		// Record game history
+		const bet = getCurrentBet();
+		console.log('Current bet:', bet);
+		if (bet && bet.betID !== undefined && bet.amount !== undefined && bet.payout !== undefined) {
+			console.log('Recording history entry');
+			addGameHistoryEntry({
+				bookId: bet.betID,
+				betAmount: bet.amount,
+				winAmount: bet.payout,
+				payoutMultiplier: bet.payoutMultiplier ?? (bet.payout / bet.amount),
+				timestamp: Date.now(),
+			});
+		}
 	},
 	// customised
 	createBonusSnapshot: async (bookEvent: BookEventOfType<'createBonusSnapshot'>) => {

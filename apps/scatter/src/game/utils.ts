@@ -18,11 +18,17 @@ import type { RawSymbol, SymbolState } from './types';
 // general utils
 export const { getEmptyBoard } = createGetEmptyPaddedBoard({ reelsDimensions: BOARD_DIMENSIONS });
 export const { playBookEvent, playBookEvents } = createPlayBookUtils({ bookEventHandlerMap });
+
+let currentBet: Bet | null = null;
+
 export const playBet = async (bet: Bet) => {
+	currentBet = bet;
 	stateBet.winBookEventAmount = 0;
 	await playBookEvents(bet.state);
 	eventEmitter.broadcast({ type: 'stopButtonEnable' });
 };
+
+export const getCurrentBet = () => currentBet;
 
 // resume bet
 const BOOK_EVENT_TYPES_TO_RESERVE_FOR_SNAPSHOT = [
