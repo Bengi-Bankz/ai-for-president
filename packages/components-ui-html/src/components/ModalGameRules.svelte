@@ -146,9 +146,7 @@
 							individual sessions may vary.
 						</p>
 						<p><b>RTP Base Game:</b> 97%</p>
-						<p><b>RTP Did Not Inhale Spins:</b> 97%</p>
-						<p><b>RTP Honest Abe Spins:</b> 97%</p>
-						<p><b>RTP Osama Killer Spins:</b> 97%</p>
+						<p><b>RTP Bonus Bang Spins:</b> 97%</p>
 					</section>
 
 					<section>
@@ -156,35 +154,7 @@
 						<div class="paytable-modal-outer" style="background:none;position:static;width:auto;height:auto;box-shadow:none;">
 							<div class="paytable-modal-inner" style="box-shadow:none;max-width:100%;width:100%;padding:0;">
 								<div class="paytable-section">
-									<h3>Did Not Inhale Spins</h3>
-									<div class="bonus-images">
-										<div class="scatter-row">
-											{#each Array(4) as _, i}
-												<img src={img1} alt="Scatter symbol {i + 1}" />
-											{/each}
-										</div>
-										<div class="bonus-row">
-											<img src={img26} alt="Did Not Inhale Spins" />
-										</div>
-									</div>
-									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 4 scatter symbols<br>Free Spins: 8<br>Purchase Amount: <b>100×</b><br><br>Take your shot at the bonus round with a lighthearted twist! Landing 4 scatters awards Did Not Inhale Spins, giving you a batch of free spins with boosted win potential. Watch the reels heat up as bonus symbols stack and multipliers rise — your chance to spin your way toward that massive 10,000× max award begins here.</div>
-								</div>
-								<div class="paytable-section">
-									<h3>Honest Abe Spins</h3>
-									<div class="bonus-images">
-										<div class="scatter-row">
-											{#each Array(5) as _, i}
-												<img src={img1} alt="Scatter symbol {i + 1}" />
-											{/each}
-										</div>
-										<div class="bonus-row">
-											<img src={img24} alt="Honest Abe Spins" />
-										</div>
-									</div>
-									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 5 scatter symbols<br>Free Spins: 10<br>Purchase Amount: <b>200×</b><br><br>Honesty is the key! Hit 5 scatters to unlock Honest Abe Spins, where the rewards climb even higher. More spins, better odds, and an extra chance for huge multipliers on top-winning combinations. Every spin could bring you closer to the game’s ultimate 10,000× Award cap — stay true, and let the reels deliver.</div>
-								</div>
-								<div class="paytable-section">
-									<h3>Osama Killer Spins</h3>
+									<h3>Bonus Bang Spins</h3>
 									<div class="bonus-images">
 										<div class="scatter-row">
 											{#each Array(6) as _, i}
@@ -192,24 +162,32 @@
 											{/each}
 										</div>
 										<div class="bonus-row">
-											<img src={img25} alt="Osama Killer Spins" />
+											<img src={img26} alt="Bonus Bang Spins" />
 										</div>
 									</div>
-									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 6 scatter symbols<br>Free Spins: 12<br>Purchase Amount: <b>500×</b><br><br>The top-tier bonus for the bold! Land 6 scatters to trigger Osama Killer Spins, the most powerful feature in the game. Packed with enhanced multipliers and maximum spin potential, this round delivers explosive win opportunities with every reel. Reach for that 10,000× max award — it’s the ultimate victory spin!</div>
+									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 4/5/6 scatter symbols<br>Free Spins: 8 / 10 / 12 (for 4 / 5 / 6 scatters)<br>Purchase Amount: <b>200×</b><br>Retriggers inside bonus: 2 scatters add +2 spins; 4 scatters add +4 spins.<br><br>Bang into the action with Bonus Bang Spins. Scatters light the fuse for free spins with stacked symbols and rising duel multipliers that push you toward the massive 10,000× top potential. You can also buy straight into the chaos for faster thrills.</div>
 								</div>
 							</div>
 						</div>
 					</section>
 
 					<section>
+						<h3>Duel Multipliers</h3>
+						<p>
+							During Bonus Bang Spins, each duel can award the winner a multiplier of 2×, 4×, 5×,
+							7×, 10×, 15×, 25×, 50×, or 100×. The winning symbol of the duel applies its
+							multiplier to the current spin’s win, amplifying the total payout.
+						</p>
+					</section>
+
+					<section>
 						<h3>Maximum Award</h3>
 						<p>
-							The maximum possible Award is capped at <b>30,000× </b>.
+							The maximum possible Award is capped at <b>30,000×</b> and can be achieved in
+							both the base game and Bonus Bang Spins.
 						</p>
 						<p><b>Max Award Base Game:</b> 30,000×</p>
-						<p><b>Max Award Did Not Inhale Spins:</b> 30,000×</p>
-						<p><b>Max Award Honest Abe Spins:</b> 30,000×</p>
-						<p><b>Max Award Osama Killer Spins:</b> 30,000×</p>
+						<p><b>Max Award Bonus Bang Spins:</b> 30,000×</p>
 					</section>
 
 					<section>

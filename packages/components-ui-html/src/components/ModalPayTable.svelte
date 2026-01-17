@@ -44,18 +44,19 @@
 							{
 								name: 'w',
 								src: wildImg,
-								text: `VS DUEL WILD
-Triggers head-to-head duels.
-Winning side applies random multipliers:
-2x · 3x · 5x · 10x`
+								text: `VS DUEL
+	Triggers head-to-head duels.
+	Winning side applies multipliers:
+	2x · 4x · 5x · 7x · 10x · 15x · 25x · 50x · 100x`
 							},
 							{
 								name: 's',
 								src: scatterImg,
 								text: `SCATTER
-4–8 Spins = Street Chaos
-5–10 Spins = Crew Frenzy
-6–12 Spins = Full Heist Mode`
+	4 Scatters = 8 Bonus Bang Spins
+	5 Scatters = 10 Bonus Bang Spins
+	6 Scatters = 12 Bonus Bang Spins
+	In bonus: 2 Scatters = +2 spins; 4 Scatters = +4 spins`
 							},
 
 							/* ===== HIGH SYMBOLS (GRENADE BANK ROBBERS) ===== */
