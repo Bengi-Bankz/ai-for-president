@@ -54,65 +54,68 @@ const DEFAULT_BET_MODE_META = {
 		maxWin: 8888,
 	},
 
-	BONUS_5_SCATTER: {
-		mode: 'BONUS_5_SCATTER',
-		costMultiplier: 200,
-		type: 'buy',
-		parent: '',
-		children: '',
-		assets: {
-			icon: 'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/icon_bonusbuy.webp',
-			dialogImage:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/bonus_image.webp',
-			dialogVolatility:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_04.webp',
-			volatility:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_white_04.webp',
-			button:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_8_97/betModes/button_buy.webp',
-		},
-		text: {
-			title: 'HONESTLY MINTING SPINS',
-			dialog:
-				'Triggers FREE SPINS with 5 GUARANTEED SCATTERS for 200x the purchase amount. The Global Multiplier can reach up to 64x and remains active for the duration of each spin.',
-			description: '5 guaranteed scatter symbols for enhanced free spins.',
-			button: 'BUY MINTING',
-			tickerIdle: 'PLACE YOUR BET',
-			tickerSpin: '5 SCATTER BONUS ACTIVATED',
-			bannerText: '5 GUARANTEED SCATTERS',
-		},
-		maxWin: 8888,
-	},
+	// BONUS_5_SCATTER and BONUS_6_SCATTER disabled
+	// Uncomment these sections to re-enable 5 and 6 scatter bonus cards
 
-	BONUS_6_SCATTER: {
-		mode: 'BONUS_6_SCATTER',
-		costMultiplier: 500,
-		type: 'buy',
-		parent: '',
-		children: '',
-		assets: {
-			icon: 'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/icon_super_bonusbuy.webp',
-			dialogImage:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/super_bonus_image.webp',
-			dialogVolatility:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_05.webp',
-			volatility:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_white_05.webp',
-			button:
-				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_8_97/betModes/button_super_buy.webp',
-		},
-		text: {
-			title: 'OSAMA KILLER SPINS',
-			dialog:
-				'Triggers FREE SPINS with 6 GUARANTEED SCATTERS for 500x the purchase amount. The Global Multiplier can reach up to 64x and remains active for the duration of each spin.',
-			description: 'Maximum 6 guaranteed scatter symbols for ultimate free spins potential.',
-			button: 'BUY KILLER',
-			tickerIdle: 'PLACE YOUR BET',
-			tickerSpin: '6 SCATTER BONUS ACTIVATED',
-			bannerText: '6 GUARANTEED SCATTERS',
-		},
-		maxWin: 8888,
-	},
+	// BONUS_5_SCATTER: {
+	// 	mode: 'BONUS_5_SCATTER',
+	// 	costMultiplier: 200,
+	// 	type: 'buy',
+	// 	parent: '',
+	// 	children: '',
+	// 	assets: {
+	// 		icon: 'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/icon_bonusbuy.webp',
+	// 		dialogImage:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/bonus_image.webp',
+	// 		dialogVolatility:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_04.webp',
+	// 		volatility:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_white_04.webp',
+	// 		button:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_8_97/betModes/button_buy.webp',
+	// 	},
+	// 	text: {
+	// 		title: 'HONESTLY MINTING SPINS',
+	// 		dialog:
+	// 			'Triggers FREE SPINS with 5 GUARANTEED SCATTERS for 200x the purchase amount. The Global Multiplier can reach up to 64x and remains active for the duration of each spin.',
+	// 		description: '5 guaranteed scatter symbols for enhanced free spins.',
+	// 		button: 'BUY MINTING',
+	// 		tickerIdle: 'PLACE YOUR BET',
+	// 		tickerSpin: '5 SCATTER BONUS ACTIVATED',
+	// 		bannerText: '5 GUARANTEED SCATTERS',
+	// 	},
+	// 	maxWin: 8888,
+	// },
+
+	// BONUS_6_SCATTER: {
+	// 	mode: 'BONUS_6_SCATTER',
+	// 	costMultiplier: 500,
+	// 	type: 'buy',
+	// 	parent: '',
+	// 	children: '',
+	// 	assets: {
+	// 		icon: 'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/icon_super_bonusbuy.webp',
+	// 		dialogImage:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/super_bonus_image.webp',
+	// 		dialogVolatility:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_05.webp',
+	// 		volatility:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_9_97/betModes/volatility/volatility_white_05.webp',
+	// 		button:
+	// 			'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_8_97/betModes/button_super_buy.webp',
+	// 	},
+	// 	text: {
+	// 		title: 'OSAMA KILLER SPINS',
+	// 		dialog:
+	// 			'Triggers FREE SPINS with 6 GUARANTEED SCATTERS for 500x the purchase amount. The Global Multiplier can reach up to 64x and remains active for the duration of each spin.',
+	// 		description: 'Maximum 6 guaranteed scatter symbols for ultimate free spins potential.',
+	// 		button: 'BUY KILLER',
+	// 		tickerIdle: 'PLACE YOUR BET',
+	// 		tickerSpin: '6 SCATTER BONUS ACTIVATED',
+	// 		bannerText: '6 GUARANTEED SCATTERS',
+	// 	},
+	// 	maxWin: 8888,
+	// },
 };
 
 const DEFAULT_GAME_RULE_META = {

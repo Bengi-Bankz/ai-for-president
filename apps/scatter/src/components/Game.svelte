@@ -37,6 +37,8 @@ const dispatch = createEventDispatcher();
 
 	import { scatterLandedThisRound } from '../stores/scatterLandedThisRound';
 	import { onDestroy } from 'svelte';
+	import ReplayIndicator from './ReplayIndicator.svelte';
+	import WatchAgain from './WatchAgain.svelte';
 
 	const context = getContext();
 
@@ -189,3 +191,5 @@ const dispatch = createEventDispatcher();
     <GameVersion version="0.0.0" />
   {/snippet}
 </Modals>
+<ReplayIndicator />
+<WatchAgain />

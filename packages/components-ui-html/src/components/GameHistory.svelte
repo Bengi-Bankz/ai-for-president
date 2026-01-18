@@ -24,6 +24,35 @@
 		clearHistory();
 		history = [];
 	}
+
+	function replayRound(betId: string | number) {
+		try {
+			// Get current URL parameters
+			const url = new URL(window.location.href);
+			const params = new URLSearchParams(url.search);
+			
+			console.log('Current URL:', window.location.href);
+			console.log('Replay clicked for bet ID:', betId);
+			
+			// Set force mode with bookID to replay the specific round
+			// The SDK uses force=true with bookID parameter for replay
+			params.set('force', 'true');
+			params.set('bookID', String(betId));
+			
+			const replayUrl = `${url.origin}${url.pathname}?${params.toString()}`;
+			console.log('Navigating to replay URL:', replayUrl);
+			console.log('Force param:', params.get('force'));
+			console.log('BookID param:', params.get('bookID'));
+			
+			// Close the modal
+			stateModal.modal = null;
+			
+			// Navigate to the replay URL
+			window.location.href = replayUrl;
+		} catch (error) {
+			console.error('Error in replayRound:', error);
+		}
+	}
 </script>
 
 <style>
@@ -73,6 +102,14 @@
 		font-family: monospace;
 		font-size: 0.85rem;
 		color: rgba(0, 255, 240, 0.8);
+		cursor: pointer;
+		transition: color 0.2s, text-shadow 0.2s;
+	}
+
+	.book-id:hover {
+		color: #00fff0;
+		text-shadow: 0 0 8px rgba(0, 255, 240, 0.6);
+		text-decoration: underline;
 	}
 
 	.win-amount {
@@ -158,7 +195,9 @@
 				{#each history as entry (entry.id)}
 					<tr>
 						<td class="time">{formatTime(entry.timestamp)}</td>
-						<td class="book-id">{entry.bookId}</td>
+						<td class="book-id" onclick={() => replayRound(entry.bookId)} title="Click to replay this round">
+							{entry.bookId}
+						</td>
 						<td>{formatCurrency(entry.betAmount)}</td>
 						<td class:win-amount={entry.winAmount > 0} class:loss-amount={entry.winAmount === 0}>
 							{formatCurrency(entry.winAmount)}
