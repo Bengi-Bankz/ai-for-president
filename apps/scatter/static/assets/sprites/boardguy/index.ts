@@ -1,7 +1,7 @@
 import { createAsset } from 'pixi-svelte';
 
 export const boardguy = createAsset({
-	img: new URL('./boardguy.webp', import.meta.url).href,
+	img: new URL('./sprite-256px-36 (3).png', import.meta.url).href,
 	atlas: new URL('./boardguy.webp.json', import.meta.url).href,
 	preload: true,
 });

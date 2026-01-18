@@ -1,7 +1,7 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
-	import { onMount } from 'svelte';
+import { onMount } from 'svelte';
 
 	import { EnablePixiExtension } from 'components-pixi';
 	import { EnableHotkey } from 'components-shared';
@@ -42,7 +42,14 @@ const dispatch = createEventDispatcher();
 
 	const context = getContext();
 
-	onMount(() => (context.stateLayout.showLoadingScreen = true));
+	let loadingMode: 'intro' | 'default' = 'intro';
+
+	onMount(() => {
+		const hasSeenIntro =
+			typeof localStorage !== 'undefined' && localStorage.getItem('scatter:introSeen') === 'true';
+		loadingMode = hasSeenIntro ? 'default' : 'intro';
+		context.stateLayout.showLoadingScreen = true;
+	});
 
 	// Subscribe to scatterLandedThisRound and trigger shake on change
 	let scatterUnsub = scatterLandedThisRound.subscribe((count) => {
@@ -124,7 +131,16 @@ const dispatch = createEventDispatcher();
     <EnablePixiExtension />
     <Background />
     {#if context.stateLayout.showLoadingScreen}
-      <LoadingScreen onloaded={() => (context.stateLayout.showLoadingScreen = false)} />
+      <LoadingScreen
+			mode={loadingMode}
+			onloaded={() => {
+				if (loadingMode === 'intro') {
+					loadingMode = 'default';
+					typeof localStorage !== 'undefined' && localStorage.setItem('scatter:introSeen', 'true');
+				}
+				context.stateLayout.showLoadingScreen = false;
+			}}
+		/>
     {:else}
       <ResumeBet />
       <!--

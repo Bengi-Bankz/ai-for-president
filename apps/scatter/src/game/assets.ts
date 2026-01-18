@@ -64,6 +64,11 @@ export default {
 		src: new URL('../../static/assets/sprites/loader/loader.webp.json', import.meta.url).href,
 		preload: true,
 	},
+	loading: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/loading/loading.webp.json', import.meta.url).href,
+		preload: true,
+	},
 	pressToContinueText: {
 		type: 'sprites',
 		src: new URL('../../assets/sprites/pressToContinueText/MM_pressanywhere.webp.json', import.meta.url)
