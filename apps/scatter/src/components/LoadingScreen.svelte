@@ -21,16 +21,12 @@ import FrameDisplay from '../framedisplay.svelte';
 
 	let loadingType = $state<'start' | 'transition'>('start');
 
-	const introFacts = [
-		{ title: 'RTP', detail: '97% base & bonus' },
-		{ title: 'Max Award', detail: '30,000× potential' },
-		{ title: 'Bonus Buy', detail: 'Jump in for 200×' },
-	];
+	const introFrames = ['intro1.png', 'intro2.png', 'intro3.png'];
 
 	const factWidth = 220;
 	const factHeight = 220;
 	const factGap = 16;
-	const totalWidthRow = factWidth * introFacts.length + factGap * (introFacts.length - 1);
+	const totalWidthRow = factWidth * introFrames.length + factGap * (introFrames.length - 1);
 
 	// Generate array of frame keys for loading animation
 	const loadingFrames = Array.from({ length: 36 }, (_, i) => `loading_000 (${i + 1}).png`);
@@ -70,33 +66,38 @@ import FrameDisplay from '../framedisplay.svelte';
 			}
 			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 200}
 		>
-			{#each introFacts as fact, index}
+			{#each introFrames as spriteKey, index}
 				<Container
 					x={isPortrait ? 0 : index * (factWidth + factGap)}
 					y={isPortrait ? index * (factHeight + factGap) : 0}
 				>
 					<Sprite
-						key="roundedrec.png"
-						width={factWidth}
-						height={factHeight}
-						alpha={0.9}
-					/>
-					<Text
+						assetKey="S_19_27"
+						key={spriteKey}
 						x={factWidth * 0.5}
 						y={factHeight * 0.5}
 						anchor={{ x: 0.5, y: 0.5 }}
-						style={{
-							fontFamily: 'Crimes Times Six',
-							fontSize: 20,
-							fontWeight: '700',
-							fill: 0xffffff,
-							align: 'center',
-						}}
-						text={`${fact.title}: ${fact.detail}`}
+						width={factWidth}
+						height={factHeight}
 					/>
 				</Container>
 			{/each}
 		</Container>
+
+		<!-- Press to continue text between loader and info cards -->
+		<Text
+			x={context.stateLayoutDerived.mainLayout().width * 0.5}
+			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 160}
+			anchor={{ x: 0.5, y: 0.5 }}
+			style={{
+				fontFamily: 'Crimes Times Six',
+				fontSize: 28,
+				fontWeight: '700',
+				fill: 0xffffff,
+				align: 'center',
+			}}
+			text="PRESS TO CONTINUE"
+		/>
 	</MainContainer>
 </FadeContainer>
 

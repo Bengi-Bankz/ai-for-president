@@ -45,6 +45,11 @@ export default {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/19-27/27.png', import.meta.url).href,
 	},
+	S_19_27: {
+		type: 'sprites',
+		src: new URL('../../static/assets/sprites/19-27/19-27.webp.json', import.meta.url).href,
+		preload: true,
+	},
 	bg: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/backgrounds/bg.webp', import.meta.url).href,
