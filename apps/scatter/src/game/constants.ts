@@ -460,10 +460,7 @@ export const MULTIPLIER_BACKGROUND_INFO_MAP = {
 	M_5: backgroundMid,
 	M_7: backgroundMid,
 	M_10: backgroundHigh,
-	M_15: backgroundHigh,
-	M_25: backgroundHigh,
-	M_50: backgroundHigh,
-	M_100: backgroundHigh,
+	M_15: backgroundHigh, // Use high background for debug
 };
 
 export const SCATTER_LAND_SOUND_MAP = {

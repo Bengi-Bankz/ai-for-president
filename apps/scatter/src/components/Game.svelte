@@ -177,13 +177,12 @@ import { onMount } from 'svelte';
           <UiGameName name="THE BANG GANG" />
         {/snippet}
         {#snippet logo()}
-          <Text
-            anchor={{ x: 1, y: 0 }}
-            text="Only Spins Studios"
-            style={{
-              fontFamily: 'Crime Times Six',
-              fontWeight: '600',
-            }}
+          <Sprite
+            key="logo"
+            anchor={{ x: 0, y: 0 }}
+            x={10}
+            y={10}
+            scale={1}
           />
         {/snippet}
       </UI>
