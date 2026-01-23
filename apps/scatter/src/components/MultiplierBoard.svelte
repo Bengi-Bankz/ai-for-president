@@ -105,19 +105,13 @@
 			animationSequenceRunning = true;
 			completedBombs = [];
 			
-			// Process all bombs in parallel for seamless animation
-			const animationPromises = unifiedBombs.map(async (bomb, index) => {
-				// Stagger start times for cascade effect (100ms between each)
-				await waitForTimeout(index * 100);
-				
+			// Process bombs sequentially - one after another
+			for (const bomb of unifiedBombs) {
 				bomb.isActive = true;
 				currentAnimatingBombs = [bomb.id];
 				await animateBackdrop(bomb);
 				await waitForBombCompletion(bomb.id);
-			});
-			
-			// Wait for all animations to complete
-			await Promise.all(animationPromises);
+			}
 			
 			animationSequenceRunning = false;
 		},
