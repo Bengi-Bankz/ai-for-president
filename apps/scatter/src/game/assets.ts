@@ -11,7 +11,7 @@ export default {
 	},
 	'Crimes Times Six': {
 		type: 'sprites',
-		src: new URL('../../static/assets/fonts/crimefont/Crime Times Six_0.json', import.meta.url).href,
+		src: new URL('../../assets/fonts/crimefont/Crime Times Six_0.json', import.meta.url).href,
 		preload: true,
 	},
 	S_19: {
@@ -52,7 +52,7 @@ export default {
 	},
 	S_19_27: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/19-27/19-27.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/19-27/19-27.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	bg: {
@@ -97,67 +97,67 @@ export default {
 	},
 	H1: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H1_01: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H1_02: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H1_03: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H1_04: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H2: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H3: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H4: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	H5: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	L1: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	L2: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	L3: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	L4: {
 		type: 'sprites',
-		src: new URL('../../static/assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
+		src: new URL('../../assets/sprites/symbols/symbols.webp.json', import.meta.url).href,
 		preload: true,
 	},
 	m: {
