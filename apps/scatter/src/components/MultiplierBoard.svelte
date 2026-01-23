@@ -44,19 +44,23 @@
 	let animationSequenceRunning = $state(false);
 
 	const animateBackdrop = async (bomb: BombType): Promise<void> => {
-		const frameCount = 15;
-		const startScale = 0.5;
-		const endScale = 2;
-		const stepDuration = 50;
+		const frameCount = 8;
+		const startScale = 0.3;
+		const endScale = 2.5;
+		const stepDuration = 40;
 		const scaleSteps = Array.from({ length: frameCount }, (_, i) =>
 			startScale + ((endScale - startScale) * i) / (frameCount - 1),
 		);
 		bomb.showBackdrop = true;
+		
+		// Play backdrop animation sound
+		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_backdrop_reveal' });
+		
 		for (const scale of scaleSteps) {
 			bomb.backdropScale = scale;
 			await waitForTimeout(stepDuration);
 		}
-		await waitForTimeout(100);
+		await waitForTimeout(150);
 		bomb.startTicking = true;
 	};
 
@@ -100,22 +104,35 @@
 			if (unifiedBombs.length === 0) return;
 			animationSequenceRunning = true;
 			completedBombs = [];
-			for (let i = 0; i < unifiedBombs.length; i++) {
-				const bomb = unifiedBombs[i];
+			
+			// Process all bombs in parallel for seamless animation
+			const animationPromises = unifiedBombs.map(async (bomb, index) => {
+				// Stagger start times for cascade effect (100ms between each)
+				await waitForTimeout(index * 100);
+				
 				bomb.isActive = true;
 				currentAnimatingBombs = [bomb.id];
 				await animateBackdrop(bomb);
 				await waitForBombCompletion(bomb.id);
-				await waitForTimeout(300);
-			}
+			});
+			
+			// Wait for all animations to complete
+			await Promise.all(animationPromises);
+			
 			animationSequenceRunning = false;
 		},
 	});
 
-	const waitForBombCompletion = (bombId: number): Promise<void> => {
+	const waitForBombCompletion = (bombId: number, timeoutMs: number = 10000): Promise<void> => {
 		return new Promise((resolve) => {
+			const startTime = Date.now();
 			const checkCompletion = () => {
 				if (completedBombs.includes(bombId)) {
+					resolve();
+				} else if (Date.now() - startTime > timeoutMs) {
+					// Timeout safety - mark as complete if taking too long
+					console.warn(`⚠️ Bomb ${bombId} timed out after ${timeoutMs}ms`);
+					handleBombComplete(bombId);
 					resolve();
 				} else {
 					setTimeout(checkCompletion, 50);

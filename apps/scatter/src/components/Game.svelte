@@ -44,6 +44,9 @@ import { onMount } from 'svelte';
 
 	let loadingMode: 'intro' | 'default' = 'intro';
 
+	let shakeOffset = { x: 0, y: 0 };
+	let shakeActive = false;
+
 	onMount(() => {
 		const hasSeenIntro =
 			typeof localStorage !== 'undefined' && localStorage.getItem('scatter:introSeen') === 'true';
@@ -74,9 +77,6 @@ import { onMount } from 'svelte';
 			stateModal.modal = { name: 'buyBonusConfirm' };
 		},
 	});
-
-	let shakeOffset = { x: 0, y: 0 };
-	let shakeActive = false;
 
 	function triggerShake({ type = 'default', magnitude = 10, duration = 400 } = {}) {
 		if (shakeActive) return;

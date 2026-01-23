@@ -7,6 +7,8 @@
 		x?: number;
 		y?: number;
 		scale?: number;
+		width?: number;
+		height?: number;
 		anchor?: number | { x: number; y: number };
 	};
 
@@ -26,5 +28,7 @@
 	anchor={props.anchor ?? 0.5}
 	x={props.x}
 	y={props.y}
-	scale={props.scale ?? 1}
+	scale={props.scale}
+	width={props.width}
+	height={props.height}
 />

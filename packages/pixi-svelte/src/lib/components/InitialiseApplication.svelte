@@ -50,7 +50,12 @@
 
 	onDestroy(() => {
 		if (context.stateApp.pixiApplication) {
-			context.stateApp.pixiApplication.destroy();
+			try {
+				context.stateApp.pixiApplication.destroy();
+			} catch (error) {
+				console.warn('Error destroying Pixi Application:', error);
+			}
+			context.stateApp.pixiApplication = null;
 		}
 	});
 </script>
