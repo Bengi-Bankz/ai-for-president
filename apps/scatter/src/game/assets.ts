@@ -422,31 +422,7 @@ export default {
 			scale: 2,
 		},
 	},
-	foregroundAnimation: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/foregroundAnimation/mm_bg.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/foregroundAnimation/mm_bg.json', import.meta.url).href,
-			scale: 2,
-		},
-		preload: true,
-	},
-	foregroundFeatureAnimation: {
-		type: 'spine',
-		src: {
-			atlas: new URL(
-				'../../assets/spines/foregroundFeatureAnimation/mm_bg_feature.atlas',
-				import.meta.url,
-			).href,
-			skeleton: new URL(
-				'../../assets/spines/foregroundFeatureAnimation/mm_bg_feature.json',
-				import.meta.url,
-			).href,
-			scale: 2,
-		},
-		preload: true,
-	},
-	tumble_multiplier: {
+	Tumble_multiplier: {
 		type: 'spine',
 		src: {
 			atlas: new URL('../../assets/spines/tumbleWin/tumble_win.atlas', import.meta.url).href,
@@ -463,14 +439,7 @@ export default {
 			scale: 2,
 		},
 	},
-	reelhouse: {
-		type: 'spine',
-		src: {
-			atlas: new URL('../../assets/spines/reelhouse/reelhouse_glow.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/reelhouse/reelhouse_glow.json', import.meta.url).href,
-			scale: 2,
-		},
-	},
+
 
 	freeSpins: {
 		type: 'sprites',
@@ -515,12 +484,6 @@ export default {
 	sound: {
 		type: 'audio',
 		src: new URL('../../assets/audio/sounds.json', import.meta.url).href,
-		preload: true,
-	},
-
-	progressBar: {
-		type: 'sprites',
-		src: new URL('../../assets/sprites/progressBar/progressBar.webp.json', import.meta.url).href,
 		preload: true,
 	},
 

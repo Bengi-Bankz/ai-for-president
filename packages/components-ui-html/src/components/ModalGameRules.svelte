@@ -135,7 +135,7 @@
 		<BaseContent maxWidth="100%">
 			<BaseScrollable type="column">
 				<div class="modal-rules-scroll">
-					<h2>The Bang Gang</h2>
+					<h2>Cowboys VS Indians</h2>
 					<h2> Game Information</h2>
 
 					<section>
@@ -146,7 +146,7 @@
 							individual sessions may vary.
 						</p>
 						<p><b>RTP Base Game:</b> 97%</p>
-						<p><b>RTP Bonus Bang Spins:</b> 97%</p>
+						<p><b>RTP Warlord VS Spins:</b> 97%</p>
 					</section>
 
 					<section>
@@ -154,7 +154,7 @@
 						<div class="paytable-modal-outer" style="background:none;position:static;width:auto;height:auto;box-shadow:none;">
 							<div class="paytable-modal-inner" style="box-shadow:none;max-width:100%;width:100%;padding:0;">
 								<div class="paytable-section">
-									<h3>Bonus Bang Spins</h3>
+									<h3>Warlord VS Spins</h3>
 									<div class="bonus-images">
 										<div class="scatter-row">
 											{#each Array(6) as _, i}
@@ -162,10 +162,10 @@
 											{/each}
 										</div>
 										<div class="bonus-row">
-											<img src={img26} alt="Bonus Bang Spins" />
+											<img src={img26} alt="Warlord VS Spins" />
 										</div>
-									</div>
-									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 4/5/6 scatter symbols<br>Free Spins: 8 / 10 / 12 (for 4 / 5 / 6 scatters)<br>Purchase Amount: <b>200×</b><br>Retriggers inside bonus: 2 scatters add +2 spins; 4 scatters add +4 spins.<br><br>Bang into the action with Bonus Bang Spins. Scatters light the fuse for free spins with stacked symbols and rising duel multipliers that push you toward the massive 30,000× top potential. You can also buy straight into the chaos for faster thrills.</div>
+									</div> 
+									<div class="paytable-desc" style="font-size:1.25rem;">Trigger: Land 4/5/6 scatter symbols<br>Free Spins: 8 / 10 / 12 (for 4 / 5 / 6 scatters)<br>Purchase Amount: <b>200×</b><br>Retriggers inside bonus: 2 scatters add +2 spins; 4 scatters add +4 spins.<br><br>Bang into the action with Warlord VS Spins. Scatters light the fuse for free spins with stacked symbols and rising duel multipliers that push you toward the massive 30,000× top potential. You can also buy straight into the chaos for faster thrills.</div>
 								</div>
 							</div>
 						</div>
@@ -174,9 +174,9 @@
 					<section>
 						<h3>Duel Multipliers</h3>
 						<p>
-							During Bonus Bang Spins, each duel can award the winner a multiplier of 2×, 4×, 5×,
+							During Warlord VS Spins, each duel can award the winner a multiplier of 2×, 4×, 5×,
 							7×, 10×, 15×, 25×, 50×, or 100×. The winning symbol of the duel applies its
-							multiplier to the current spin’s win, amplifying the total payout.
+							multiplier to the current spin’s win, amplifying the total award.
 						</p>
 					</section>
 
@@ -184,10 +184,10 @@
 						<h3>Maximum Award</h3>
 						<p>
 							The maximum possible Award is capped at <b>30,000×</b> and can be achieved in
-							both the base game and Bonus Bang Spins.
+							both the base game and Warlord VS Spins.
 						</p>
 						<p><b>Max Award Base Game:</b> 30,000×</p>
-						<p><b>Max Award Bonus Bang Spins:</b> 30,000×</p>
+						<p><b>Max Award Warlord VS Spins:</b> 30,000×</p>
 					</section>
 
 					<section>
@@ -211,7 +211,7 @@
 							</li>
 							<li>
 								<img src={img16} alt="Menu" />
-								<b>Menu</b> – Opens sound settings, Awardtable, and game Info.
+								<b>Menu</b> – Opens sound settings,Game History, Awardtable, and game Info.
 							</li>
 						</ul>
 					</section>

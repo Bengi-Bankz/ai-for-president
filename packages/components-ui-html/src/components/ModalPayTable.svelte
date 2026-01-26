@@ -53,9 +53,9 @@
 								name: 's',
 								src: scatterImg,
 								text: `SCATTER
-	4 Scatters = 8 Bonus Bang Spins
-	5 Scatters = 10 Bonus Bang Spins
-	6 Scatters = 12 Bonus Bang Spins
+	4 Scatters = 8 Warlord VS Spins
+	5 Scatters = 10 Warlord VS Spins
+	6 Scatters = 12 Warlord VS Spins
 	In bonus: 2 Scatters = +2 spins; 4 Scatters = +4 spins`
 							},
 
@@ -63,7 +63,7 @@
 							{
 								name: 'h1',
 								src: h1Img,
-								text: `THE PIN KING
+								text: `SCATTER WOLF RUN
 8–9 = 4x
 10–11 = 6x
 12+ = 12x`
@@ -71,7 +71,7 @@
 							{
 								name: 'h2',
 								src: h2Img,
-								text: `VAULT POPPER
+								text: `CASHOUT CASSIDY
 8–9 = 3x
 10–11 = 5x
 12+ = 10x`
@@ -79,7 +79,7 @@
 							{
 								name: 'h3',
 								src: h3Img,
-								text: `LOB & GRAB
+								text: `RED BUFFALO BLAZE
 8–9 = 2x
 10–11 = 4x
 12+ = 8x`
@@ -87,7 +87,7 @@
 							{
 								name: 'h4',
 								src: h4Img,
-								text: `TELLER SHREDDER
+								text: `SPIRIT SKULL
 8–9 = 1.5x
 10–11 = 3x
 12+ = 6x`
@@ -95,7 +95,7 @@
 							{
 								name: 'h5',
 								src: h3_2Img,
-								text: `SMOKE RUNNER
+								text: `SHERIFF SILVERTON
 8–9 = 1x
 10–11 = 2x
 12+ = 5x`
@@ -105,7 +105,7 @@
 							{
 								name: 'l1',
 								src: l1Img,
-								text: `SPADES
+								text: `TOMAHAWK SET
 8–9 = 0.3x
 10–11 = 0.8x
 12+ = 1x`
@@ -113,7 +113,7 @@
 							{
 								name: 'l2',
 								src: l2Img,
-								text: `CLUBS
+								text: `ENCHANTED HEADDRESS
 8–9 = 0.3x
 10–11 = 0.8x
 12+ = 1x`
@@ -121,7 +121,7 @@
 							{
 								name: 'l3',
 								src: l3Img,
-								text: `DIAMONDS
+								text: `COLT REVOLVER
 8–9 = 0.3x
 10–11 = 0.8x
 12+ = 1x`
@@ -129,7 +129,7 @@
 							{
 								name: 'l4',
 								src: l4Img,
-								text: `HEARTS
+								text: `TEEPEE TENT
 8–9 = 0.3x
 10–11 = 0.8x
 12+ = 1x`
