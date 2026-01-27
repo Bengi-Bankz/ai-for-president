@@ -57,9 +57,9 @@
 					{#snippet children({ sizes })}
 						<!-- Grenade mug shot sprite with sign - sized to fill board -->
 						<Sprite
-							anchor={{ x: 0, y: 0 }}
-							width={sizes.width}
-							height={sizes.height}
+							anchor={{ x: 0.15, y: 0 }}
+							width={sizes.width*1.5}
+							height={sizes.height*1.5}
 							key="trashcan"
 						/>
 
@@ -77,15 +77,15 @@
 							maxWidth={sizes.width * 0.5}
 						/>
 
-						<!-- "YOUR CUT" text below the amount -->
+						<!-- "YOU WON" text below the amount -->
 						<BitmapText
 							anchor={{ x: 0.5, y: 0.5 }}
 							x={sizes.width * 0.5}
 							y={sizes.height * 0.5 + sizes.width * 0.206 + sizes.width * 0.14}
-							text="YOUR CUT"
+							text="YOU WON"
 							style={{
 								fontFamily: 'MoneyFont3',
-								fontSize: sizes.width * 0.08,
+								fontSize: sizes.width * 0.05,
 								fontWeight: 'bold',
 							}}
 						/>
