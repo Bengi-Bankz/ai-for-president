@@ -62,10 +62,11 @@
 						y={sizes.height * 0.38}
 						text={freeSpinsFromEvent}
 						style={{
-							fontFamily: 'MoneyFont3',
+							fontFamily: 'MildEast',
 							fontSize: sizes.width * 0.09,
 							fontWeight: 'bold',
 						}}
+						tint={0xff0000}
 					/>
 
 				<!-- "FREE" text below the number -->
@@ -75,10 +76,11 @@
 						y={sizes.height * 0.38 + sizes.width * 0.07}
 						text="FREE"
 						style={{
-							fontFamily: 'MoneyFont3',
+							fontFamily: 'MildEast',
 							fontSize: sizes.width * 0.06,
 							fontWeight: 'bold',
 						}}
+						tint={0xff0000}
 					/>
 
 				<!-- "SPINS" text below FREE -->
@@ -88,10 +90,11 @@
 						y={sizes.height * 0.38 + sizes.width * 0.13}
 						text="SPINS"
 						style={{
-							fontFamily: 'MoneyFont3',
+							fontFamily: 'MildEast',
 							fontSize: sizes.width * 0.06,
 							fontWeight: 'bold',
 						}}
+						tint={0xff0000}
 					/>
 		{/snippet}
 	</FreeSpinAnimation>

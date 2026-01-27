@@ -41,10 +41,11 @@
 		anchor={0.5}
 		text={`${totalMultiplier} X`}
 		style={{
-			fontFamily: 'MoneyFont3',
+			fontFamily: 'MildEast',
 			fontSize: SYMBOL_SIZE,
 			letterSpacing: -5,
 		}}
+		tint={0xff0000}
 	/>
 {/snippet}
 

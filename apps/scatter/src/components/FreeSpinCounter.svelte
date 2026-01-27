@@ -72,10 +72,11 @@
 			<BitmapText
 				text={'FREE\nSPIN'}
 				style={{
-					fontFamily: 'MoneyFont3',
+					fontFamily: 'MildEast',
 					fontSize,
 					wordWrap: false,
 				}}
+				tint={0xff0000}
 				onresize={(sizes) => (titleSizes = sizes)}
 			/>
 			<BitmapText
@@ -83,10 +84,10 @@
 				{...counterPosition}
 				anchor={{ x: 0.5, y: 0 }}
 				style={{
-					fontFamily: 'MoneyFont3',
+					fontFamily: 'MildEast',
 					fontSize,
 				}}
-				onresize={(sizes) => (counterSizes = sizes)}
+				tint={0xff0000}
 			/>
 		</Container>
 	</FadeContainer>

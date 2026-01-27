@@ -48,7 +48,7 @@
 		y={props.y}
 		text={`${props.rawSymbol.multiplier}X`}
 		style={{
-			fontFamily: 'MoneyFont3',
+			fontFamily: 'MildEast',
 			fontSize: 50,
 		}}
 	/>

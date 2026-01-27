@@ -53,7 +53,7 @@
 								}}
 								text={`${multiplier} X`}
 								style={{
-									fontFamily: 'MoneyFont3',
+									fontFamily: 'MildEast',
 									fontSize: SYMBOL_SIZE * 0.5,
 									letterSpacing: -5,
 								}}

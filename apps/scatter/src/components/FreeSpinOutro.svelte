@@ -69,10 +69,11 @@
 							x={sizes.width * 0.5}
 							y={sizes.height * 0.5 + sizes.width * 0.206}
 							style={{
-								fontFamily: 'MoneyFont3',
+								fontFamily: 'MildEast',
 								fontSize: sizes.width * 0.12,
 								fontWeight: 'bold',
 							}}
+							tint={0xff0000}
 							text={bookEventAmountToCurrencyString(countUpAmount)}
 							maxWidth={sizes.width * 0.5}
 						/>
@@ -84,10 +85,11 @@
 							y={sizes.height * 0.5 + sizes.width * 0.206 + sizes.width * 0.14}
 							text="YOU WON"
 							style={{
-								fontFamily: 'MoneyFont3',
+								fontFamily: 'MildEast',
 								fontSize: sizes.width * 0.05,
 								fontWeight: 'bold',
 							}}
+							tint={0xff0000}
 						/>
 					{/snippet}
 				</FreeSpinAnimation>

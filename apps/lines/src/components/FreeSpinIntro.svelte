@@ -65,7 +65,7 @@
 						anchor={{ x: 0.5, y: 0.5 }}
 						text={freeSpinsFromEvent}
 						style={{
-							fontFamily: 'MoneyFont3',
+							fontFamily: 'MildEast',
 							fontSize: sizes.width * 0.1,
 							fontWeight: 'bold',
 						}}

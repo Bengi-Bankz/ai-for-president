@@ -71,8 +71,9 @@
 			: bookEventAmountToCurrencyString(props.win.result)}
 		anchor={0.5}
 		style={{
-			fontFamily: 'MoneyFont3',
+			fontFamily: 'MildEast',
 			fontSize: SYMBOL_SIZE * 0.5,
 		}}
+		tint={0xff0000}
 	/>
 </FadeContainer>

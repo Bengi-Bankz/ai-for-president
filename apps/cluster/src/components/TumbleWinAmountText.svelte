@@ -49,7 +49,7 @@
 		<ResponsiveBitmapText
 			anchor={0.5}
 			style={{
-				fontFamily: 'MoneyFont3',
+				fontFamily: 'MildEast',
 				fontSize: 0.65 * SYMBOL_SIZE,
 			}}
 			text={bookEventAmountToCurrencyString(amount.current)}

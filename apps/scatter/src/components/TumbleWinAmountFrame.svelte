@@ -35,7 +35,8 @@
 		anchor={0.5}
 		y={-TITLE_HEIGHT * 0.025}
 		text="TUMBLE WIN"
-		style={{ fontFamily: 'MoneyFont3', fontSize: TITLE_HEIGHT * 0.45 }}
+		style={{ fontFamily: 'MildEast', fontSize: TITLE_HEIGHT * 0.45 }}
+		tint={0xff0000}
 	/>
 </Container>
 

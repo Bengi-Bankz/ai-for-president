@@ -324,9 +324,13 @@ export default {
 			scale: 2,
 		},
 	},
-	MoneyFont3: {
+	MildEast: {
 		type: 'font',
-		src: new URL('../../assets/fonts/MoneyFont3/MoneyFont3.xml', import.meta.url).href,
+		src: new URL('../../assets/fonts/MildEast/MildEast.xml', import.meta.url).href,
+	},
+		MildEast: {
+		type: 'font',
+		src: new URL('../../assets/fonts/MildEast/MildEast.xml', import.meta.url).href,
 	},
 	auto: {
 		type: 'sprite',
