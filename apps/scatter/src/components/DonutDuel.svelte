@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Tween } from 'svelte/motion';
 	import { quartOut, cubicInOut } from 'svelte/easing';
-	import { Container, BitmapText } from 'pixi-svelte';
+	import { Container, Sprite } from 'pixi-svelte';
 	import { waitForTimeout } from 'utils-shared/wait';
 	import { stateBetDerived } from 'state-shared';
 	
@@ -212,6 +212,15 @@
 		<!-- VS Animation Phase with large Multiplier Comparison -->
 		{#if phase === 'vs-reveal' && showVSAnimation}
 			{@const positions = getMultiplierPositions()}
+			<!-- VS Duel Background -->
+			<Sprite
+				key="duelbg.png"
+				anchor={{ x: 0.5, y: 0.5 }}
+				x={0}
+				y={SYMBOL_SIZE * 0.9  }
+				width={SYMBOL_SIZE * 5}
+				height={SYMBOL_SIZE * 2}
+			/>
 			<!-- Grenade Robber Multiplier (left or top) - Large display -->
 			<MultiplierNumber
 				multiplier={grenadeMultiplier}

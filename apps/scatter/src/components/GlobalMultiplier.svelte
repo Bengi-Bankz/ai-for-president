@@ -93,9 +93,10 @@
 							anchor={0.5}
 							text={`${Math.round(previousMultiplier.current)}X`}
 							style={{
-								fontFamily: 'purple',
+								fontFamily: 'MildEast',
 								fontSize: SYMBOL_SIZE * 5.2,
 							}}
+							tint={0xff0000}
 						/>
 					</SpineSlot>
 					<SpineSlot slotName="slot_multi_next">
@@ -103,9 +104,10 @@
 							anchor={0.5}
 							text={`${multiplier}X`}
 							style={{
-								fontFamily: 'purple',
+								fontFamily: 'MildEast',
 								fontSize: SYMBOL_SIZE * 5.2,
 							}}
+							tint={0xff0000}
 						/>
 					</SpineSlot>
 				</SpineEventEmitterProvider>
