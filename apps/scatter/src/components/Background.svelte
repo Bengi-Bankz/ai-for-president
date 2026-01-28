@@ -53,7 +53,7 @@
 	/>
 </FadeContainer>
 
-<FadeContainer show={showFeatureBackground} duration={SECOND} zIndex={-1}>
+<FadeContainer show={showFeatureBackground} duration={SECOND} zIndex={-3}>
 	<Sprite
 		key="bgstatic"
 		x={backgroundLayout.x}

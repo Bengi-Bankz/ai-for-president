@@ -94,7 +94,7 @@ export const HIGH_SYMBOLS = ['H1', 'H2', 'H3', 'H4', 'H5'];
 
 export const INITIAL_SYMBOL_STATE: SymbolState = 'static';
 
-const M_SIZE = 0.9;
+const M_SIZE = 1.4;
 const HIGH_SYMBOL_SIZE = 0.9;
 const LOW_SYMBOL_SIZE = 0.9;
 const SPECIAL_SYMBOL_SIZE = 0.9;
@@ -145,10 +145,10 @@ const explosion = {
 
 const h1Static = { type: 'sprite', assetKey: 'h1 (1).png', sizeRatios: { width: 1, height: 1 } };
 const h2Static = { type: 'sprite', assetKey: 'h2 (1).png', sizeRatios: { width: 1, height: 1 } };
-const h3Static = { type: 'sprite', assetKey: 'h3 (1).png', sizeRatios: { width: 1, height: 1 } };
+const h3Static = { type: 'sprite', assetKey: 'h3 (1).png', sizeRatios: { width: 1.4, height: 1.4 } };
 const h4Static = { type: 'sprite', assetKey: 'h4 (1).png', sizeRatios: { width: 1, height: 1 } };
 const h5Static = { type: 'sprite', assetKey: 'h5 (1).png', sizeRatios: { width: 1, height: 1 } };
-const l1Static = { type: 'sprite', assetKey: 'l1 (1).png', sizeRatios: { width: 1, height: 1 } };
+const l1Static = { type: 'sprite', assetKey: 'l1 (1).png', sizeRatios: { width: 1.3, height: 1.3 } };
 const l2Static = { type: 'sprite', assetKey: 'l2 (1).png', sizeRatios: { width: 1, height: 1 } };
 const l3Static = { type: 'sprite', assetKey: 'l3 (1).png', sizeRatios: { width: 1, height: 1 } };
 const l4Static = { type: 'sprite', assetKey: 'l4 (1).png', sizeRatios: { width: 1, height: 1 } };
@@ -167,7 +167,7 @@ const m4Static = {
 };
 const m5Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } };
 const m7Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } };
-const m10Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } };
+const m10Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1.7, height: 1.7 } };
 const m15Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } };
 const m25Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } }; 		
 const m50Static = { type: 'sprite', assetKey: 'm (1).png', sizeRatios: { width: 1, height: 1 } };

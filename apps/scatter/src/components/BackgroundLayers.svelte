@@ -194,7 +194,7 @@
 	<AnimatedSprite
 		frames={fireFrames}
 		fps={16}
-		x={x - width * 0.325}
+		x={x - width * 0.425}
 		y={y - height * 0.05}
 		width={width * 0.04}
 		height={height * 0.07}
