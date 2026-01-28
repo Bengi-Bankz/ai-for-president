@@ -40,18 +40,50 @@ import { onMount } from 'svelte';
 	import ReplayIndicator from './ReplayIndicator.svelte';
 	import WatchAgain from './WatchAgain.svelte';
 
+
+	import { getReplayParams, type ReplayParams } from '../game/utils-replay';
+	import { requestReplay } from 'rgs-requests';
+	import { setContext as setSvelteContext } from 'svelte';
+
 	const context = getContext();
+
+	// Detect replay mode and parse params
+	const replayParams: ReplayParams = getReplayParams();
+	setSvelteContext('replay', replayParams);
 
 	let loadingMode: 'intro' | 'default' = 'intro';
 
 	let shakeOffset = { x: 0, y: 0 };
 	let shakeActive = false;
 
-	onMount(() => {
+
+	import { playBet } from '../game/utils';
+	import type { Bet } from '../game/typesBookEvent';
+
+	onMount(async () => {
 		const hasSeenIntro =
 			typeof localStorage !== 'undefined' && localStorage.getItem('scatter:introSeen') === 'true';
 		loadingMode = hasSeenIntro ? 'default' : 'intro';
 		context.stateLayout.showLoadingScreen = true;
+
+		// --- REPLAY MODE: Fetch replay data from RGS ---
+		if (replayParams.isReplayMode && replayParams.rgs_url && replayParams.game && replayParams.version && replayParams.mode && replayParams.event) {
+			try {
+				const replayData = await requestReplay({
+					rgsUrl: replayParams.rgs_url,
+					game: replayParams.game,
+					version: replayParams.version,
+					mode: replayParams.mode,
+					event: replayParams.event,
+				});
+				// Use replayData to drive game state
+				// Assume replayData is a Bet object
+				await playBet(replayData as Bet);
+				console.log('[Replay] Played replay data:', replayData);
+			} catch (err) {
+				console.error('[Replay] Failed to load replay data:', err);
+			}
+		}
 	});
 
 	// Subscribe to scatterLandedThisRound and trigger shake on change

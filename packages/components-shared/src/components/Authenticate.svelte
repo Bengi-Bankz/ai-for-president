@@ -11,7 +11,13 @@
 
 	let authenticated = $state(false);
 
+	import { isReplayMode } from '../replayMode';
+
 	const authenticate = async () => {
+		if (isReplayMode()) {
+			// In replay mode, skip authentication/session logic
+			return;
+		}
 		try {
 			const authenticateData = await requestAuthenticate({
 				rgsUrl: stateUrlDerived.rgsUrl(),

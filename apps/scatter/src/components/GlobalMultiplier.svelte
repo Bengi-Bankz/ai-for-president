@@ -94,7 +94,7 @@
 							text={`${Math.round(previousMultiplier.current)}X`}
 							style={{
 								fontFamily: 'MildEast',
-								fontSize: SYMBOL_SIZE * 5.2,
+								fontSize: SYMBOL_SIZE * 4.2,
 							}}
 							tint={0xff0000}
 						/>
@@ -105,7 +105,7 @@
 							text={`${multiplier}X`}
 							style={{
 								fontFamily: 'MildEast',
-								fontSize: SYMBOL_SIZE * 5.2,
+								fontSize: SYMBOL_SIZE * 4.2,
 							}}
 							tint={0xff0000}
 						/>

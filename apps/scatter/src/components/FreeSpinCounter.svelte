@@ -31,10 +31,10 @@
 			SYMBOL_SIZE * 0.7,
 		y:
 			context.stateGameDerived.boardLayout().y -
-			context.stateGameDerived.boardLayout().height * 0.5,
+			context.stateGameDerived.boardLayout().height * 0.5 + SYMBOL_SIZE * 1.5, // Lowered by 1.5 symbol heights
 	});
 
-	const fontSize = SYMBOL_SIZE * 0.175;
+	const fontSize = SYMBOL_SIZE * 0.3;
 
 	let show = $state(false);
 	let current = $state(0);
@@ -63,7 +63,7 @@
 		<Sprite key={panelKey} {...panelSizes} />
 		<Container
 			x={panelSizes.width * 0.5}
-			y={panelSizes.height * 0.48}
+			y={panelSizes.height * 0.32}
 			pivot={anchorToPivot({
 				sizes: textContainerSizes,
 				anchor: { x: 0.5, y: 0.5 },
@@ -87,7 +87,6 @@
 					fontFamily: 'MildEast',
 					fontSize,
 				}}
-				tint={0xff0000}
 			/>
 		</Container>
 	</FadeContainer>

@@ -328,10 +328,6 @@ export default {
 		type: 'font',
 		src: new URL('../../assets/fonts/MildEast/MildEast.xml', import.meta.url).href,
 	},
-		MildEast: {
-		type: 'font',
-		src: new URL('../../assets/fonts/MildEast/MildEast.xml', import.meta.url).href,
-	},
 	auto: {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/icons/auto.webp', import.meta.url).href,

@@ -1,3 +1,20 @@
+// Bet Replay request for RGS
+export const requestReplay = async (options: {
+	rgsUrl: string;
+	game: string;
+	version: string;
+	mode: string;
+	event: string;
+	// Optionally add more params if needed
+}) => {
+	const url = `/bet/replay/${options.game}/${options.version}/${options.mode}/${options.event}`;
+	// GET request, no body
+	const data = await rgsFetcher.get({
+		rgsUrl: options.rgsUrl,
+		url: url as any, // Type assertion for dynamic path
+	});
+	return data;
+};
 import { API_AMOUNT_MULTIPLIER } from 'constants-shared/bet';
 import { rgsFetcher } from 'rgs-fetcher';
 
