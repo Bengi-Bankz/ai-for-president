@@ -34,7 +34,10 @@
 			context.stateGameDerived.boardLayout().height * 0.5 + SYMBOL_SIZE * 1.5, // Lowered by 1.5 symbol heights
 	});
 
+
 	const fontSize = SYMBOL_SIZE * 0.3;
+
+	const isFreeSpins = $derived(context.stateGame.gameType === 'freegame');
 
 	let show = $state(false);
 	let current = $state(0);
@@ -59,7 +62,7 @@
 </script>
 
 <MainContainer>
-	<FadeContainer {show} {...position} {scale}>
+	<FadeContainer show={true} {...position} {scale}>
 		<Sprite key={panelKey} {...panelSizes} />
 		<Container
 			x={panelSizes.width * 0.5}
@@ -69,25 +72,38 @@
 				anchor: { x: 0.5, y: 0.5 },
 			})}
 		>
-			<BitmapText
-				text={'FREE\nSPIN'}
-				style={{
-					fontFamily: 'MildEast',
-					fontSize,
-					wordWrap: false,
-				}}
-				tint={0xff0000}
-				onresize={(sizes) => (titleSizes = sizes)}
-			/>
-			<BitmapText
-				text={`${current} OF ${total}`}
-				{...counterPosition}
-				anchor={{ x: 0.5, y: 0 }}
-				style={{
-					fontFamily: 'MildEast',
-					fontSize,
-				}}
-			/>
+			{#if isFreeSpins}
+				<BitmapText
+					text={'FREE\nSPIN'}
+					style={{
+						fontFamily: 'MildEast',
+						fontSize,
+						wordWrap: false,
+					}}
+					tint={0xff0000}
+					onresize={(sizes) => (titleSizes = sizes)}
+				/>
+				<BitmapText
+					text={`${current} OF ${total}`}
+					{...counterPosition}
+					anchor={{ x: 0.5, y: 0 }}
+					style={{
+						fontFamily: 'MildEast',
+						fontSize,
+					}}
+				/>
+			{:else}
+				<BitmapText
+					text={'MAX WIN\n30,000X'}
+					anchor={{ x: 0.5, y: 0 }}
+					style={{
+						fontFamily: 'MildEast',
+						fontSize: fontSize * 1,
+						fontWeight: 'bold',
+					}}
+					tint={0xffd700}
+				/>
+			{/if}
 		</Container>
 	</FadeContainer>
 </MainContainer>

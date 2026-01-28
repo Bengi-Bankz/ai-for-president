@@ -26,14 +26,14 @@ import FrameDisplay from '../framedisplay.svelte';
 
 	const introFrames = ['intro1.png', 'intro2.png', 'intro3.png'];
 
-	const factWidth = 220;
-	const factHeight = 220;
+	const factWidth = 360;
+	const factHeight = 500;
 	const factGap = 16;
 	const portraitRatio = 0.85; // percentage of main width for portrait card size
 	const totalWidthRow = factWidth * introFrames.length + factGap * (introFrames.length - 1);
 
-	// Generate array of frame keys for loading animation
-	const loadingFrames = Array.from({ length: 36 }, (_, i) => `loading_000 (${i + 1}).png`);
+	// Use only the last 12 frames for loading animation
+	const loadingFrames = Array.from({ length: 12 }, (_, i) => `loading_000 (${i + 25}).png`);
 
 	onMount(() => {
 		// auto-advance carousel every 3 seconds
@@ -79,7 +79,7 @@ import FrameDisplay from '../framedisplay.svelte';
 					? context.stateLayoutDerived.mainLayout().width * 0.5 - (context.stateLayoutDerived.mainLayout().width * portraitRatio) * 0.5
 					: context.stateLayoutDerived.mainLayout().width * 0.5 - totalWidthRow * 0.5
 			}
-			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 200}
+			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 100}
 		>
 			<!-- carousel track: slides horizontally in portrait -->
 			<Container x={isPortrait ? -currentIndex * (context.stateLayoutDerived.mainLayout().width * portraitRatio + factGap) : 0}>
@@ -118,7 +118,7 @@ import FrameDisplay from '../framedisplay.svelte';
 		<!-- Press to continue text between loader and info cards -->
 		<Text
 			x={context.stateLayoutDerived.mainLayout().width * 0.5}
-			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 160}
+			y={context.stateLayoutDerived.mainLayout().height * 0.25 + 60}
 			anchor={{ x: 0.5, y: 0.5 }}
 			style={{
 				fontFamily: 'Crimes Times Six',
