@@ -495,6 +495,12 @@ export default {
 		src: new URL('../../assets/sprites/trump/spritesheet.webp.json', import.meta.url).href,
 		preload: true,
 	},
+anticipation1: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/anticipation/anticipation.webp.json', import.meta.url).href,
+		preload: true,
+	},
+
 	mSymbol: {
 		type: 'spriteWithTexture',
 		src: 'spritesheet',

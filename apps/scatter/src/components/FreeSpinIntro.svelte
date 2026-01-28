@@ -66,7 +66,7 @@
 							fontSize: sizes.width * 0.09,
 							fontWeight: 'bold',
 						}}
-						tint={0xff0000}
+						tint={0xffefe}
 					/>
 
 				<!-- "FREE" text below the number -->

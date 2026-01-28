@@ -1,53 +1,56 @@
+
 <script lang="ts">
-	import { SpineProvider, SpineTrack } from 'pixi-svelte';
-	import { stateBetDerived } from 'state-shared';
+import { getContext } from '../game/context';
+import type { Reel } from '../game/stateGame.svelte';
+import { REEL_PADDING, SYMBOL_SIZE } from '../game/constants';
+import assets from '../game/assets';
+import AnimatedSprite from './AnimatedSprite.svelte';
 
-	import { getContext } from '../game/context';
-	import type { Reel } from '../game/stateGame.svelte';
-	import { REEL_PADDING, SYMBOL_SIZE } from '../game/constants';
+type Props = {
+	reel: Reel;
+	oncomplete: () => void;
+};
 
-	type Props = {
-		reel: Reel;
-		oncomplete: () => void;
-	};
+const props: Props = $props();
+const context = getContext();
 
-	const props: Props = $props();
-	const context = getContext();
+// Calculate position for the anticipation effect on the reel
+const boardLayout = context.stateGameDerived.boardLayout();
+const anticipationX = boardLayout.x - boardLayout.width * 0.5 + (props.reel.reelIndex + REEL_PADDING) * SYMBOL_SIZE;
+const anticipationY = boardLayout.y - SYMBOL_SIZE * 0.06;
 
-	type AnimationName = 'anticipation_intro' | 'anticipation_loop' | 'anticipation_out';
+// Use all frames from anticipation.webp.json
+const anticipationData = assets.anticipation1;
+const anticipationSrc = anticipationData?.src;
+// List all frame keys in order
+const anticipationFrames = anticipationSrc
+	? [
+		...Array(36).fill(0).map((_, i) => `anticipation (${i + 1}).png`)
+	]
+	: [];
+const anticipationScale = {
+	x: (SYMBOL_SIZE / 273) * 3.5, // wider
+	y: (SYMBOL_SIZE / 273) * 6.0  // shorter
+};
 
-	let animationName = $state<AnimationName>('anticipation_intro');
+let visible = true;
 
-	$effect(() => {
-		if (props.reel.reelState.motion === 'stopped') {
-			animationName = 'anticipation_out';
-		}
-	});
+$effect(() => {
+	if (props.reel.reelState.motion === 'stopped') {
+		visible = false;
+		props.oncomplete();
+	}
+});
 </script>
 
-<SpineProvider
-	key="anticipation"
-	width={SYMBOL_SIZE * 0.56}
-	x={context.stateGameDerived.boardLayout().x -
-		context.stateGameDerived.boardLayout().width * 0.5 +
-		(props.reel.reelIndex + REEL_PADDING) * SYMBOL_SIZE}
-	y={context.stateGameDerived.boardLayout().y - SYMBOL_SIZE * 0.06}
->
-	<SpineTrack
-		trackIndex={0}
-		{animationName}
-		loop={animationName === 'anticipation_loop'}
-		timeScale={stateBetDerived.timeScale()}
-		listener={{
-			complete: () => {
-				if (animationName === 'anticipation_intro') {
-					animationName = 'anticipation_loop';
-				}
-
-				if (animationName === 'anticipation_out') {
-					props.oncomplete();
-				}
-			},
-		}}
+{#if visible}
+	<AnimatedSprite
+		src={anticipationSrc}
+		frames={anticipationFrames}
+		fps={30}
+		x={anticipationX}
+		y={anticipationY}
+		anchor={{ x: 0.5, y: 0.5 }}
+		scale={anticipationScale}
 	/>
-</SpineProvider>
+{/if}
