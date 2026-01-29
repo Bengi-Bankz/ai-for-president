@@ -237,6 +237,16 @@
 </script>
 
 {#if phase !== 'hidden' && phase !== 'complete'}
+	<!-- Cinematic overlay dims board except duel area -->
+	<Sprite
+		key="tint.png"
+		x={context.stateGameDerived.boardLayout().x - 1920 * 0.5}
+		y={context.stateGameDerived.boardLayout().y - 1080 * 0.5}
+		width={1920}
+		height={1080}
+		anchor={{ x: 0, y: 0 }}
+		alpha={0.7}
+	/>
 	<!-- Duel always animates in the center of the board -->
 	<Container>
 		<!-- Anticipation Phase - Hidden, just sound and timing -->
