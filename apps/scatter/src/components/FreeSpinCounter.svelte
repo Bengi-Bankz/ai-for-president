@@ -98,7 +98,7 @@
 					anchor={{ x: 0.5, y: 0 }}
 					style={{
 						fontFamily: 'MildEast',
-						fontSize: fontSize * 1,
+						fontSize: fontSize * 0.9,
 						fontWeight: 'bold',
 					}}
 					tint={0xffd700}

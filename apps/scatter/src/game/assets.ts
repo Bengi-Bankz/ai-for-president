@@ -535,7 +535,9 @@ anticipation1: {
 		preload: true,
 	},
 
+continueButton: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/continue/continue.webp', import.meta.url)
 
 
-
-} as const;
+} as const}

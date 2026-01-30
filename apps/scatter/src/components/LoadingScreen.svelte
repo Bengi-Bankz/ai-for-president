@@ -32,8 +32,8 @@ import FrameDisplay from '../framedisplay.svelte';
 	const portraitRatio = 0.85; // percentage of main width for portrait card size
 	const totalWidthRow = factWidth * introFrames.length + factGap * (introFrames.length - 1);
 
-	// Use only the last 12 frames for loading animation
-	const loadingFrames = Array.from({ length: 12 }, (_, i) => `loading_000 (${i + 25}).png`);
+	// Use all 36 frames for loading animation
+	const loadingFrames = Array.from({ length: 36 }, (_, i) => `loading_000 (${i + 1}).png`);
 
 	onMount(() => {
 		// auto-advance carousel every 3 seconds

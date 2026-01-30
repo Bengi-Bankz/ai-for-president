@@ -57,31 +57,14 @@
 		return largeMultipliers.includes(multiplier) ? SYMBOL_SIZE * 1.4 : SYMBOL_SIZE * 1.2;
 	};
 
-	// Helper to determine if multiplier is on an end column (left or right edge)
-	const isEndColumn = (): boolean => {
-		if (!props.gridPosition) return false;
-		const col = props.gridPosition.col;
-		const boardWidth = BOARD_DIMENSIONS.x;
-		return col === 0 || col === boardWidth - 1;
-	};
-
-	// Helper to get multiplier positions (horizontal vs vertical arrangement)
+	// Helper to get multiplier positions (horizontal arrangement)
 	const getMultiplierPositions = () => {
-		if (isEndColumn()) {
-			// Vertical arrangement: blue above, red below
-			return {
-				blue: { x: 0, y: -SYMBOL_SIZE },
-				red: { x: 0, y: SYMBOL_SIZE },
-				vs: { x: 0, y: 0 }
-			};
-		} else {
-			// Horizontal arrangement: blue left, red right
-			return {
-				blue: { x: -SYMBOL_SIZE * 1.3, y: 0 },
-				red: { x: SYMBOL_SIZE * 1.3, y: 0 },
-				vs: { x: -SYMBOL_SIZE * 0.8, y: 0 }
-			};
-		}
+		// Always horizontal arrangement: blue left, red right
+		return {
+			blue: { x: -SYMBOL_SIZE * 1.3, y: 0 },
+			red: { x: SYMBOL_SIZE * 1.3, y: 0 },
+			vs: { x: -SYMBOL_SIZE * 0.8, y: 0 }
+		};
 	};
 	
 	let phase = $state<DuelPhase>('hidden');

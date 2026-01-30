@@ -24,24 +24,25 @@
 		z-index: 1000;
 	}
 
-	.watch-again-button {
-		background: linear-gradient(135deg, #00ffcc 0%, #00ff88 100%);
-		color: #000;
-		border: none;
-		padding: 16px 40px;
-		border-radius: 12px;
-		font-family: 'Crimes Times Six', sans-serif;
-		font-weight: 700;
-		font-size: 1.1rem;
-		cursor: pointer;
-		transition: all 0.3s;
-		box-shadow: 0 4px 20px rgba(0, 255, 200, 0.4);
-	}
+	   .watch-again-button {
+		   background: #222;
+		   color: #fff;
+		   border: none;
+		   padding: 16px 40px;
+		   border-radius: 12px;
+		   font-family: 'Crimes Times Six', sans-serif;
+		   font-weight: 700;
+		   font-size: 1.1rem;
+		   cursor: pointer;
+		   transition: background 0.2s, transform 0.2s;
+		   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	   }
 
-	.watch-again-button:hover {
-		transform: scale(1.05);
-		box-shadow: 0 6px 30px rgba(0, 255, 200, 0.8);
-	}
+	   .watch-again-button:hover {
+		   background: #444;
+		   transform: scale(1.05);
+		   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+	   }
 
 	.watch-again-button:active {
 		transform: scale(0.98);

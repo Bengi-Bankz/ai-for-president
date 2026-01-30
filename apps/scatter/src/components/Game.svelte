@@ -39,11 +39,13 @@ import { onMount } from 'svelte';
 	import { onDestroy } from 'svelte';
 	import ReplayIndicator from './ReplayIndicator.svelte';
 	import WatchAgain from './WatchAgain.svelte';
-
+	import ReplayLoadingScreen from './ReplayLoadingScreen.svelte';
+	import ReplayButton from './ReplayButton.svelte';
 
 	import { getReplayParams, type ReplayParams } from '../game/utils-replay';
 	import { requestReplay } from 'rgs-requests';
 	import { setContext as setSvelteContext } from 'svelte';
+	import { isReplayMode, replayLoading, replayError, replayData, replayReady } from '../stores/replayState';
 
 	const context = getContext();
 
@@ -68,20 +70,33 @@ import { onMount } from 'svelte';
 
 		// --- REPLAY MODE: Fetch replay data from RGS ---
 		if (replayParams.isReplayMode && replayParams.rgs_url && replayParams.game && replayParams.version && replayParams.mode && replayParams.event) {
+			replayLoading.set(true);
+			replayError.set(null);
 			try {
-				const replayData = await requestReplay({
+				console.log('[Replay] Fetching replay data from RGS...');
+				const data = await requestReplay({
 					rgsUrl: replayParams.rgs_url,
 					game: replayParams.game,
 					version: replayParams.version,
 					mode: replayParams.mode,
 					event: replayParams.event,
 				});
-				// Use replayData to drive game state
-				// Assume replayData is a Bet object
-				await playBet(replayData as Bet);
-				console.log('[Replay] Played replay data:', replayData);
+				console.log('[Replay] Successfully loaded replay data:', data);
+				replayData.set(data);
+				replayReady.set(true);
+				replayLoading.set(false);
+				
+				// Skip normal loading screen for replay
+				context.stateLayout.showLoadingScreen = false;
+				
+				// Play the replay using the fetched data
+				if (data && data.state) {
+					await playBet(data as Bet);
+				}
 			} catch (err) {
 				console.error('[Replay] Failed to load replay data:', err);
+				replayError.set(err instanceof Error ? err.message : 'Failed to load replay data');
+				replayLoading.set(false);
 			}
 		}
 	});
@@ -240,3 +255,5 @@ import { onMount } from 'svelte';
 </Modals>
 <ReplayIndicator />
 <WatchAgain />
+<ReplayLoadingScreen />
+<ReplayButton />
