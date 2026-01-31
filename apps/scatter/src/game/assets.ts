@@ -265,6 +265,10 @@ export default {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/trashcan/trashcan.png', import.meta.url).href,
 	},
+	trashcan2: {
+		type: 'sprite',
+		src: new URL('../../assets/fonts/trashcan/trashcan2.png', import.meta.url).href,
+	},
 	play01: {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/play01/play01.png', import.meta.url).href,
@@ -284,6 +288,14 @@ export default {
 	replayButton: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/replay/replay_play.png', import.meta.url).href,
+	},
+	deafPresidents: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/thumbNails/deaf_presidents.png', import.meta.url).href,
+	},
+	bangGang: {
+		type: 'sprite',
+		src: new URL('../../assets/sprites/thumbNails/bang_gang.png', import.meta.url).href,
 	},
 	replayCorner: {
 		type: 'sprite',
@@ -511,6 +523,21 @@ anticipation1: {
 continueButton: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/continue/continue.webp', import.meta.url)
-
-
-} as const}
+	},
+	cowboyWins: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/vsfinal4/cowboy_wins.webp.json', import.meta.url).href,
+	},
+	cowboyDies: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/vsfinal4/cowboy_dies.webp.json', import.meta.url).href,
+	},
+	indianWins: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/vsfinal4/indian_wins.webp.json', import.meta.url).href,
+	},
+	indianDies: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/vsfinal4/indian_dies.webp.json', import.meta.url).href,
+	},
+} as const;

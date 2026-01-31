@@ -6,186 +6,135 @@
 	import { waitForTimeout } from 'utils-shared/wait';
 	import { stateBetDerived } from 'state-shared';
 	import { getContext } from '../game/context';
-	import FramedDisplay from '../framedisplay.svelte';
 	import MultiplierNumber from './MultiplierNumber.svelte';
+	import DuelAnimation from './DuelAnimation.svelte';
 	import { SYMBOL_SIZE, BOARD_DIMENSIONS } from '../game/constants';
 
 	type Props = {
 		x?: number;
 		y?: number;
 		multiplierValue: number;
-		gridPosition?: { row: number; col: number }; // Position on grid where VS symbol landed
+		gridPosition?: { row: number; col: number };
 		onComplete?: () => void;
 	};
 
 	type DuelPhase = 'hidden' | 'anticipation' | 'vs-reveal' | 'multiplier-drop' | 'return-to-grid' | 'complete';
 
+	const MULTIPLIER_VALUES = [2, 4, 5, 7, 10, 50, 100];
+
 	const props: Props = $props();
 	const context = getContext();
 
-	// Center of the board
+	// Board center position
 	const centerX = (BOARD_DIMENSIONS.x * SYMBOL_SIZE) / 2;
 	const centerY = (BOARD_DIMENSIONS.y * SYMBOL_SIZE) / 2;
 
-	// Where the multiplier should end up (its grid cell)
+	// Target grid cell position
 	const targetX = props.x ?? 0;
 	const targetY = props.y ?? 0;
 
 	// Animation timing constants (in ms)
 	const ANTICIPATION_DURATION = 300;
-	const VS_ANIMATION_DURATION = 2250;
-	const VS_HOLD_DURATION = 600;
-	const MULTIPLIER_DROP_DURATION = 700;
-	const RETURN_TO_GRID_DURATION = 700;
-	const DROP_BOUNCE_DURATION = 200;
-	const TOTAL_SEQUENCE_DURATION = 
-		ANTICIPATION_DURATION + 
-		VS_ANIMATION_DURATION + 
-		VS_HOLD_DURATION + 
-		MULTIPLIER_DROP_DURATION + 
-		RETURN_TO_GRID_DURATION +
-		DROP_BOUNCE_DURATION;
+	const VS_ANIMATION_DURATION = 1500;
+	const VS_HOLD_DURATION = 400;
+	const MULTIPLIER_DROP_DURATION = 500;
+	const RETURN_TO_GRID_DURATION = 500;
+
+	// Duel display sizing
+	const DUEL_SCALE = 1.8;
+	const CHARACTER_WIDTH = SYMBOL_SIZE * 1.0;
+	const CHARACTER_HEIGHT = SYMBOL_SIZE * 1.2;
+	const CHARACTER_SPACING = SYMBOL_SIZE * 2.2;
+	const MULTIPLIER_SIZE = SYMBOL_SIZE * 1.0;
+	const MULTIPLIER_OFFSET_Y = SYMBOL_SIZE * 0.9;
+	const BG_WIDTH = SYMBOL_SIZE * 4.5;
+	const BG_HEIGHT = SYMBOL_SIZE * 1.8;
+
 	const getRandomMultiplier = () => {
-		const MULTIPLIER_VALUES = [2, 4, 5, 7, 10, 50, 100];
 		const available = MULTIPLIER_VALUES.filter(v => v !== props.multiplierValue);
 		return available[Math.floor(Math.random() * available.length)];
 	};
 
-	// Helper to determine multiplier size based on value
-	const getMultiplierSize = (multiplier: number) => {
-		const largeMultipliers = [10, 15, 25, 50, 100];
-		return largeMultipliers.includes(multiplier) ? SYMBOL_SIZE * 1.4 : SYMBOL_SIZE * 1.2;
-	};
-
-	// Helper to get multiplier positions (horizontal arrangement)
-	const getMultiplierPositions = () => {
-		// Always horizontal arrangement: blue left, red right
-		return {
-			blue: { x: -SYMBOL_SIZE * 1.3, y: 0 },
-			red: { x: SYMBOL_SIZE * 1.3, y: 0 },
-			vs: { x: -SYMBOL_SIZE * 0.8, y: 0 }
-		};
-	};
-	
 	let phase = $state<DuelPhase>('hidden');
 	let showVSAnimation = $state(false);
 	let showMultiplierDrop = $state(false);
 	let showReturnToGrid = $state(false);
-	
-	// Randomly determine which side wins - will be set in onMount
+
+	// Randomly determine which side wins
 	let leftWins = $state(false);
 	let fakeMultiplier = $state(2);
 	let grenadeMultiplier = $state(0);
 	let copMultiplier = $state(0);
-	
-	// Multiplier drop animation
-	const VS_ANIMATION_FRAMES = [
-		"vs0001 (9).png", "vs0001 (8).png", "vs0001 (7).png", "vs0001 (6).png", "vs0001 (5).png", "vs0001 (4).png",
-		"vs0001 (3).png", "vs0001 (2).png", "vs0001 (1).png", "vs0001 (30).png", "vs0001 (29).png", "vs0001 (28).png",
-		"vs0001 (27).png", "vs0001 (26).png", "vs0001 (25).png", "vs0001 (24).png", "vs0001 (23).png", "vs0001 (22).png",
-		"vs0001 (21).png", "vs0001 (20).png", "vs0001 (19).png", "vs0001 (18).png", "vs0001 (17).png", "vs0001 (16).png",
-		"vs0001 (15).png", "vs0001 (14).png", "vs0001 (13).png", "vs0001 (12).png", "vs0001 (11).png", "vs0001 (10).png"
-	];
 
-	// Multiplier drop animation (centered)
-	const multiplierDropX = new Tween(centerX);
-	const multiplierDropY = new Tween(centerY);
+	// Multiplier drop animation tweens
 	const multiplierDropScale = new Tween(1);
 	const multiplierDropAlpha = new Tween(0);
 
-	// Return to grid animation
+	// Return to grid animation tweens
 	const returnX = new Tween(centerX);
 	const returnY = new Tween(centerY);
 	const returnScale = new Tween(1);
 	const returnAlpha = new Tween(0);
 
 	onMount(() => {
-		// Randomly decide which side gets the winning multiplier
+		// Randomly decide which side wins
 		leftWins = Math.random() > 0.5;
 		fakeMultiplier = getRandomMultiplier();
-		
-		// Assign multipliers - left (blue) gets real value half the time
+
+		// Assign multipliers - left (blue/cowboy) gets real value if leftWins
 		grenadeMultiplier = leftWins ? props.multiplierValue : fakeMultiplier;
 		copMultiplier = leftWins ? fakeMultiplier : props.multiplierValue;
-		
-		console.log(`🎲 Left wins: ${leftWins}, Blue: ${grenadeMultiplier}X, Red: ${copMultiplier}X`);
-		
+
 		startDuelSequence();
 	});
 
 	const startDuelSequence = async () => {
-		console.log(`🎯 Donut Duel: ${leftWins ? 'Left (Blue)' : 'Right (Red)'} wins with ${props.multiplierValue}X vs ${fakeMultiplier}X`);
-
-		// Phase 0: Anticipation pulse
+		// Phase 1: Anticipation
 		phase = 'anticipation';
 		await playAnticipation();
 
-		// Phase 1: VS Animation with multiplier comparison
+		// Phase 2: VS Animation with duel
 		phase = 'vs-reveal';
 		await playVSAnimation();
-
-		// Brief hold on VS multipliers
 		await waitForTimeout(VS_HOLD_DURATION / stateBetDerived.timeScale());
 
-		// Phase 2: Multiplier Drop in Center
+		// Phase 3: Multiplier Drop
 		phase = 'multiplier-drop';
 		await playMultiplierDrop();
 
-		// Phase 3: Animate winning multiplier to grid cell
+		// Phase 4: Return to grid
 		phase = 'return-to-grid';
 		await playReturnToGrid();
 
 		phase = 'complete';
-		console.log('✅ Donut Duel complete');
 		props.onComplete?.();
 	};
 
 	const playAnticipation = async () => {
-		console.log('⏳ Playing anticipation pulse');
-		
-		// Play anticipation sound
 		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_anticipation' });
-		
 		await waitForTimeout(ANTICIPATION_DURATION / stateBetDerived.timeScale());
-		console.log('✅ Anticipation complete');
 	};
 
 	const playVSAnimation = async () => {
-		console.log('🆚 Playing VS animation with multiplier comparison');
 		showVSAnimation = true;
-		
-		// Play explosion sound at start
 		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_a' });
-		
-		// Play through all frames
 		await waitForTimeout(VS_ANIMATION_DURATION / stateBetDerived.timeScale());
-		
 		showVSAnimation = false;
-		console.log('✅ VS animation complete');
 	};
 
 	const playMultiplierDrop = async () => {
-		console.log('💰 Dropping multiplier in center');
 		showMultiplierDrop = true;
 
-		// Start at center
-		multiplierDropX.set(centerX, { duration: 0 });
-		multiplierDropY.set(centerY, { duration: 0 });
 		multiplierDropScale.set(1.3, { duration: 0 });
 		multiplierDropAlpha.set(1, { duration: 0 });
 
-		// Brief delay before drop
 		await waitForTimeout(100 / stateBetDerived.timeScale());
-
-		// Play drop sound
 		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_up' });
 
-		// Animate drop with easing (scale down)
-		multiplierDropScale.set(1, { 
-			duration: MULTIPLIER_DROP_DURATION / stateBetDerived.timeScale(), 
-			easing: cubicInOut 
+		multiplierDropScale.set(1, {
+			duration: MULTIPLIER_DROP_DURATION / stateBetDerived.timeScale(),
+			easing: cubicInOut
 		});
-
 		await waitForTimeout(MULTIPLIER_DROP_DURATION / stateBetDerived.timeScale());
 
 		// Bounce effect
@@ -196,7 +145,8 @@
 
 		showMultiplierDrop = false;
 		showReturnToGrid = true;
-		// Prepare return-to-grid start state
+
+		// Setup return animation start state
 		returnX.set(centerX, { duration: 0 });
 		returnY.set(centerY, { duration: 0 });
 		returnScale.set(1, { duration: 0 });
@@ -204,93 +154,86 @@
 	};
 
 	const playReturnToGrid = async () => {
-		// Animate from center to grid cell
-		returnX.set(targetX, { duration: RETURN_TO_GRID_DURATION, easing: cubicInOut });
-		returnY.set(targetY, { duration: RETURN_TO_GRID_DURATION, easing: cubicInOut });
-		returnScale.set(1, { duration: RETURN_TO_GRID_DURATION, easing: cubicInOut });
-		returnAlpha.set(1, { duration: RETURN_TO_GRID_DURATION, easing: cubicInOut });
+		const duration = RETURN_TO_GRID_DURATION / stateBetDerived.timeScale();
+
+		returnX.set(targetX, { duration, easing: cubicInOut });
+		returnY.set(targetY, { duration, easing: cubicInOut });
+		returnScale.set(1, { duration, easing: cubicInOut });
+
 		await waitForTimeout(RETURN_TO_GRID_DURATION);
-		// Stay visible at grid cell
-		returnX.set(targetX, { duration: 0 });
-		returnY.set(targetY, { duration: 0 });
-		returnScale.set(1, { duration: 0 });
-		returnAlpha.set(1, { duration: 0 });
 		showReturnToGrid = false;
 	};
 </script>
 
 {#if phase !== 'hidden' && phase !== 'complete'}
-	<!-- Cinematic overlay dims board except duel area -->
+	{@const mainLayout = context.stateLayoutDerived.mainLayout()}
+
+	<!-- Dim overlay -->
 	<Sprite
 		key="tint.png"
-		x={context.stateGameDerived.boardLayout().x - 1920 * 0.5}
-		y={context.stateGameDerived.boardLayout().y - 1080 * 0.5}
-		width={1920}
-		height={1080}
+		x={-mainLayout.width * 0.5}
+		y={-mainLayout.height * 0.5}
+		width={mainLayout.width * 2}
+		height={mainLayout.height * 2}
 		anchor={{ x: 0, y: 0 }}
 		alpha={0.7}
 	/>
-	<!-- Duel always animates in the center of the board -->
-	<Container>
-		<!-- Anticipation Phase - Hidden, just sound and timing -->
-		{#if phase === 'anticipation'}
-			<!-- Invisible phase - just anticipation sound and timing -->
-		{/if}
 
-		<!-- VS Animation Phase with large Multiplier Comparison -->
+	<Container>
+		<!-- VS Animation Phase -->
 		{#if phase === 'vs-reveal' && showVSAnimation}
-			{@const positions = getMultiplierPositions()}
-			<!-- VS Duel Background -->
-			<Container x={centerX} y={centerY}>
+			<Container x={centerX} y={centerY} scale={DUEL_SCALE}>
+				<!-- Background -->
 				<Sprite
 					key="duelbg.png"
 					anchor={{ x: 0.5, y: 0.5 }}
 					x={0}
-					y={SYMBOL_SIZE * 0.9}
-					width={SYMBOL_SIZE * 5}
-					height={SYMBOL_SIZE * 2}
+					y={MULTIPLIER_OFFSET_Y}
+					width={BG_WIDTH}
+					height={BG_HEIGHT}
 				/>
-				<!-- Grenade Robber Multiplier (left or top) - Large display -->
+
+				<!-- Duel Animation -->
+				<DuelAnimation
+					winner={leftWins ? 'cowboy' : 'indian'}
+					x={0}
+					y={0}
+					width={CHARACTER_WIDTH}
+					height={CHARACTER_HEIGHT}
+					spacing={CHARACTER_SPACING}
+					fps={24}
+					playSound={true}
+				/>
+
+				<!-- Left multiplier (blue/cowboy) -->
 				<MultiplierNumber
 					multiplier={grenadeMultiplier}
 					color="blue"
-					x={positions.blue.x}
-					y={positions.blue.y}
-					width={getMultiplierSize(grenadeMultiplier)}
-					height={getMultiplierSize(grenadeMultiplier)}
+					x={-CHARACTER_SPACING / 2}
+					y={MULTIPLIER_OFFSET_Y}
+					width={MULTIPLIER_SIZE}
+					height={MULTIPLIER_SIZE}
 					anchor={{ x: 0.5, y: 0.5 }}
 				/>
 
-				<!-- VS Animation in center -->
-				<FramedDisplay
-					frameKeys={VS_ANIMATION_FRAMES}
-					x={positions.vs.x}
-					y={positions.vs.y}
-					width={SYMBOL_SIZE * 1.6}
-					height={SYMBOL_SIZE * 1.6}
-					fps={16}
-					scale={1}
-					loop={false}
-				/>
-
-				<!-- Donut Cop Multiplier (right or bottom) - Large display -->
+				<!-- Right multiplier (red/indian) -->
 				<MultiplierNumber
 					multiplier={copMultiplier}
 					color="red"
-					x={positions.red.x}
-					y={positions.red.y}
-					width={getMultiplierSize(copMultiplier)}
-					height={getMultiplierSize(copMultiplier)}
+					x={CHARACTER_SPACING / 2}
+					y={MULTIPLIER_OFFSET_Y}
+					width={MULTIPLIER_SIZE}
+					height={MULTIPLIER_SIZE}
 					anchor={{ x: 0.5, y: 0.5 }}
 				/>
 			</Container>
 		{/if}
 
-		<!-- Multiplier Drop Phase - Centered -->
+		<!-- Multiplier Drop Phase -->
 		{#if phase === 'multiplier-drop' && showMultiplierDrop}
 			<Container
-				x={multiplierDropX.current}
-				y={multiplierDropY.current}
+				x={centerX}
+				y={centerY}
 				scale={multiplierDropScale.current}
 				alpha={multiplierDropAlpha.current}
 			>
@@ -305,7 +248,7 @@
 		{/if}
 
 		<!-- Return to grid animation -->
-		{#if phase === 'return-to-grid' || (phase === 'complete' && showReturnToGrid)}
+		{#if showReturnToGrid}
 			<Container
 				x={returnX.current}
 				y={returnY.current}

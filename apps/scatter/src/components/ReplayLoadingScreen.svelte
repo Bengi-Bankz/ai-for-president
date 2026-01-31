@@ -13,6 +13,10 @@
 	// Get the replay button sprite URL
 	const replayButtonUrl = assets.replayButton?.src || '';
 
+	// Get game thumbnail URLs
+	const deafPresidentsUrl = assets.deafPresidents?.src || '';
+	const bangGangUrl = assets.bangGang?.src || '';
+
 	// Get replay params from URL
 	const replayParams = getReplayParams();
 
@@ -189,6 +193,21 @@
 			<button class="play-button" onclick={handlePlay}>
 				<img src={replayButtonUrl} alt="Play" class="play-button-image" />
 			</button>
+
+			<div class="other-games-section">
+				<p class="other-games-title">Check out other games from</p>
+				<p class="studio-name">OnlySpins Studios</p>
+				<div class="game-thumbnails">
+					<div class="game-thumb">
+						<img src={deafPresidentsUrl} alt="Deaf Presidents" class="game-image" />
+						<span class="game-name">Deaf Presidents</span>
+					</div>
+					<div class="game-thumb">
+						<img src={bangGangUrl} alt="The Bang Gang" class="game-image" />
+						<span class="game-name">The Bang Gang</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}
@@ -327,6 +346,62 @@
 		max-width: 200px;
 		max-height: 200px;
 		filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
+	}
+
+	.other-games-section {
+		margin-top: 2rem;
+		text-align: center;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.other-games-title {
+		color: #666;
+		font-size: 0.85rem;
+		margin: 0;
+		letter-spacing: 0.05em;
+	}
+
+	.studio-name {
+		color: #ff6b35;
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 1.3rem;
+		font-weight: 700;
+		margin: 0.25rem 0 1rem;
+		text-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+	}
+
+	.game-thumbnails {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.game-thumb {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.game-image {
+		width: 80px;
+		height: 80px;
+		object-fit: cover;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+		&:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+		}
+	}
+
+	.game-name {
+		color: #555;
+		font-size: 0.7rem;
+		letter-spacing: 0.03em;
 	}
 
 	/* Error State */

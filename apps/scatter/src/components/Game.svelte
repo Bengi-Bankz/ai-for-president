@@ -37,7 +37,6 @@ import { onMount } from 'svelte';
 
 	import { scatterLandedThisRound } from '../stores/scatterLandedThisRound';
 	import { onDestroy } from 'svelte';
-	import WatchAgain from './WatchAgain.svelte';
 	import ReplayLoadingScreen from './ReplayLoadingScreen.svelte';
 	import ReplayCorner from './ReplayCorner.svelte';
 
@@ -81,15 +80,18 @@ import { onMount } from 'svelte';
 			console.log('[Replay] Starting replay playback...');
 			replayPlaying.set(true);
 			replayAwaitingStart.set(false);
+			replayComplete.set(false);
 
 			try {
 				await playBet(data as Bet);
-				console.log('[Replay] Replay playback complete');
+				console.log('[Replay] Replay playback complete, returning to play screen...');
 				replayPlaying.set(false);
-				replayComplete.set(true);
+				// Return to the play button screen instead of showing WatchAgain
+				replayAwaitingStart.set(true);
 			} catch (err) {
 				console.error('[Replay] Error during replay playback:', err);
 				replayPlaying.set(false);
+				replayAwaitingStart.set(true);
 			}
 		}
 	}
@@ -285,6 +287,5 @@ import { onMount } from 'svelte';
     <GameVersion version="0.0.0" />
   {/snippet}
 </Modals>
-<WatchAgain />
 <ReplayLoadingScreen onPlay={startReplay} />
 <ReplayCorner />

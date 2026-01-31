@@ -10,6 +10,9 @@ export type MusicName =
 	| 'bgm_winlevel_superwin';
 
 export type SoundEffectName =
+	| 'cowboywins'
+	| 'duel'
+	| 'indianwins'
 	| 'jng_intro_fs'
 	| 'sfx_anticipation'
 	| 'sfx_anticipation_start'
