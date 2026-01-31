@@ -54,12 +54,12 @@
 			if (emitterEvent.multiplier === 1 && multiplier !== 1) {
 				animationName = 'reset';
 				await waitForTimeout(300);
-				context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_reset' });
+				context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_change' });
 				previousMultiplier.set(emitterEvent.multiplier);
 			}
 
 			if (emitterEvent.multiplier > multiplier) {
-				context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_update' });
+				context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_change' });
 				animationName = 'increment';
 			}
 

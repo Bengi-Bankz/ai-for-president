@@ -27,7 +27,7 @@
 		soundBetMode: async ({ betModeKey }) => {
 			if (betModeKey === 'SUPERSPIN') {
 				// check if SUPERSPIN, when changing the bet mode.
-				sound.players.once.play({ name: 'sfx_winlevel_end' });
+				sound.players.once.play({ name: 'sfx_win_end' });
 				await waitForTimeout(SECOND);
 				sound.players.music.play({ name: 'bgm_freespin' });
 			} else {

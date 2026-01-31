@@ -54,7 +54,7 @@
 		bomb.showBackdrop = true;
 		
 		// Play backdrop animation sound
-		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_backdrop_reveal' });
+		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_explosion' });
 		
 		for (const scale of scaleSteps) {
 			bomb.backdropScale = scale;

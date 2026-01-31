@@ -58,7 +58,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 	},
 	winInfo: async (bookEvent: BookEventOfType<'winInfo'>) => {
 		const promise1 = async () => {
-			eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_winlevel_small' });
+			eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_win' });
 			await animateSymbols({ positions: _.flatten(bookEvent.wins.map((win) => win.positions)) });
 		};
 
@@ -94,10 +94,10 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 	},
 	freeSpinTrigger: async (bookEvent: BookEventOfType<'freeSpinTrigger'>) => {
 		// animate scatters
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_scatter_win_v2' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_scatter_win' });
 		await animateSymbols({ positions: bookEvent.positions });
 		// show free spin intro
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_superfreespin' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_freespin' });
 		await eventEmitter.broadcastAsync({ type: 'uiHide' });
 		await eventEmitter.broadcastAsync({ type: 'transition' });
 		eventEmitter.broadcast({ type: 'freeSpinIntroShow' });
@@ -151,7 +151,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 		eventEmitter.broadcast({ type: 'boardFrameGlowHide' });
 		eventEmitter.broadcast({ type: 'globalMultiplierHide' });
 		eventEmitter.broadcast({ type: 'freeSpinOutroShow' });
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_youwon_panel' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_win_panel' });
 		winLevelSoundsPlay({ winLevelData });
 		await eventEmitter.broadcastAsync({
 			type: 'freeSpinOutroCountUp',
@@ -181,7 +181,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 		});
 		eventEmitter.broadcast({ type: 'multiplierBoardShow' });
 		eventEmitter.broadcast({ type: 'multiplierBoardInit' });
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'tumble_win_4' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_tumble' });
 		await eventEmitter.broadcastAsync({ type: 'multiplierBoardAnimate' });
 		eventEmitter.broadcast({ type: 'boardWithMovingMultiplierTexts' });
 		await eventEmitter.broadcastAsync({ type: 'multiplierBoardMove' });
@@ -192,9 +192,9 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 			type: 'multiplierTotalUpdate',
 			totalMultiplier: bookEvent.winInfo.boardMult,
 		});
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_win' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_up' });
 		await eventEmitter.broadcastAsync({ type: 'multiplierTotalAnimate' });
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_a' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_explosion' });
 		eventEmitter.broadcast({ type: 'multiplierTotalHide' });
 		await eventEmitter.broadcastAsync({
 			type: 'tumbleWinAmountUpdate',
@@ -206,7 +206,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 		eventEmitter.broadcast({ type: 'boardHide' });
 		eventEmitter.broadcast({ type: 'tumbleBoardShow' });
 		eventEmitter.broadcast({ type: 'tumbleBoardInit', addingBoard: bookEvent.newSymbols });
-		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_b' });
+		eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_explosion' });
 		await eventEmitter.broadcastAsync({
 			type: 'tumbleBoardExplode',
 			explodingPositions: bookEvent.explodingSymbols,

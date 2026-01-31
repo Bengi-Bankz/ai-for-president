@@ -91,8 +91,7 @@
 					currentFrameIndex = FRAME_COUNT - 1;
 					// Play winner sound when animation completes
 					if (playSound) {
-						const soundName = winner === 'cowboy' ? 'cowboywins' : 'indianwins';
-						context.eventEmitter?.broadcast({ type: 'soundOnce', name: soundName });
+						context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_duel_win' });
 					}
 					oncomplete?.();
 				}

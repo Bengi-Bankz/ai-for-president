@@ -43,7 +43,7 @@
 	onMount(async () => {
 		if (showMultiplier) {
 			await waitForTimeout(SECOND);
-			context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_combine_a' });
+			context.eventEmitter.broadcast({ type: 'soundOnce', name: 'sfx_combine' });
 			await scale.set(0.1, { duration: 200 / stateBetDerived.timeScale() });
 			await scale.set(1, { duration: 200 / stateBetDerived.timeScale() });
 		}

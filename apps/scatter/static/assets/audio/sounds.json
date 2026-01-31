@@ -1,444 +1,212 @@
-{
-  "sprite": {
-    "bgm_freespin": [
-      0,
-      120686,
-      false
-    ],
-    "bgm_main": [
-      122000,
-      237166,
-      false
-    ],
-    "bgm_winlevel_big": [
-      361000,
-      261,
-      false
-    ],
-    "bgm_winlevel_epic": [
-      363000,
-      15432,
-      false
-    ],
-    "bgm_winlevel_max": [
-      380000,
-      15432,
-      false
-    ],
-    "bgm_winlevel_mega": [
-      397000,
-      15432,
-      false
-    ],
-    "bgm_winlevel_superwin": [
-      414000,
-      261,
-      false
-    ],
-    "cowboywins": [
-      416000,
-      5040,
-      false
-    ],
-    "duel": [
-      423000,
-      7872,
-      false
-    ],
-    "indianwins": [
-      432000,
-      1097,
-      false
-    ],
-    "jng_intro_fs": [
-      435000,
-      2208,
-      false
-    ],
-    "sfx_anticipation": [
-      439000,
-      8112,
-      false
-    ],
-    "sfx_anticipation_start": [
-      449000,
-      8112,
-      false
-    ],
-    "sfx_bigwin_coinloop": [
-      459000,
-      7032,
-      false
-    ],
-    "sfx_btn_general": [
-      468000,
-      1685,
-      false
-    ],
-    "sfx_btn_spin": [
-      471000,
-      3776,
-      false
-    ],
-    "sfx_fs_respins": [
-      476000,
-      2256,
-      false
-    ],
-    "sfx_multiplier_combine_a": [
-      480000,
-      3553,
-      false
-    ],
-    "sfx_multiplier_combine_b": [
-      485000,
-      3553,
-      false
-    ],
-    "sfx_multiplier_explosion_a": [
-      490000,
-      2472,
-      false
-    ],
-    "sfx_multiplier_explosion_b": [
-      494000,
-      2472,
-      false
-    ],
-    "sfx_multiplier_explosion_c": [
-      498000,
-      2472,
-      false
-    ],
-    "sfx_multiplier_landing": [
-      502000,
-      4544,
-      false
-    ],
-    "sfx_multiplier_reset": [
-      508000,
-      4544,
-      false
-    ],
-    "sfx_multiplier_up": [
-      514000,
-      4544,
-      false
-    ],
-    "sfx_multiplier_update": [
-      520000,
-      4544,
-      false
-    ],
-    "sfx_multiplier_win": [
-      526000,
-      4544,
-      false
-    ],
-    "sfx_reel_stop_1": [
-      532000,
-      459,
-      false
-    ],
-    "sfx_reel_stop_2": [
-      534000,
-      459,
-      false
-    ],
-    "sfx_reel_stop_3": [
-      536000,
-      459,
-      false
-    ],
-    "sfx_reel_stop_4": [
-      538000,
-      459,
-      false
-    ],
-    "sfx_reel_stop_5": [
-      540000,
-      459,
-      false
-    ],
-    "sfx_royals_landing": [
-      542000,
-      1704,
-      false
-    ],
-    "sfx_scatter_reveal": [
-      545000,
-      13128,
-      false
-    ],
-    "sfx_scatter_stop_1": [
-      560000,
-      2472,
-      false
-    ],
-    "sfx_scatter_stop_2": [
-      564000,
-      2472,
-      false
-    ],
-    "sfx_scatter_stop_3": [
-      568000,
-      2472,
-      false
-    ],
-    "sfx_scatter_stop_4": [
-      572000,
-      2472,
-      false
-    ],
-    "sfx_scatter_stop_5": [
-      576000,
-      2472,
-      false
-    ],
-    "sfx_scatter_win": [
-      580000,
-      4320,
-      false
-    ],
-    "sfx_scatter_win_v2": [
-      586000,
-      720,
-      false
-    ],
-    "sfx_superfreespin": [
-      588000,
-      2208,
-      false
-    ],
-    "sfx_symbols_landing": [
-      592000,
-      2472,
-      false
-    ],
-    "sfx_wild_explode": [
-      596000,
-      261,
-      false
-    ],
-    "sfx_winlevel_end": [
-      598000,
-      4320,
-      false
-    ],
-    "sfx_winlevel_nice": [
-      604000,
-      15432,
-      false
-    ],
-    "sfx_winlevel_small": [
-      621000,
-      13128,
-      false
-    ],
-    "sfx_winlevel_standard": [
-      636000,
-      8112,
-      false
-    ],
-    "sfx_winlevel_substantial": [
-      646000,
-      5040,
-      false
-    ],
-    "sfx_youwon_panel": [
-      653000,
-      2256,
-      false
-    ],
-    "tumble_win_1": [
-      657000,
-      1664,
-      false
-    ],
-    "tumble_win_2": [
-      660000,
-      1664,
-      false
-    ],
-    "tumble_win_3": [
-      663000,
-      1664,
-      false
-    ],
-    "tumble_win_4": [
-      666000,
-      1664,
-      false
-    ]
-  },
-  "src": [
-    "./assets/audio/sounds.mp3",
-    "./assets/audio/sounds.m4a",
-    "./assets/audio/sounds.ogg",
-    "./assets/audio/sounds.ac3"
-  ],
-  "config": {
-    "bgm_freespin": {
-      "volume": 1
-    },
-    "bgm_main": {
-      "volume": 1
-    },
-    "bgm_winlevel_big": {
-      "volume": 1
-    },
-    "bgm_winlevel_epic": {
-      "volume": 1
-    },
-    "bgm_winlevel_max": {
-      "volume": 1
-    },
-    "bgm_winlevel_mega": {
-      "volume": 1
-    },
-    "bgm_winlevel_superwin": {
-      "volume": 1
-    },
-    "cowboywins": {
-      "volume": 1
-    },
-    "duel": {
-      "volume": 1
-    },
-    "indianwins": {
-      "volume": 1
-    },
-    "jng_intro_fs": {
-      "volume": 1
-    },
-    "sfx_anticipation": {
-      "volume": 1
-    },
-    "sfx_anticipation_start": {
-      "volume": 1
-    },
-    "sfx_bigwin_coinloop": {
-      "volume": 1
-    },
-    "sfx_btn_general": {
-      "volume": 1
-    },
-    "sfx_btn_spin": {
-      "volume": 1
-    },
-    "sfx_fs_respins": {
-      "volume": 1
-    },
-    "sfx_multiplier_combine_a": {
-      "volume": 1
-    },
-    "sfx_multiplier_combine_b": {
-      "volume": 1
-    },
-    "sfx_multiplier_explosion_a": {
-      "volume": 1
-    },
-    "sfx_multiplier_explosion_b": {
-      "volume": 1
-    },
-    "sfx_multiplier_explosion_c": {
-      "volume": 1
-    },
-    "sfx_multiplier_landing": {
-      "volume": 1
-    },
-    "sfx_multiplier_reset": {
-      "volume": 1
-    },
-    "sfx_multiplier_up": {
-      "volume": 1
-    },
-    "sfx_multiplier_update": {
-      "volume": 1
-    },
-    "sfx_multiplier_win": {
-      "volume": 1
-    },
-    "sfx_reel_stop_1": {
-      "volume": 1
-    },
-    "sfx_reel_stop_2": {
-      "volume": 1
-    },
-    "sfx_reel_stop_3": {
-      "volume": 1
-    },
-    "sfx_reel_stop_4": {
-      "volume": 1
-    },
-    "sfx_reel_stop_5": {
-      "volume": 1
-    },
-    "sfx_royals_landing": {
-      "volume": 1
-    },
-    "sfx_scatter_reveal": {
-      "volume": 1
-    },
-    "sfx_scatter_stop_1": {
-      "volume": 1
-    },
-    "sfx_scatter_stop_2": {
-      "volume": 1
-    },
-    "sfx_scatter_stop_3": {
-      "volume": 1
-    },
-    "sfx_scatter_stop_4": {
-      "volume": 1
-    },
-    "sfx_scatter_stop_5": {
-      "volume": 1
-    },
-    "sfx_scatter_win": {
-      "volume": 1
-    },
-    "sfx_scatter_win_v2": {
-      "volume": 1
-    },
-    "sfx_superfreespin": {
-      "volume": 1
-    },
-    "sfx_symbols_landing": {
-      "volume": 1
-    },
-    "sfx_wild_explode": {
-      "volume": 1
-    },
-    "sfx_winlevel_end": {
-      "volume": 1
-    },
-    "sfx_winlevel_nice": {
-      "volume": 1
-    },
-    "sfx_winlevel_small": {
-      "volume": 1
-    },
-    "sfx_winlevel_standard": {
-      "volume": 1
-    },
-    "sfx_winlevel_substantial": {
-      "volume": 1
-    },
-    "sfx_youwon_panel": {
-      "volume": 1
-    },
-    "tumble_win_1": {
-      "volume": 1
-    },
-    "tumble_win_2": {
-      "volume": 1
-    },
-    "tumble_win_3": {
-      "volume": 1
-    },
-    "tumble_win_4": {
-      "volume": 1
-    }
-  }
+﻿{
+    "config":  {
+                   "sfx_btn_general":  {
+                                           "volume":  1
+                                       },
+                   "sfx_win_panel":  {
+                                         "volume":  1
+                                     },
+                   "sfx_win":  {
+                                   "volume":  1
+                               },
+                   "sfx_anticipation":  {
+                                            "volume":  1
+                                        },
+                   "duel":  {
+                                "volume":  1
+                            },
+                   "cowboywins":  {
+                                      "volume":  1
+                                  },
+                   "bgm_freespin":  {
+                                        "volume":  1
+                                    },
+                   "sfx_bigwin_coinloop":  {
+                                               "volume":  1
+                                           },
+                   "bgm-main":  {
+                                    "volume":  1
+                                },
+                   "indianwins":  {
+                                      "volume":  1
+                                  },
+                   "sfx_freespin":  {
+                                        "volume":  1
+                                    },
+                   "sfx_tumble":  {
+                                      "volume":  1
+                                  },
+                   "jng_intro_fs":  {
+                                        "volume":  1
+                                    },
+                   "sfx_combine":  {
+                                       "volume":  1
+                                   },
+                   "sfx_scatter_win":  {
+                                           "volume":  1
+                                       },
+                   "sfx_multiplier_up":  {
+                                             "volume":  1
+                                         },
+                   "sfx_btn_spin":  {
+                                        "volume":  1
+                                    },
+                   "sfx_multiplier_change":  {
+                                                 "volume":  1
+                                             },
+                   "sfx_multiplier_land":  {
+                                               "volume":  1
+                                           },
+                   "sfx_reel_stop":  {
+                                         "volume":  1
+                                     },
+                   "sfx_duel_win":  {
+                                        "volume":  1
+                                    },
+                   "sfx_wild_explode":  {
+                                            "volume":  1
+                                        },
+                   "bgm_main":  {
+                                    "volume":  1
+                                },
+                   "sfx_win_end":  {
+                                       "volume":  1
+                                   },
+                   "sfx_explosion":  {
+                                         "volume":  1
+                                     }
+               },
+    "sprite":  {
+                   "sfx_btn_general":  [
+                                           484000,
+                                           150,
+                                           false
+                                       ],
+                   "sfx_win_panel":  [
+                                         560000,
+                                         2256,
+                                         false
+                                     ],
+                   "sfx_win":  [
+                                   564000,
+                                   7776,
+                                   false
+                               ],
+                   "sfx_anticipation":  [
+                                            467000,
+                                            8112,
+                                            false
+                                        ],
+                   "duel":  [
+                                440000,
+                                7872,
+                                false
+                            ],
+                   "cowboywins":  [
+                                      433000,
+                                      5040,
+                                      false
+                                  ],
+                   "bgm_freespin":  [
+                                        0,
+                                        120686,
+                                        false
+                                    ],
+                   "sfx_bigwin_coinloop":  [
+                                               477000,
+                                               5040,
+                                               false
+                                           ],
+                   "bgm-main":  [
+                                    361000,
+                                    70170,
+                                    false
+                                ],
+                   "indianwins":  [
+                                      449000,
+                                      1097,
+                                      false
+                                  ],
+                   "sfx_freespin":  [
+                                        509000,
+                                        13584,
+                                        false
+                                    ],
+                   "sfx_tumble":  [
+                                      542000,
+                                      2194,
+                                      false
+                                  ],
+                   "jng_intro_fs":  [
+                                        452000,
+                                        13584,
+                                        false
+                                    ],
+                   "sfx_combine":  [
+                                       488000,
+                                       1698,
+                                       false
+                                   ],
+                   "sfx_scatter_win":  [
+                                           536000,
+                                           4320,
+                                           false
+                                       ],
+                   "sfx_multiplier_up":  [
+                                             532000,
+                                             313,
+                                             false
+                                         ],
+                   "sfx_btn_spin":  [
+                                        486000,
+                                        459,
+                                        false
+                                    ],
+                   "sfx_multiplier_change":  [
+                                                 524000,
+                                                 313,
+                                                 false
+                                             ],
+                   "sfx_multiplier_land":  [
+                                               526000,
+                                               4544,
+                                               false
+                                           ],
+                   "sfx_reel_stop":  [
+                                         534000,
+                                         459,
+                                         false
+                                     ],
+                   "sfx_duel_win":  [
+                                        491000,
+                                        7872,
+                                        false
+                                    ],
+                   "sfx_wild_explode":  [
+                                            546000,
+                                            7576,
+                                            false
+                                        ],
+                   "bgm_main":  [
+                                    122000,
+                                    237166,
+                                    false
+                                ],
+                   "sfx_win_end":  [
+                                       555000,
+                                       3082,
+                                       false
+                                   ],
+                   "sfx_explosion":  [
+                                         500000,
+                                         7576,
+                                         false
+                                     ]
+               },
+    "src":  [
+                "./assets/audio/sounds.mp3",
+                "./assets/audio/sounds.m4a",
+                "./assets/audio/sounds.ogg",
+                "./assets/audio/sounds.ac3"
+            ]
 }

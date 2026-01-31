@@ -117,7 +117,7 @@
 
 	const playVSAnimation = async () => {
 		showVSAnimation = true;
-		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_multiplier_explosion_a' });
+		context.eventEmitter?.broadcast({ type: 'soundOnce', name: 'sfx_explosion' });
 		await waitForTimeout(VS_ANIMATION_DURATION / stateBetDerived.timeScale());
 		showVSAnimation = false;
 	};
