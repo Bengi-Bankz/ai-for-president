@@ -844,11 +844,80 @@ export const SYMBOL_INFO_MAP = {
 		win: mWin,
 		land: m10Static,
 	},
-	M_TAKEN_2: backgroundLow,
-	M_TAKEN_4: backgroundLow,
-	M_TAKEN_5: backgroundMid,
-	M_TAKEN_7: backgroundMid,
-	M_TAKEN_10: backgroundHigh,
+	// M_TAKEN symbols - these are multiplier symbols after being "taken" in a duel
+	// They need all the same states as regular M symbols
+	M_TAKEN_2: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_4: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_5: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_7: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_10: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_15: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_25: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_50: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
+	M_TAKEN_100: {
+		explosion,
+		postWinStatic: m10Static,
+		static: m10Static,
+		spin: m10Static,
+		win: mWin,
+		land: m10Static,
+	},
 } as const;
 
 export const MULTIPLIER_BACKGROUND_INFO_MAP = {
@@ -857,7 +926,10 @@ export const MULTIPLIER_BACKGROUND_INFO_MAP = {
 	M_5: backgroundMid,
 	M_7: backgroundMid,
 	M_10: backgroundHigh,
-	M_15: backgroundHigh, // Use high background for debug
+	M_15: backgroundHigh,
+	M_25: backgroundHigh,
+	M_50: backgroundHigh,
+	M_100: backgroundHigh,
 };
 
 export const SCATTER_LAND_SOUND_MAP = {
