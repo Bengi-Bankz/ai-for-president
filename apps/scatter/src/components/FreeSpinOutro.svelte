@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { Sprite, BitmapText } from 'pixi-svelte';
+	import { Sprite } from 'pixi-svelte';
 	import { FadeContainer, WinCountUpProvider, ResponsiveBitmapText } from 'components-pixi';
 	import { bookEventAmountToCurrencyString } from 'utils-shared/amount';
 	import { waitForResolve } from 'utils-shared/wait';
@@ -55,41 +55,30 @@
 
 				<FreeSpinAnimation>
 					{#snippet children({ sizes })}
-						<!-- Grenade mug shot sprite with sign - sized to fill board -->
+						<!-- Wanted poster - 1024x1024 square, fit to container maintaining aspect ratio -->
+						{@const posterSize = Math.min(sizes.width, sizes.height) * 1.1}
 						<Sprite
-							anchor={{ x: 0.15, y: 0 }}
-							width={sizes.width*1.5}
-							height={sizes.height*1.5}
-							key="trashcan2"
+							key="fs_outro.png"
+							anchor={{ x: 0.5, y: 0.5 }}
+							x={sizes.width * 0.5}
+							y={sizes.height * 0.5}
+							width={posterSize}
+							height={posterSize}
 						/>
 
-						<!-- Winning amount text on the sign (same positioning as intro) -->
+						<!-- Winning amount - positioned in the box below "YOU WON" (roughly 75% down the poster) -->
 						<ResponsiveBitmapText
 							anchor={{ x: 0.5, y: 0.5 }}
 							x={sizes.width * 0.5}
-							y={sizes.height * 0.5 + sizes.width * 0.206}
+							y={sizes.height * 0.5 + posterSize * 0.35}
 							style={{
 								fontFamily: 'MildEast',
-								fontSize: sizes.width * 0.12,
+								fontSize: posterSize * 0.12,
 								fontWeight: 'bold',
 							}}
-							tint={0xff0000}
+							tint={0x000000}
 							text={bookEventAmountToCurrencyString(countUpAmount)}
-							maxWidth={sizes.width * 0.5}
-						/>
-
-						<!-- "YOU WON" text below the amount -->
-						<BitmapText
-							anchor={{ x: 0.5, y: 0.5 }}
-							x={sizes.width * 0.5}
-							y={sizes.height * 0.5 + sizes.width * 0.206 + sizes.width * 0.14}
-							text="YOU WON"
-							style={{
-								fontFamily: 'MildEast',
-								fontSize: sizes.width * 0.05,
-								fontWeight: 'bold',
-							}}
-							tint={0xff0000}
+							maxWidth={posterSize * 0.55}
 						/>
 					{/snippet}
 				</FreeSpinAnimation>

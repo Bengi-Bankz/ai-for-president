@@ -269,6 +269,16 @@ export default {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/trashcan/trashcan2.png', import.meta.url).href,
 	},
+	fsPosterIntro: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/fs_in_out/fs_intro.png.json', import.meta.url).href,
+		preload: true,
+	},
+	fsPosterOutro: {
+		type: 'sprites',
+		src: new URL('../../assets/sprites/fs_in_out/fs_outro.png.json', import.meta.url).href,
+		preload: true,
+	},
 	play01: {
 		type: 'sprite',
 		src: new URL('../../assets/fonts/play01/play01.png', import.meta.url).href,

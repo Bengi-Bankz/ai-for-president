@@ -44,58 +44,30 @@
 
 	<FreeSpinAnimation>
 		{#snippet children({ sizes })}
-				<!-- Grenade mug shot sprite with sign - sized to fill board -->
-				   <Sprite
-					   texture="/assets/fonts/trashcan/trashcan.png"
-					   anchor={{ x: 0.5, y: 0.5 }}
-					   x={sizes.width * 0.5}
-					   y={sizes.height * 0.5}
-					   width={sizes.width * 1.2}
-					   height={sizes.width * 1.2}
-					   key="trashcan"
-				   />
+				<!-- Wanted poster - 1024x1024 square, fit to container maintaining aspect ratio -->
+				{@const posterSize = Math.min(sizes.width, sizes.height) * 1.1}
+				<Sprite
+					key="fs_intro.png"
+					anchor={{ x: 0.5, y: 0.5 }}
+					x={sizes.width * 0.5}
+					y={sizes.height * 0.5}
+					width={posterSize}
+					height={posterSize}
+				/>
 
-				<!-- Text on the sign (centered horizontally, positioned on sign vertically) -->
-					<BitmapText
-						anchor={{ x: 0.5, y: 0.5 }}
-						x={sizes.width * 0.5}
-						y={sizes.height * 0.38}
-						text={freeSpinsFromEvent}
-						style={{
-							fontFamily: 'MildEast',
-							fontSize: sizes.width * 0.09,
-							fontWeight: 'bold',
-						}}
-						tint={0xffefe}
-					/>
-
-				<!-- "FREE" text below the number -->
-					<BitmapText
-						anchor={{ x: 0.5, y: 0.5 }}
-						x={sizes.width * 0.5}
-						y={sizes.height * 0.38 + sizes.width * 0.07}
-						text="FREE"
-						style={{
-							fontFamily: 'MildEast',
-							fontSize: sizes.width * 0.06,
-							fontWeight: 'bold',
-						}}
-						tint={0xff0000}
-					/>
-
-				<!-- "SPINS" text below FREE -->
-					<BitmapText
-						anchor={{ x: 0.5, y: 0.5 }}
-						x={sizes.width * 0.5}
-						y={sizes.height * 0.38 + sizes.width * 0.13}
-						text="SPINS"
-						style={{
-							fontFamily: 'MildEast',
-							fontSize: sizes.width * 0.06,
-							fontWeight: 'bold',
-						}}
-						tint={0xff0000}
-					/>
+				<!-- Number of spins - positioned in the box below "SPINS AWARDED" (roughly 75% down the poster) -->
+				<BitmapText
+					anchor={{ x: 0.5, y: 0.5 }}
+					x={sizes.width * 0.5}
+					y={sizes.height * 0.5 + posterSize * 0.35}
+					text={freeSpinsFromEvent}
+					style={{
+						fontFamily: 'MildEast',
+						fontSize: posterSize * 0.15,
+						fontWeight: 'bold',
+					}}
+					tint={0x000000}
+				/>
 		{/snippet}
 	</FreeSpinAnimation>
 
