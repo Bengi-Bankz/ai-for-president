@@ -212,6 +212,8 @@
 								<span class="multiplier-badge">5×</span>
 								<span class="multiplier-badge">7×</span>
 								<span class="multiplier-badge">10×</span>
+								<span class="multiplier-badge">15×</span>
+								<span class="multiplier-badge">25×</span>
 								<span class="multiplier-badge">50×</span>
 								<span class="multiplier-badge">100×</span>
 							</div>
@@ -261,11 +263,11 @@
 					</section>
 
 					<section>
-						<h3>💰 Buy Bonus</h3>
+						<h3>💰 Get Bonus</h3>
 						<div class="feature-box">
 							<p>
-								Can't wait for the action? Purchase instant access to <span class="highlight">Warlord VS Spins</span>
-								for <span class="multiplier">200× your bet</span>!
+								Can't wait for the action? Instantly trigger <span class="highlight">Warlord VS Spins</span>
+								for <span class="multiplier">200× your play</span>!
 							</p>
 							<p>
 								Jump straight into the heat of battle with guaranteed free spins and
@@ -278,7 +280,7 @@
 						<h3>🏆 Maximum Win</h3>
 						<div class="feature-box">
 							<p>
-								The maximum possible win is capped at <span class="multiplier">30,000×</span> your bet,
+								The maximum possible win is capped at <span class="multiplier">30,000×</span> your play,
 								achievable in both the Base Game and Warlord VS Spins through stacked multipliers!
 							</p>
 						</div>
@@ -298,7 +300,7 @@
 						<ul class="button-list">
 							<li>
 								<img src={img17} alt="Spin" />
-								<b>Spin</b> – Start a single round at your chosen bet amount.
+								<b>Spin</b> – Start a single round at your chosen play amount.
 							</li>
 							<li>
 								<img src={img12} alt="Autoplay" />
@@ -309,8 +311,8 @@
 								<b>Turbo</b> – Speed up animations for faster gameplay.
 							</li>
 							<li>
-								<img src={img13} alt="Bonus Buy" />
-								<b>Bonus</b> – Purchase instant access to Warlord VS Spins.
+								<img src={img13} alt="Bonus" />
+								<b>Bonus</b> – Instantly trigger Warlord VS Spins.
 							</li>
 							<li>
 								<img src={img16} alt="Menu" />
@@ -322,7 +324,7 @@
 					<section>
 						<h3>⚠️ Important Notice</h3>
 						<ul>
-							<li>Malfunctions void all plays and pays.</li>
+							<li>Malfunctions void all plays and wins.</li>
 							<li>
 								A stable internet connection is required. If disconnected,
 								reload the game to continue any incomplete rounds.

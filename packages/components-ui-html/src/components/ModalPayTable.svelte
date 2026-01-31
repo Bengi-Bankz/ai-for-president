@@ -56,7 +56,7 @@ The winner's multiplier is applied to your wins.
 Available in Base Game & Bonus!
 
 Possible Multipliers:
-2× · 4× · 5× · 7× · 10× · 50× · 100×`
+2× · 4× · 5× · 7× · 10× · 15× · 25× · 50× · 100×`
 							},
 							{
 								name: 'SCATTER',
@@ -105,13 +105,13 @@ Retrigger: 4 Scatters = +4 Spins`
 								payouts: { low: '2×', mid: '4×', high: '8×' }
 							},
 							{
-								name: 'SPIRIT SKULL',
-								src: h4Img,
+								name: 'BINGE BEAR SPIN',
+								src: h3_2Img,
 								payouts: { low: '1.5×', mid: '3×', high: '6×' }
 							},
 							{
-								name: 'SHERIFF SILVERTON',
-								src: h3_2Img,
+								name: 'TOMAHAWK SET',
+								src: h4Img,
 								payouts: { low: '1×', mid: '2×', high: '5×' }
 							}
 						] as symbol}
@@ -144,17 +144,17 @@ Retrigger: 4 Scatters = +4 Spins`
 
 						{#each [
 							{
-								name: 'TOMAHAWK SET',
+								name: 'ENCHANTED HEADDRESS',
 								src: l1Img,
 								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
 							},
 							{
-								name: 'ENCHANTED HEADDRESS',
+								name: 'COLT REVOLVER',
 								src: l2Img,
 								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
 							},
 							{
-								name: 'COLT REVOLVER',
+								name: 'SPIRIT SKULL',
 								src: l3Img,
 								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
 							},

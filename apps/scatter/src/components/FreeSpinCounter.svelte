@@ -17,23 +17,35 @@
 	const PANEL_KEY_DESKTOP = 'Frame_FSCounter.png';
 	const PANEL_RATIO_DESKTOP = 824 / 622;
 	const panelKey = PANEL_KEY_DESKTOP;
-	const panelWidth = $derived(SYMBOL_SIZE * 2);
+	
+	const isPortrait = $derived(context.stateLayoutDerived.layoutType() === 'portrait');
+	
+	const panelWidth = $derived(isPortrait ? SYMBOL_SIZE * 2.2 : SYMBOL_SIZE * 2);
 	const panelSizes = $derived({
 		width: panelWidth,
 		height: panelWidth / PANEL_RATIO_DESKTOP,
 	});
-	const scale = 1;
-	const position = $derived({
-		x:
-			context.stateGameDerived.boardLayout().x -
-			context.stateGameDerived.boardLayout().width * 0.5 -
-			panelSizes.width -
-			SYMBOL_SIZE * 0.7 +
-			25,
-		y:
-			context.stateGameDerived.boardLayout().y -
-			context.stateGameDerived.boardLayout().height * 0.5 + SYMBOL_SIZE * 1.5, // Lowered by 1.5 symbol heights
-	});
+	const scale = $derived(isPortrait ? 1.2 : 1);
+	const position = $derived(
+		isPortrait
+			? {
+					// Portrait: right side, lower
+					x: context.stateLayoutDerived.mainLayoutStandard().width * 0.6 - panelSizes.width * 0.5,
+					y: 140,
+			  }
+			: {
+					// Desktop/Landscape: left of board
+					x:
+						context.stateGameDerived.boardLayout().x -
+						context.stateGameDerived.boardLayout().width * 0.5 -
+						panelSizes.width -
+						SYMBOL_SIZE * 0.7 +
+						25,
+					y:
+						context.stateGameDerived.boardLayout().y -
+						context.stateGameDerived.boardLayout().height * 0.5 + SYMBOL_SIZE * 1.5,
+			  }
+	);
 
 
 	const fontSize = SYMBOL_SIZE * 0.3;
@@ -67,7 +79,7 @@
 		<Sprite key={panelKey} {...panelSizes} />
 		<Container
 			x={panelSizes.width * 0.5}
-			y={panelSizes.height * 0.32}
+			y={isFreeSpins ? panelSizes.height * 0.42 : panelSizes.height * 0.32}
 			pivot={anchorToPivot({
 				sizes: textContainerSizes,
 				anchor: { x: 0.5, y: 0.5 },
@@ -81,7 +93,7 @@
 						fontSize,
 						wordWrap: false,
 					}}
-					tint={0xff0000}
+					tint={0xff6600}
 					onresize={(sizes) => (titleSizes = sizes)}
 				/>
 				<BitmapText
@@ -92,6 +104,7 @@
 						fontFamily: 'MildEast',
 						fontSize,
 					}}
+					tint={0x89CFF0}
 				/>
 			{:else}
 				<BitmapText
@@ -101,7 +114,7 @@
 						fontSize,
 						wordWrap: false,
 					}}
-					tint={0xff0000}
+					tint={0xff6600}
 					onresize={(sizes) => (titleSizes = sizes)}
 				/>
 				<BitmapText
@@ -112,7 +125,7 @@
 						fontFamily: 'MildEast',
 						fontSize,
 					}}
-					tint={0xff0000}
+					tint={0xff6600}
 					onresize={(sizes) => (counterSizes = sizes)}
 				/>
 			{/if}

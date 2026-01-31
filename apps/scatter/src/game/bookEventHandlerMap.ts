@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { recordBookEvent, checkIsMultipleRevealEvents, type BookEventHandlerMap } from 'utils-book';
-import { stateBet } from 'state-shared';
+import { stateBet, stateUi } from 'state-shared';
 import { addEntry as addGameHistoryEntry } from 'components-ui-html';
 
 import { eventEmitter } from './eventEmitter';
@@ -116,6 +116,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 			multiplier: 1, // resets when multiplier === 1
 		});
 		eventEmitter.broadcast({ type: 'freeSpinCounterShow' });
+		stateUi.freeSpinCounterShow = true;
 		eventEmitter.broadcast({
 			type: 'freeSpinCounterUpdate',
 			current: undefined,
@@ -127,6 +128,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 	},
 	updateFreeSpin: async (bookEvent: BookEventOfType<'updateFreeSpin'>) => {
 		eventEmitter.broadcast({ type: 'freeSpinCounterShow' });
+		stateUi.freeSpinCounterShow = true;
 		eventEmitter.broadcast({
 			type: 'freeSpinCounterUpdate',
 			current: bookEvent.amount,
@@ -161,6 +163,7 @@ export const bookEventHandlerMap: BookEventHandlerMap<BookEvent, BookEventContex
 		winLevelSoundsStop();
 		eventEmitter.broadcast({ type: 'freeSpinOutroHide' });
 		eventEmitter.broadcast({ type: 'freeSpinCounterHide' });
+		stateUi.freeSpinCounterShow = false;
 		eventEmitter.broadcast({ type: 'globalMultiplierHide' });
 		eventEmitter.broadcast({ type: 'tumbleWinAmountHide' });
 		await eventEmitter.broadcastAsync({ type: 'transition' });

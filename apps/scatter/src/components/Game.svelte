@@ -269,8 +269,8 @@ import { onMount } from 'svelte';
       </UI>
       <Win />
       <FreeSpinIntro />
+      <FreeSpinCounter />
       {#if ['desktop', 'landscape'].includes(context.stateLayoutDerived.layoutType())}
-        <FreeSpinCounter />
         <CharacterDisplay />
       {/if}
       <FreeSpinOutro />

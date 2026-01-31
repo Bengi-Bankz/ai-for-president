@@ -105,29 +105,21 @@
 </MainContainer>
 
 <MainContainer standard alignVertical="bottom">
-	{#if stateUi.freeSpinCounterShow}
+	{#if !stateUi.freeSpinCounterShow}
 		<Container
-			x={context.stateLayoutDerived.mainLayoutStandard().width * 0.5}
-			y={context.stateLayoutDerived.mainLayoutStandard().height - 130}
+			x={context.stateLayoutDerived.mainLayoutStandard().width * 0.96 }
+			y={context.stateLayoutDerived.mainLayoutStandard().height - 105}
+			scale={0.45}  
 		>
-			<LabelFreeSpinCounter stacked />
+			{@render props.buttonDecrease({ anchor: 0.5 })}
 		</Container>
-	{:else}
 
-<Container
-    x={context.stateLayoutDerived.mainLayoutStandard().width * 0.96 }
-    y={context.stateLayoutDerived.mainLayoutStandard().height - 105}
-    scale={0.45}  
->
-    {@render props.buttonDecrease({ anchor: 0.5 })}
-</Container>
-
-<Container
-    x={context.stateLayoutDerived.mainLayoutStandard().width * 0.96}
-    y={context.stateLayoutDerived.mainLayoutStandard().height - 185}
-    scale={0.45}
->
-    {@render props.buttonIncrease({ anchor: 0.5 })}
+		<Container
+			x={context.stateLayoutDerived.mainLayoutStandard().width * 0.96}
+			y={context.stateLayoutDerived.mainLayoutStandard().height - 185}
+			scale={0.45}
+		>
+			{@render props.buttonIncrease({ anchor: 0.5 })}
 </Container>
 	{/if}
 
