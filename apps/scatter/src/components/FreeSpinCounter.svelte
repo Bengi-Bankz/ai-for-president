@@ -28,7 +28,8 @@
 			context.stateGameDerived.boardLayout().x -
 			context.stateGameDerived.boardLayout().width * 0.5 -
 			panelSizes.width -
-			SYMBOL_SIZE * 0.7,
+			SYMBOL_SIZE * 0.7 +
+			25,
 		y:
 			context.stateGameDerived.boardLayout().y -
 			context.stateGameDerived.boardLayout().height * 0.5 + SYMBOL_SIZE * 1.5, // Lowered by 1.5 symbol heights
@@ -94,14 +95,25 @@
 				/>
 			{:else}
 				<BitmapText
-					text={'MAX WIN\n30,000X'}
+					text={'MAX WIN'}
+					style={{
+						fontFamily: 'MildEast',
+						fontSize,
+						wordWrap: false,
+					}}
+					tint={0xff0000}
+					onresize={(sizes) => (titleSizes = sizes)}
+				/>
+				<BitmapText
+					text={'30,000X'}
+					{...counterPosition}
 					anchor={{ x: 0.5, y: 0 }}
 					style={{
 						fontFamily: 'MildEast',
-						fontSize: fontSize * 0.9,
-						fontWeight: 'bold',
+						fontSize,
 					}}
-					tint={0xffd700}
+					tint={0xff0000}
+					onresize={(sizes) => (counterSizes = sizes)}
 				/>
 			{/if}
 		</Container>

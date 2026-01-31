@@ -6,6 +6,13 @@ import { requestBet, requestForceResult, requestEndRound } from 'rgs-requests';
 
 import type { BaseBet } from './types';
 
+// Check if running in replay mode - replay doesn't need session API calls
+const isReplayMode = (): boolean => {
+	if (typeof window === 'undefined') return false;
+	const params = new URLSearchParams(window.location.search);
+	return params.get('replay') === 'true';
+};
+
 const handleRequestBet = async ({ onError }: { onError: () => void }) => {
 	try {
 		const data = await requestBet({
@@ -40,6 +47,11 @@ const handleRequestBet = async ({ onError }: { onError: () => void }) => {
 };
 
 const handleRequestEndRound = async () => {
+	// Skip in replay mode - no active session
+	if (isReplayMode()) {
+		return;
+	}
+
 	try {
 		const data = await requestEndRound({
 			sessionID: stateUrlDerived.sessionID(),

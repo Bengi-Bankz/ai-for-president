@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isReplayMode, lastReplayGameId } from '../stores/replayState';
+	import { isReplayMode, replayComplete } from '../stores/replayState';
 
 	function watchAgain() {
 		// Reload the page to replay again
@@ -7,7 +7,7 @@
 	}
 </script>
 
-{#if $isReplayMode && $lastReplayGameId}
+{#if $isReplayMode && $replayComplete}
 	<div class="watch-again-container">
 		<button class="watch-again-button" onclick={watchAgain}>
 			🎬 Watch Again

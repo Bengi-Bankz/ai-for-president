@@ -13,9 +13,55 @@
 
 	import { isReplayMode } from '../replayMode';
 
+	// Check if running in storybook
+	const isStorybook = (): boolean => {
+		if (typeof window === 'undefined') return false;
+		// Check for storybook-specific globals or URL patterns
+		return !!(window as any).__STORYBOOK__ || 
+		       window.location.href.includes('iframe.html') ||
+		       window.location.port === '6001' ||
+		       window.location.port === '6002';
+	};
+
+	// Helper to get URL search params for replay mode
+	const getReplayUrlParam = (key: string): string | null => {
+		if (typeof window === 'undefined') return null;
+		return new URLSearchParams(window.location.search).get(key);
+	};
+
+	const initializeReplayMode = () => {
+		// Set up state from URL parameters for replay mode
+		const currency = getReplayUrlParam('currency');
+		const amount = getReplayUrlParam('amount');
+		const mode = getReplayUrlParam('mode');
+
+		if (currency) {
+			stateBet.currency = currency;
+		}
+		if (amount) {
+			const amountNum = Number(amount);
+			if (!isNaN(amountNum)) {
+				stateBet.betAmount = amountNum;
+				stateBet.wageredBetAmount = amountNum;
+			}
+		}
+		if (mode) {
+			stateBet.activeBetModeKey = mode;
+		}
+
+		// In replay mode, set a fake balance so UI doesn't show 0
+		// The actual bet cost will come from the replay data
+		stateBet.balanceAmount = 1000000;
+	};
+
 	const authenticate = async () => {
 		if (isReplayMode()) {
-			// In replay mode, skip authentication/session logic
+			// In replay mode, skip session authentication but initialize state from URL
+			initializeReplayMode();
+			return;
+		}
+		if (isStorybook()) {
+			// In storybook mode, skip authentication entirely
 			return;
 		}
 		try {

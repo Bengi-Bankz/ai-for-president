@@ -4,12 +4,24 @@ import { requestEndEvent } from 'rgs-requests';
 
 import type { BaseBookEvent } from './types';
 
+// Check if running in replay mode - replay doesn't need session API calls
+const isReplayMode = (): boolean => {
+	if (typeof window === 'undefined') return false;
+	const params = new URLSearchParams(window.location.search);
+	return params.get('replay') === 'true';
+};
+
 export function recordBookEvent<TBookEvent extends BaseBookEvent>({
 	bookEvent,
 }: {
 	bookEvent: TBookEvent;
 }) {
 	try {
+		// Skip in replay mode - no active session
+		if (isReplayMode()) {
+			return;
+		}
+
 		if (PUBLIC_CHROMATIC) {
 			console.log('storybook mock request end-event:', bookEvent.index, bookEvent.type);
 			return;

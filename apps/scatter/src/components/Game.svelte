@@ -37,21 +37,33 @@ import { onMount } from 'svelte';
 
 	import { scatterLandedThisRound } from '../stores/scatterLandedThisRound';
 	import { onDestroy } from 'svelte';
-	import ReplayIndicator from './ReplayIndicator.svelte';
 	import WatchAgain from './WatchAgain.svelte';
 	import ReplayLoadingScreen from './ReplayLoadingScreen.svelte';
-	import ReplayButton from './ReplayButton.svelte';
+	import ReplayCorner from './ReplayCorner.svelte';
 
 	import { getReplayParams, type ReplayParams } from '../game/utils-replay';
 	import { requestReplay } from 'rgs-requests';
-	import { setContext as setSvelteContext } from 'svelte';
-	import { isReplayMode, replayLoading, replayError, replayData, replayReady } from '../stores/replayState';
+	import { setContext as setSvelteContext, getContext as getSvelteContext } from 'svelte';
+	import { isReplayMode, replayLoading, replayError, replayData, replayReady, replayAwaitingStart, replayPlaying, replayComplete } from '../stores/replayState';
 
 	const context = getContext();
 
-	// Detect replay mode and parse params
-	const replayParams: ReplayParams = getReplayParams();
-	setSvelteContext('replay', replayParams);
+	// Check if replay params were set by parent (e.g., storybook wrapper)
+	// If not, read from URL params
+	let replayParams: ReplayParams;
+	try {
+		const existingParams = getSvelteContext<ReplayParams>('replay');
+		if (existingParams && existingParams.isReplayMode) {
+			replayParams = existingParams;
+			console.log('[Replay] Using params from context:', replayParams);
+		} else {
+			replayParams = getReplayParams();
+			setSvelteContext('replay', replayParams);
+		}
+	} catch {
+		replayParams = getReplayParams();
+		setSvelteContext('replay', replayParams);
+	}
 
 	let loadingMode: 'intro' | 'default' = 'intro';
 
@@ -61,6 +73,26 @@ import { onMount } from 'svelte';
 
 	import { playBet } from '../game/utils';
 	import type { Bet } from '../game/typesBookEvent';
+
+	// Function to start playing the replay (called when Play button is clicked)
+	async function startReplay() {
+		const data = $replayData;
+		if (data && data.state) {
+			console.log('[Replay] Starting replay playback...');
+			replayPlaying.set(true);
+			replayAwaitingStart.set(false);
+
+			try {
+				await playBet(data as Bet);
+				console.log('[Replay] Replay playback complete');
+				replayPlaying.set(false);
+				replayComplete.set(true);
+			} catch (err) {
+				console.error('[Replay] Error during replay playback:', err);
+				replayPlaying.set(false);
+			}
+		}
+	}
 
 	onMount(async () => {
 		const hasSeenIntro =
@@ -72,6 +104,8 @@ import { onMount } from 'svelte';
 		if (replayParams.isReplayMode && replayParams.rgs_url && replayParams.game && replayParams.version && replayParams.mode && replayParams.event) {
 			replayLoading.set(true);
 			replayError.set(null);
+			isReplayMode.set(true);
+
 			try {
 				console.log('[Replay] Fetching replay data from RGS...');
 				const data = await requestReplay({
@@ -85,14 +119,12 @@ import { onMount } from 'svelte';
 				replayData.set(data);
 				replayReady.set(true);
 				replayLoading.set(false);
-				
-				// Skip normal loading screen for replay
+
+				// Skip normal loading screen for replay - the ReplayLoadingScreen handles it
 				context.stateLayout.showLoadingScreen = false;
-				
-				// Play the replay using the fetched data
-				if (data && data.state) {
-					await playBet(data as Bet);
-				}
+
+				// DON'T auto-play - wait for the Play button to be clicked
+				// The ReplayLoadingScreen will show the loader, then the Play button
 			} catch (err) {
 				console.error('[Replay] Failed to load replay data:', err);
 				replayError.set(err instanceof Error ? err.message : 'Failed to load replay data');
@@ -253,7 +285,6 @@ import { onMount } from 'svelte';
     <GameVersion version="0.0.0" />
   {/snippet}
 </Modals>
-<ReplayIndicator />
 <WatchAgain />
-<ReplayLoadingScreen />
-<ReplayButton />
+<ReplayLoadingScreen onPlay={startReplay} />
+<ReplayCorner />
