@@ -42,11 +42,13 @@
 
 	// Duel display sizing
 	const DUEL_SCALE = 1.8;
-	const CHARACTER_WIDTH = SYMBOL_SIZE * 1.0;
-	const CHARACTER_HEIGHT = SYMBOL_SIZE * 1.2;
+	const CHARACTER_WIDTH = SYMBOL_SIZE * 1.5;
+	const CHARACTER_HEIGHT = SYMBOL_SIZE * 1.8;
 	const CHARACTER_SPACING = SYMBOL_SIZE * 2.2;
 	const MULTIPLIER_SIZE = SYMBOL_SIZE * 1.0;
-	const MULTIPLIER_OFFSET_Y = SYMBOL_SIZE * 0.9;
+	const MULTIPLIER_OFFSET_Y = -SYMBOL_SIZE * 0.6; // Numbers above (negative Y)
+	const ANIMATION_OFFSET_Y = SYMBOL_SIZE * 0.5; // Animations below (positive Y)
+	const OVERALL_OFFSET_Y = SYMBOL_SIZE * 0.4; // Push everything down a bit
 	const BG_WIDTH = SYMBOL_SIZE * 4.5;
 	const BG_HEIGHT = SYMBOL_SIZE * 1.8;
 
@@ -182,30 +184,18 @@
 	<Container>
 		<!-- VS Animation Phase -->
 		{#if phase === 'vs-reveal' && showVSAnimation}
-			<Container x={centerX} y={centerY} scale={DUEL_SCALE}>
+			<Container x={centerX} y={centerY + OVERALL_OFFSET_Y} scale={DUEL_SCALE}>
 				<!-- Background -->
 				<Sprite
 					key="duelbg.png"
 					anchor={{ x: 0.5, y: 0.5 }}
 					x={0}
-					y={MULTIPLIER_OFFSET_Y}
+					y={0}
 					width={BG_WIDTH}
 					height={BG_HEIGHT}
 				/>
 
-				<!-- Duel Animation -->
-				<DuelAnimation
-					winner={leftWins ? 'cowboy' : 'indian'}
-					x={0}
-					y={0}
-					width={CHARACTER_WIDTH}
-					height={CHARACTER_HEIGHT}
-					spacing={CHARACTER_SPACING}
-					fps={24}
-					playSound={true}
-				/>
-
-				<!-- Left multiplier (blue/cowboy) -->
+				<!-- Left multiplier (blue/cowboy) - now on top -->
 				<MultiplierNumber
 					multiplier={grenadeMultiplier}
 					color="blue"
@@ -216,7 +206,7 @@
 					anchor={{ x: 0.5, y: 0.5 }}
 				/>
 
-				<!-- Right multiplier (red/indian) -->
+				<!-- Right multiplier (red/indian) - now on top -->
 				<MultiplierNumber
 					multiplier={copMultiplier}
 					color="red"
@@ -225,6 +215,18 @@
 					width={MULTIPLIER_SIZE}
 					height={MULTIPLIER_SIZE}
 					anchor={{ x: 0.5, y: 0.5 }}
+				/>
+
+				<!-- Duel Animation - now below -->
+				<DuelAnimation
+					winner={leftWins ? 'cowboy' : 'indian'}
+					x={0}
+					y={ANIMATION_OFFSET_Y}
+					width={CHARACTER_WIDTH}
+					height={CHARACTER_HEIGHT}
+					spacing={CHARACTER_SPACING}
+					fps={24}
+					playSound={true}
 				/>
 			</Container>
 		{/if}
