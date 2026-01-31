@@ -18,14 +18,24 @@
 	};
 
 	const props: Props = $props();
+	
+	// Check if in replay mode - hide betting/interactive modals
+	const isReplayMode = (): boolean => {
+		if (typeof window === 'undefined') return false;
+		return new URLSearchParams(window.location.search).get('replay') === 'true';
+	};
+	
+	const replay = isReplayMode();
 </script>
 
 <ModalError />
-<ModalBetMenu />
-<ModalBuyBonus />
-<ModalBuyBonusConfirm />
-<ModalAutoSpin />
-<ModalAutoSpinMessage />
+{#if !replay}
+	<ModalBetMenu />
+	<ModalBuyBonus />
+	<ModalBuyBonusConfirm />
+	<ModalAutoSpin />
+	<ModalAutoSpinMessage />
+{/if}
 <!-- <ModalForceResult /> -->
 <ModalPayTable>
 	{@render props.version()}
@@ -34,7 +44,9 @@
 	{@render props.version()}
 </ModalGameRules>
 <ModalSettings />
-<ModalGameHistory>
-	{@render props.version()}
-</ModalGameHistory>
+{#if !replay}
+	<ModalGameHistory>
+		{@render props.version()}
+	</ModalGameHistory>
+{/if}
 

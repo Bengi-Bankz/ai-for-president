@@ -35,6 +35,14 @@
 
 	const { stateLayoutDerived } = getContextLayout();
 
+	// Check if in replay mode - hide betting/interactive buttons
+	const isReplayMode = (): boolean => {
+		if (typeof window === 'undefined') return false;
+		return new URLSearchParams(window.location.search).get('replay') === 'true';
+	};
+	
+	const replay = isReplayMode();
+
 	const LAYOUT_COMPONENT_MAP = {
 		desktop: LayoutDesktop,
 		portrait: LayoutPortrait,
@@ -45,7 +53,9 @@
 	const LayoutComponent = $derived(LAYOUT_COMPONENT_MAP[stateLayoutDerived.layoutType()]);
 </script>
 
-<EnableSpaceHold />
+{#if !replay}
+	<EnableSpaceHold />
+{/if}
 
 <UiFadeContainer>
 	<LayoutComponent>
@@ -58,7 +68,9 @@
 		{/snippet}
 
 		{#snippet amountBalance(labelProps)}
-			<LabelBalance {...labelProps} />
+			{#if !replay}
+				<LabelBalance {...labelProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet amountWin(labelProps)}
@@ -66,15 +78,21 @@
 		{/snippet}
 
 		{#snippet amountBet(labelProps)}
-			<LabelBet {...labelProps} />
+			{#if !replay}
+				<LabelBet {...labelProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonBuyBonus(buttonProps)}
-			<ButtonBuyBonus {...buttonProps} />
+			{#if !replay}
+				<ButtonBuyBonus {...buttonProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonBet(buttonProps)}
-			<ButtonBet {...buttonProps} />
+			{#if !replay}
+				<ButtonBet {...buttonProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonTurbo(buttonProps)}
@@ -82,15 +100,21 @@
 		{/snippet}
 
 		{#snippet buttonAutoSpin(buttonProps)}
-			<ButtonAutoSpin {...buttonProps} />
+			{#if !replay}
+				<ButtonAutoSpin {...buttonProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonIncrease(buttonProps)}
-			<ButtonIncrease {...buttonProps} />
+			{#if !replay}
+				<ButtonIncrease {...buttonProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonDecrease(buttonProps)}
-			<ButtonDecrease {...buttonProps} />
+			{#if !replay}
+				<ButtonDecrease {...buttonProps} />
+			{/if}
 		{/snippet}
 
 		{#snippet buttonMenu(buttonProps)}
