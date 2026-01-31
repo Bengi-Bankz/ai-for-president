@@ -14,14 +14,14 @@ const DEFAULT_BET_MODE_META = {
 		},
 		text: {
 			title: 'BASE GAME',
-			dialog: 'Standard gameplay with natural scatter triggers.',
+			dialog: 'Standard gameplay with VS Duels and natural scatter triggers.',
 			button: 'SPIN',
 			betAmountLabel: '',
 			tickerIdle: 'PLACE YOUR BET',
 			tickerSpin: 'SPINNING...',
 			bannerText: '',
 		},
-		maxWin: 8888,
+		maxWin: 30000,
 	},
 
 	BONUS: {
@@ -42,16 +42,16 @@ const DEFAULT_BET_MODE_META = {
 				'https://test-fart-cdn-bucket.s3.ap-southeast-2.amazonaws.com/1_8_97/betModes/button_buy.webp',
 		},
 		text: {
-			title: "BONUS BANG' SPINS",
+			title: 'WARLORD VS SPINS',
 			dialog:
-				'Triggers FREE SPINS with 4 GUARANTEED SCATTERS for 100x the purchase amount. The Global Multiplier can reach up to 64x and remains active for the duration of each spin.',
-			description: '4 guaranteed scatter symbols for free spins.',
-			button: 'BUY INHALE',
+				'Triggers Warlord VS Spins with 4 GUARANTEED SCATTERS! Experience epic Cowboy vs Indian duels with multipliers up to 100×. Stack multipliers for massive wins up to 30,000×!',
+			description: '4 Scatters guaranteed.\nVS Duels with multipliers\nup to 100×!',
+			button: 'BUY NOW',
 			tickerIdle: 'PLACE YOUR BET',
-			tickerSpin: '4 SCATTER BONUS ACTIVATED',
+			tickerSpin: 'WARLORD VS SPINS ACTIVATED',
 			bannerText: '4 GUARANTEED SCATTERS',
 		},
-		maxWin: 8888,
+		maxWin: 30000,
 	},
 
 	// BONUS_5_SCATTER and BONUS_6_SCATTER disabled

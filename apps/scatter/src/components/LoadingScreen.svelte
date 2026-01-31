@@ -2,7 +2,7 @@
 import { onMount, onDestroy } from 'svelte';
 import FrameDisplay from '../framedisplay.svelte';
 	import { Container, Sprite, Text } from 'pixi-svelte';
-	import { FadeContainer, LoadingProgress } from 'components-pixi';
+	import { FadeContainer } from 'components-pixi';
 	import { MainContainer } from 'components-layout';
 
 	import { getContext } from '../game/context';
@@ -58,19 +58,6 @@ import FrameDisplay from '../framedisplay.svelte';
 			y={context.stateLayoutDerived.mainLayout().height * 0.25 - 150}
 		>
 			<FrameDisplay frameKeys={loadingFrames} assetKey="loading" width={300} height={300} loop />
-			{#if !context.stateApp.loaded}
-				<LoadingProgress y={250} width={1967 * 0.2} height={346 * 0.2}>
-					{#snippet background(sizes)}
-						<Sprite key="progressBarBackground.png" {...sizes} />
-					{/snippet}
-					{#snippet progress(sizes)}
-						<Sprite key="progressBar.png" {...sizes} />
-					{/snippet}
-					{#snippet frame(sizes)}
-						<Sprite key="progressBarFrame.png" {...sizes} />
-					{/snippet}
-				</LoadingProgress>
-			{/if}
 		</Container>
 
 		<Container

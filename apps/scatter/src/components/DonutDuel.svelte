@@ -50,7 +50,7 @@
 	const ANIMATION_OFFSET_Y = SYMBOL_SIZE * 0.5; // Animations below (positive Y)
 	const OVERALL_OFFSET_Y = SYMBOL_SIZE * 0.4; // Push everything down a bit
 	const BG_WIDTH = SYMBOL_SIZE * 4.5;
-	const BG_HEIGHT = SYMBOL_SIZE * 1.8;
+	const BG_HEIGHT = SYMBOL_SIZE * 2.4;
 
 	const getRandomMultiplier = () => {
 		const available = MULTIPLIER_VALUES.filter(v => v !== props.multiplierValue);

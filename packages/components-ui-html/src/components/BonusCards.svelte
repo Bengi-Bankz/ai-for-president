@@ -53,7 +53,7 @@
 					disabled={stateBet.betAmount <= 0 ||
 						stateBet.balanceAmount < stateBet.betAmount * betModeData.costMultiplier}
 				>
-					<span style="font-size: 1rem; font-weight: bold;">
+					<span class="button-text">
 						{props.label ?? betModeData.text.button}
 					</span>
 				</Button>
@@ -64,20 +64,28 @@
 
 <style lang="scss">
 	.title {
-		font-size: 1rem;
-		line-height: 1rem;
+		font-size: 1.1rem;
+		line-height: 1.2rem;
 		text-align: center;
 		font-family: 'Crimes Times Six', sans-serif;
+		color: #FFD700;
+		text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 1px;
 	}
 
 	.description {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 		text-align: center;
-		min-height: 4rem;
+		min-height: 3.5rem;
 		white-space: pre-line;
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		font-family: 'Crimes Times Six', sans-serif;
+		color: #E8DCC4;
+		line-height: 1.3;
 	}
 
 	.description:empty {
@@ -85,9 +93,20 @@
 	}
 
 	.price {
-		font-size: 1rem;
-		line-height: 1rem;
+		font-size: 1.2rem;
+		line-height: 1.2rem;
 		text-align: center;
 		white-space: nowrap;
+		color: #00FF00;
+		text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+		font-weight: bold;
+		font-family: 'Crimes Times Six', sans-serif;
+	}
+
+	.button-text {
+		font-size: 1rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 1px;
 	}
 </style>

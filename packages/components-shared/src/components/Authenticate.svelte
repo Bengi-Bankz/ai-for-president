@@ -41,8 +41,10 @@
 		if (amount) {
 			const amountNum = Number(amount);
 			if (!isNaN(amountNum)) {
-				stateBet.betAmount = amountNum;
-				stateBet.wageredBetAmount = amountNum;
+				// Amount in URL is in API format (1000000 = $1), convert to display format
+				const displayAmount = amountNum / API_AMOUNT_MULTIPLIER;
+				stateBet.betAmount = displayAmount;
+				stateBet.wageredBetAmount = displayAmount;
 			}
 		}
 		if (mode) {
@@ -51,7 +53,7 @@
 
 		// In replay mode, set a fake balance so UI doesn't show 0
 		// The actual bet cost will come from the replay data
-		stateBet.balanceAmount = 1000000;
+		stateBet.balanceAmount = 1000;
 	};
 
 	const authenticate = async () => {

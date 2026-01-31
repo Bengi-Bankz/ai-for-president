@@ -524,12 +524,6 @@ anticipation1: {
 		preload: true,
 	},
 
-	progressBar: {
-		type: 'sprites',
-		src: new URL('../../assets/sprites/progressBar/progressBar.webp.json', import.meta.url).href,
-		preload: true,
-	},
-
 continueButton: {
 		type: 'sprite',
 		src: new URL('../../assets/sprites/continue/continue.webp', import.meta.url)

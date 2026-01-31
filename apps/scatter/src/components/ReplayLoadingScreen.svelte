@@ -23,12 +23,16 @@
 	// Derive display values
 	const roundId = $derived(replayParams.event || 'N/A');
 	const currency = $derived(replayParams.currency || 'USD');
-	const betAmount = $derived(replayParams.amount ? parseFloat(replayParams.amount).toFixed(2) : 'N/A');
+	// Amount comes in as 6 decimal precision (1000000 = $1.00)
+	const PRECISION_DIVISOR = 1000000;
+	const betAmount = $derived(replayParams.amount ? (parseFloat(replayParams.amount) / PRECISION_DIVISOR).toFixed(2) : 'N/A');
 	const totalWin = $derived(() => {
 		const data = $replayData;
 		if (data && data.payoutMultiplier !== undefined && replayParams.amount) {
-			const bet = parseFloat(replayParams.amount);
-			const win = bet * data.payoutMultiplier;
+			// Amount is in 6 decimal precision, payoutMultiplier is a regular multiplier (3.0 = 3x)
+			const bet = parseFloat(replayParams.amount) / PRECISION_DIVISOR;
+			const multiplier = data.payoutMultiplier;
+			const win = bet * multiplier;
 			return win.toFixed(2);
 		}
 		return 'N/A';

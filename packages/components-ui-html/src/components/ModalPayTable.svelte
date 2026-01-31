@@ -32,7 +32,7 @@
 		<BaseContent maxWidth="100%">
 			<BaseScrollable type="column">
 				<div class="paytable-modal-outer">
-					<div class="paytable-modal-inner" style="position:relative;">
+					<div class="paytable-modal-inner">
 						<button
 							class="paytable-modal-close-btn"
 							onclick={() => (stateModal.modal = null)}
@@ -40,99 +40,79 @@
 							&times;
 						</button>
 
+						<h2 class="paytable-title">⚔️ AWARD TABLE ⚔️</h2>
+
+						<!-- Special Symbols Section -->
+						<div class="section-header">SPECIAL SYMBOLS</div>
+
 						{#each [
 							{
-								name: 'w',
+								name: 'VS DUEL WILD',
 								src: wildImg,
-								text: `VS DUEL
-	Triggers head-to-head duels.
-	Winning side applies multipliers:
-	2x · 4x · 5x · 7x · 10x · 15x · 25x · 50x · 100x`
+								isSpecial: true,
+								text: `Triggers head-to-head duels!
+The winner's multiplier is applied to your wins.
+
+Available in Base Game & Bonus!
+
+Possible Multipliers:
+2× · 4× · 5× · 7× · 10× · 50× · 100×`
 							},
 							{
-								name: 's',
+								name: 'SCATTER',
 								src: scatterImg,
-								text: `SCATTER
-	4 Scatters = 8 Warlord VS Spins
-	5 Scatters = 10 Warlord VS Spins
-	6 Scatters = 12 Warlord VS Spins
-	In bonus: 2 Scatters = +2 spins; 4 Scatters = +4 spins`
-							},
+								isSpecial: true,
+								text: `Triggers Warlord VS Spins!
 
-							/* ===== HIGH SYMBOLS (GRENADE BANK ROBBERS) ===== */
+4 Scatters = 8 Free Spins
+5 Scatters = 10 Free Spins
+6 Scatters = 12 Free Spins
+
+Retrigger: 2 Scatters = +2 Spins
+Retrigger: 4 Scatters = +4 Spins`
+							}
+						] as symbol}
+							<div class="paytable-section special">
+								<img
+									class="paytable-symbol-img special-img"
+									src={symbol.src}
+									alt={symbol.name}
+								/>
+								<div class="symbol-name special-name">{symbol.name}</div>
+								<div class="paytable-desc">
+									{symbol.text}
+								</div>
+							</div>
+						{/each}
+
+						<!-- High Symbols Section -->
+						<div class="section-header">HIGH VALUE SYMBOLS</div>
+
+						{#each [
 							{
-								name: 'h1',
+								name: 'SCATTER WOLF RUN',
 								src: h1Img,
-								text: `SCATTER WOLF RUN
-8–9 = 4x
-10–11 = 6x
-12+ = 12x`
+								payouts: { low: '4×', mid: '6×', high: '12×' }
 							},
 							{
-								name: 'h2',
+								name: 'CASHOUT CASSIDY',
 								src: h2Img,
-								text: `CASHOUT CASSIDY
-8–9 = 3x
-10–11 = 5x
-12+ = 10x`
+								payouts: { low: '3×', mid: '5×', high: '10×' }
 							},
 							{
-								name: 'h3',
+								name: 'RED BUFFALO BLAZE',
 								src: h3Img,
-								text: `RED BUFFALO BLAZE
-8–9 = 2x
-10–11 = 4x
-12+ = 8x`
+								payouts: { low: '2×', mid: '4×', high: '8×' }
 							},
 							{
-								name: 'h4',
+								name: 'SPIRIT SKULL',
 								src: h4Img,
-								text: `SPIRIT SKULL
-8–9 = 1.5x
-10–11 = 3x
-12+ = 6x`
+								payouts: { low: '1.5×', mid: '3×', high: '6×' }
 							},
 							{
-								name: 'h5',
+								name: 'SHERIFF SILVERTON',
 								src: h3_2Img,
-								text: `SHERIFF SILVERTON
-8–9 = 1x
-10–11 = 2x
-12+ = 5x`
-							},
-
-							/* ===== LOW SYMBOLS ===== */
-							{
-								name: 'l1',
-								src: l1Img,
-								text: `TOMAHAWK SET
-8–9 = 0.3x
-10–11 = 0.8x
-12+ = 1x`
-							},
-							{
-								name: 'l2',
-								src: l2Img,
-								text: `ENCHANTED HEADDRESS
-8–9 = 0.3x
-10–11 = 0.8x
-12+ = 1x`
-							},
-							{
-								name: 'l3',
-								src: l3Img,
-								text: `COLT REVOLVER
-8–9 = 0.3x
-10–11 = 0.8x
-12+ = 1x`
-							},
-							{
-								name: 'l4',
-								src: l4Img,
-								text: `TEEPEE TENT
-8–9 = 0.3x
-10–11 = 0.8x
-12+ = 1x`
+								payouts: { low: '1×', mid: '2×', high: '5×' }
 							}
 						] as symbol}
 							<div class="paytable-section">
@@ -141,8 +121,69 @@
 									src={symbol.src}
 									alt={symbol.name}
 								/>
-								<div class="paytable-desc" style="white-space: pre-line">
-									{symbol.text}
+								<div class="symbol-name">{symbol.name}</div>
+								<div class="payout-grid">
+									<div class="payout-item">
+										<span class="cluster-size">8-9</span>
+										<span class="payout-value">{symbol.payouts.low}</span>
+									</div>
+									<div class="payout-item">
+										<span class="cluster-size">10-11</span>
+										<span class="payout-value">{symbol.payouts.mid}</span>
+									</div>
+									<div class="payout-item">
+										<span class="cluster-size">12+</span>
+										<span class="payout-value high">{symbol.payouts.high}</span>
+									</div>
+								</div>
+							</div>
+						{/each}
+
+						<!-- Low Symbols Section -->
+						<div class="section-header">LOW VALUE SYMBOLS</div>
+
+						{#each [
+							{
+								name: 'TOMAHAWK SET',
+								src: l1Img,
+								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
+							},
+							{
+								name: 'ENCHANTED HEADDRESS',
+								src: l2Img,
+								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
+							},
+							{
+								name: 'COLT REVOLVER',
+								src: l3Img,
+								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
+							},
+							{
+								name: 'TEEPEE TENT',
+								src: l4Img,
+								payouts: { low: '0.3×', mid: '0.8×', high: '1×' }
+							}
+						] as symbol}
+							<div class="paytable-section low">
+								<img
+									class="paytable-symbol-img"
+									src={symbol.src}
+									alt={symbol.name}
+								/>
+								<div class="symbol-name">{symbol.name}</div>
+								<div class="payout-grid">
+									<div class="payout-item">
+										<span class="cluster-size">8-9</span>
+										<span class="payout-value">{symbol.payouts.low}</span>
+									</div>
+									<div class="payout-item">
+										<span class="cluster-size">10-11</span>
+										<span class="payout-value">{symbol.payouts.mid}</span>
+									</div>
+									<div class="payout-item">
+										<span class="cluster-size">12+</span>
+										<span class="payout-value">{symbol.payouts.high}</span>
+									</div>
 								</div>
 							</div>
 						{/each}
@@ -166,14 +207,21 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		background: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.7);
 		z-index: 9;
 	}
 
 	.paytable-modal-inner {
-		background: #050505;
+		background: linear-gradient(
+			180deg,
+			rgba(30, 15, 5, 0.98) 0%,
+			rgba(20, 10, 5, 0.99) 100%
+		);
+		border: 3px solid #8B4513;
 		border-radius: 18px;
-		box-shadow: 0 4px 32px #228B22;
+		box-shadow:
+			0 0 40px rgba(139, 69, 19, 0.5),
+			inset 0 0 60px rgba(0, 0, 0, 0.5);
 		max-width: 700px;
 		width: 95vw;
 		max-height: 90vh;
@@ -184,10 +232,34 @@
 		align-items: center;
 		scrollbar-width: none;
 		box-sizing: border-box;
+		position: relative;
 	}
 
 	.paytable-modal-inner::-webkit-scrollbar {
 		display: none;
+	}
+
+	.paytable-title {
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 2.2rem;
+		color: #FFD700;
+		text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+		margin-bottom: 24px;
+		text-align: center;
+	}
+
+	.section-header {
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 1.4rem;
+		color: #D2691E;
+		text-shadow: 0 0 10px rgba(210, 105, 30, 0.5);
+		margin: 24px 0 16px 0;
+		padding: 8px 24px;
+		border-bottom: 2px solid rgba(139, 69, 19, 0.6);
+		border-top: 2px solid rgba(139, 69, 19, 0.6);
+		width: 100%;
+		text-align: center;
+		background: rgba(0, 0, 0, 0.3);
 	}
 
 	.paytable-modal-close-btn {
@@ -197,42 +269,142 @@
 		background: none;
 		border: none;
 		font-size: 2.5rem;
-		color:#228B22;
+		color: #D2691E;
 		cursor: pointer;
 		z-index: 2;
-		transition: color 0.2s;
+		transition: all 0.2s;
+		text-shadow: 0 0 10px rgba(210, 105, 30, 0.5);
 	}
 	.paytable-modal-close-btn:hover {
-		color: #222;
+		color: #FFD700;
+		transform: scale(1.1);
 	}
 
 	.paytable-section {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background: #020202;
+		background: linear-gradient(
+			180deg,
+			rgba(40, 20, 10, 0.8) 0%,
+			rgba(20, 10, 5, 0.9) 100%
+		);
+		border: 2px solid rgba(139, 69, 19, 0.5);
 		border-radius: 12px;
-		margin-bottom: 24px;
-		padding: 20px 12px 16px 12px;
-		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.04);
+		margin-bottom: 16px;
+		padding: 20px 16px;
+		box-shadow:
+			0 0 15px rgba(139, 69, 19, 0.2),
+			inset 0 0 20px rgba(0, 0, 0, 0.3);
 		width: 100%;
 		max-width: 420px;
+		transition: all 0.3s ease;
 	}
+
+	.paytable-section:hover {
+		border-color: rgba(210, 105, 30, 0.7);
+		box-shadow:
+			0 0 25px rgba(210, 105, 30, 0.3),
+			inset 0 0 20px rgba(0, 0, 0, 0.3);
+		transform: translateY(-2px);
+	}
+
+	.paytable-section.special {
+		background: linear-gradient(
+			180deg,
+			rgba(80, 40, 20, 0.9) 0%,
+			rgba(40, 20, 10, 0.95) 100%
+		);
+		border-color: #FFD700;
+		box-shadow:
+			0 0 20px rgba(255, 215, 0, 0.3),
+			inset 0 0 30px rgba(0, 0, 0, 0.4);
+	}
+
+	.paytable-section.low {
+		max-width: 380px;
+	}
+
 	.paytable-symbol-img {
-		width: 190px;
-		height: 190px;
+		width: 160px;
+		height: 160px;
 		border-radius: 10px;
-		box-shadow: 0 3px 6px 0 #228B22;
-		background: #020202;
+		box-shadow: 0 0 15px rgba(139, 69, 19, 0.5);
+		background: rgba(0, 0, 0, 0.3);
 		margin-bottom: 12px;
+		transition: transform 0.3s ease;
 	}
+
+	.paytable-symbol-img.special-img {
+		width: 180px;
+		height: 180px;
+		box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+	}
+
+	.paytable-section:hover .paytable-symbol-img {
+		transform: scale(1.05);
+	}
+
+	.symbol-name {
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 1.3rem;
+		color: #E8DCC4;
+		text-align: center;
+		margin-bottom: 12px;
+		font-weight: bold;
+	}
+
+	.symbol-name.special-name {
+		color: #FFD700;
+		font-size: 1.5rem;
+		text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+	}
+
 	.paytable-desc {
-		color: #00fff0;
-		font-size: 2rem;
+		color: #E8DCC4;
+		font-size: 1.1rem;
 		font-weight: 500;
 		text-align: center;
 		font-family: 'Crimes Times Six', sans-serif;
-		line-height: 1.6;
+		line-height: 1.5;
+		white-space: pre-line;
+	}
+
+	.payout-grid {
+		display: flex;
+		gap: 16px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.payout-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background: rgba(0, 0, 0, 0.4);
+		padding: 8px 16px;
+		border-radius: 8px;
+		border: 1px solid rgba(139, 69, 19, 0.4);
+	}
+
+	.cluster-size {
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 0.9rem;
+		color: #888;
+		margin-bottom: 4px;
+	}
+
+	.payout-value {
+		font-family: 'Crimes Times Six', sans-serif;
+		font-size: 1.3rem;
+		color: #00FF00;
+		font-weight: bold;
+		text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+	}
+
+	.payout-value.high {
+		color: #FFD700;
+		text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 	}
 
 	@media (max-width: 700px) {
@@ -240,15 +412,25 @@
 			max-width: 100vw;
 			width: 100vw;
 			border-radius: 0;
-			padding: 16px 0;
+			padding: 16px 8px;
 		}
 		.paytable-section {
 			max-width: 98vw;
-			padding: 16px 4vw 12px 4vw;
+			padding: 16px 8px;
 		}
 		.paytable-symbol-img {
-			width: 170px;
-			height: 170px;
+			width: 140px;
+			height: 140px;
+		}
+		.paytable-symbol-img.special-img {
+			width: 160px;
+			height: 160px;
+		}
+		.payout-grid {
+			gap: 8px;
+		}
+		.payout-item {
+			padding: 6px 12px;
 		}
 	}
-</style>;
+</style>
